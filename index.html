@@ -215,8 +215,8 @@ const parts = [
     {
         category: "Wizualne",
         items: [
-            {name: "Szerokość tylnych opon", price: 2000000},
-            {name: "Szerokość przednich opon", price: 2000000},
+            {name: "Lacze Przód", price: 2000000},
+            {name: "Lacze Tył", price: 2000000},
             {name: "Paintjob", price: 12500000},
             {name: "Kolor świateł", price: 2000000},
             {name: "Neony", price: 550000},
@@ -228,12 +228,12 @@ const parts = [
     {
         category: "Silnik",
         items: [
-            {name: "Ulepszenie silnika 1", price: 300000},
-            {name: "Ulepszenie silnika 2", price: 400000},
-            {name: "Ulepszenie silnika 3", price: 500000},
-            {name: "Ulepszenie silnika 4", price: 1300000},
-            {name: "Turbosprężarka", price: 700000},
-            {name: "Chip tuning", price: 800000},
+            {name: "US 1", price: 300000},
+            {name: "US 2", price: 400000},
+            {name: "US 3", price: 500000},
+            {name: "US 4", price: 1300000},
+            {name: "Turbo", price: 700000},
+            {name: "Chip ", price: 800000},
             {name: "Silnik benzynowy", price: 150000},
             {name: "Silnik diesel", price: 300000},
             {name: "Silnik elektryczny", price: 400000}
@@ -273,7 +273,7 @@ let activeCategory = 0;
 let selectedParts = {};
 
 	let lastSendTime = 0;
-const sendCooldown = 120000; // 15 sekund (zmień jeśli chcesz)
+const sendCooldown = 600000; // 15 sekund (zmień jeśli chcesz)
 // Tworzenie zakładek
 parts.forEach((category, index) => {
     const tab = document.createElement("div");
@@ -731,6 +731,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
