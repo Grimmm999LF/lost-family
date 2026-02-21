@@ -307,40 +307,46 @@ function renderParts() {
         const div = document.createElement("div");
         div.className = "part";
 
-        // sprawdź czy było wcześniej zaznaczone
         const checked = selectedParts[part.name] ? "checked" : "";
 
-div.innerHTML = `
-    <div class="part-left">
-        <input type="checkbox" data-name="${part.name}" data-price="${part.price}" ${checked}>
-        <span class="part-name">${part.name}</span>
-    </div>
-    <span class="part-price">${part.price.toLocaleString()} PLN</span>
-`;
+        div.innerHTML = `
+            <div class="part-left">
+                <input type="checkbox" ${checked}>
+                <span class="part-name">${part.name}</span>
+            </div>
+            <span class="part-price">${part.price.toLocaleString()} PLN</span>
+        `;
 
         const checkbox = div.querySelector("input");
-		if (checked) {
-    div.classList.add("selected");
-}
 
-// zapisuj stan po kliknięciu
-checkbox.addEventListener("change", function() {
-    if (this.checked) {
-        selectedParts[part.name] = part.price;
-        div.classList.add("selected");
-    } else {
-        delete selectedParts[part.name];
-        div.classList.remove("selected");
-    }
-    calculate();
-});
-		// kliknięcie w cały element
-div.addEventListener("click", function(e) {
-    if (e.target.tagName !== "INPUT") {
-        checkbox.checked = !checkbox.checked;
-        checkbox.dispatchEvent(new Event("change"));
-    }
-});
+        // jeśli było zaznaczone wcześniej
+        if (checked) {
+            div.classList.add("selected");
+        }
+
+        // zmiana checkboxa
+        checkbox.addEventListener("change", function() {
+            if (this.checked) {
+                selectedParts[part.name] = part.price;
+                div.classList.add("selected");
+            } else {
+                delete selectedParts[part.name];
+                div.classList.remove("selected");
+            }
+            calculate();
+        });
+
+        // kliknięcie w cały box
+        div.addEventListener("click", function(e) {
+            if (e.target.tagName !== "INPUT") {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event("change"));
+            }
+        });
+
+        // 🔥 TEGO BRAKOWAŁO
+        partsList.appendChild(div);
+    });
 }
 
 renderParts();
@@ -748,6 +754,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
