@@ -251,7 +251,7 @@ button:hover {
 <div class="tft-wrapper">
     <label class="tft-label">
         <input type="checkbox" id="tftOption" onchange="toggleTFT()">
-        <span>TFT (Zaznacz wszystkie części – bez nitra!)</span>
+        <span>TFT (Zaznacz wszystkie części – bez nitra oraz Vopisu!)</span>
     </label>
 </div>
 <div class="tabs" id="categoryTabs"></div>
@@ -565,7 +565,7 @@ parts.forEach(category => {
     category.items.forEach(part => {
 
         // części wykluczone z TFT
-        const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L"];
+        const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L", "Vopis"];
 
         if (!excluded.includes(part.name)) {
             selectedParts[part.name] = part.price;
@@ -833,6 +833,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
