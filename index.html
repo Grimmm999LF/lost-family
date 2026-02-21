@@ -1,145 +1,77 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Kalkulator Lost Family!</title>
 
 <style>
 body {
-    background: #0b0b0b;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    padding: 40px;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0f1115;
+    color: #e4e6eb;
 }
 
+/* UKŁAD STRONY */
 .container {
-    width: 1200px;
-    background: #111;
-    border-radius: 12px;
-    box-shadow: 0 0 40px rgba(255,120,0,0.3);
-    padding: 25px;
     display: flex;
     gap: 20px;
+    padding: 20px;
 }
 
-h2 {
-    color: #ff8c00;
+/* KARTY */
+.card {
+    background: #181c24;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* LEWA STRONA */
+.main-panel {
+    flex: 3;
+}
+
+/* PRAWA – PODGLĄD */
+.preview-panel {
+    flex: 1;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+/* INPUTY */
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #0f1115;
+    color: white;
     margin-bottom: 10px;
 }
 
-.section {
-    margin-bottom: 25px;
-}
-
-select {
-    width: 100%;
-    padding: 10px;
-    background: #1b1b1b;
-    color: white;
-    border: 1px solid #ff8c00;
-    border-radius: 6px;
-    font-size: 16px;
-}
-
-.parts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.part {
-    background: #1a1a1a;
+/* PRZYCISKI */
+button {
+    background: #ff7a00;
+    border: none;
     padding: 12px;
     border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #222;
-}
-
-.part input {
-    transform: scale(1.3);
-}
-
-.summary {
-    background: #0d0d0d;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #ff8c00;
-}
-
-.total {
-    font-size: 22px;
-    color: #ff8c00;
-    margin-top: 10px;
-}
-
-button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #ff8c00;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
+    color: white;
+    font-weight: 600;
     cursor: pointer;
 }
 
 button:hover {
-    background: #ffa733;
-}
-.logo {
-    text-align: center;
-    font-size: 48px;
-    font-weight: bold;
-    letter-spacing: 4px;
-    margin-bottom: 30px;
-    color: #ff8c00;
-    animation: glow 2.5s infinite ease-in-out;
+    background: #ff9500;
 }
 
-/* animacja świecenia */
-@keyframes glow {
-    0% {
-        text-shadow: 0 0 5px #ff8c00,
-                     0 0 10px #ff8c00;
-    }
-    50% {
-        text-shadow: 0 0 20px #ff8c00,
-                     0 0 40px #ff8c00;
-    }
-    100% {
-        text-shadow: 0 0 5px #ff8c00,
-                     0 0 10px #ff8c00;
-    }
-}
-.tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.tab {
-    padding: 10px 18px;
-    border-radius: 10px;
-    background: #151515;
-    border: 1px solid #222;
-    cursor: pointer;
-    transition: 0.25s;
-    font-weight: 500;
-}
-
-.tab:hover {
-    border: 1px solid #ff8c00;
-}
-
-.tab.active {
-    background: #ff8c00;
-    color: black;
-    box-shadow: 0 0 15px rgba(255,140,0,0.5);
+/* CENA */
+.total-price {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ff7a00;
 }
 </style>
 </head>
@@ -728,9 +660,11 @@ fetch(webhookURL, {
 
 </div> <!-- ZAMYKA container -->
 
+
 </body>
 
 </html>
+
 
 
 
