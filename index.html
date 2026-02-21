@@ -73,6 +73,55 @@ button:hover {
     font-weight: 700;
     color: #ff7a00;
 }
+	/* KATEGORIE (zakładki) */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #0f1115;
+    border: 1px solid #2a2f3a;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.tab:hover {
+    border-color: #ff7a00;
+}
+
+.tab.active {
+    background: #ff7a00;
+    color: #000;
+    font-weight: 600;
+}
+	.parts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.part {
+    background: #0f1115;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #2a2f3a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.part input {
+    transform: scale(1.2);
+    margin-right: 6px;
+}
 </style>
 </head>
 <body>
@@ -664,6 +713,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
