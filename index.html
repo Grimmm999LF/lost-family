@@ -598,7 +598,16 @@ function updatePreview() {
 updatePreview();
 	function sendToDiscord() {
 
-    const webhookURL = "https://discord.com/api/webhooks/1474591220624916753/zZSsBBp4j09LqwdudXFM6CiavLJvETznhltKTN0SdrMkohRcJT2M2J9pEtqSxWKF3RAU";
+    // SPRAWDZENIE CZY COŚ WYBRANO
+	const carValue = document.getElementById("carSelect").value;
+	const partsCount = Object.keys(selectedParts).length;
+	const upgradesCount = cyl + engine + fuel;
+
+	if (carValue == 0 && partsCount === 0 && upgradesCount === 0) {
+    alert("Nie wybrano żadnego auta ani ulepszeń!");
+    return;
+}
+	const webhookURL = "https://discord.com/api/webhooks/1474591220624916753/zZSsBBp4j09LqwdudXFM6CiavLJvETznhltKTN0SdrMkohRcJT2M2J9pEtqSxWKF3RAU";
 
     const car = document.getElementById("carSearch").value || "Brak";
     const total = document.getElementById("total").innerText;
@@ -673,4 +682,5 @@ updatePreview();
 </body>
 
 </html>
+
 
