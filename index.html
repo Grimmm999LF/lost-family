@@ -457,13 +457,17 @@ function toggleTFT() {
 
     if (tftChecked) {
         // zaznacz WSZYSTKIE części ze wszystkich kategorii
-        parts.forEach(category => {
-            category.items.forEach(part => {
-                if (part.name !== "Butla nitro") {
-                    selectedParts[part.name] = part.price;
-                }
-            });
-        });
+parts.forEach(category => {
+    category.items.forEach(part => {
+
+        // części wykluczone z TFT
+        const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L"];
+
+        if (!excluded.includes(part.name)) {
+            selectedParts[part.name] = part.price;
+        }
+    });
+});
     } else {
         // odznacz wszystko
         selectedParts = {};
