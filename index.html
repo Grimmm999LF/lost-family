@@ -273,7 +273,7 @@ let activeCategory = 0;
 let selectedParts = {};
 
 	let lastSendTime = 0;
-const sendCooldown = 15000; // 15 sekund (zmień jeśli chcesz)
+const sendCooldown = 120000; // 15 sekund (zmień jeśli chcesz)
 // Tworzenie zakładek
 parts.forEach((category, index) => {
     const tab = document.createElement("div");
@@ -701,6 +701,7 @@ if (now - lastSendTime < sendCooldown) {
 </body>
 
 </html>
+
 
 
 
