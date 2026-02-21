@@ -192,6 +192,28 @@ button:hover {
     transform: scale(1.2);
     text-shadow: 0 0 25px #ff7a00;
 }
+	/* TFT */
+.tft-wrapper {
+    display: flex;
+    justify-content: flex-end; /* wyrównanie w prawo */
+    margin-bottom: 15px;
+}
+
+.tft-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #ff8c00;
+}
+
+.tft-label input {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff7a00;
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -226,10 +248,10 @@ button:hover {
 <input type="hidden" id="carSelect" value="0">
 
     <h2>Części tuningowe</h2>
-<div style="margin-bottom:15px; display:flex; align-items:center; gap:10px;">
-    <input type="checkbox" id="tftOption" onchange="toggleTFT()">
-    <label for="tftOption" style="cursor:pointer; font-weight:bold;">
-        TFT (Zaznacz wszystkie części - bez nitra!)
+<div class="tft-wrapper">
+    <label class="tft-label">
+        <input type="checkbox" id="tftOption" onchange="toggleTFT()">
+        <span>TFT (Zaznacz wszystkie części – bez nitra!)</span>
     </label>
 </div>
 <div class="tabs" id="categoryTabs"></div>
@@ -810,6 +832,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
