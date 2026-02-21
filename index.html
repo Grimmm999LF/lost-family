@@ -636,22 +636,6 @@ if (now - lastSendTime < sendCooldown) {
     const engineText = document.getElementById("engine").innerText;
     const fuelText = document.getElementById("fuel").innerText;
 
-// lista części jako tekst
-let partsText = "";
-for (let name in selectedParts) {
-    partsText += "• " + name + "\n";
-}
-if (partsText === "") partsText = "Brak";
-
-// ulepszenia
-const cylText = document.getElementById("cyl").innerText;
-const engineText = document.getElementById("engine").innerText;
-const fuelText = document.getElementById("fuel").innerText;
-
-// auto i cena
-const car = document.getElementById("carSearch").value || "Brak";
-const total = document.getElementById("total").innerText;
-
 // EMBED
 const message = {
     embeds: [
@@ -746,6 +730,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
