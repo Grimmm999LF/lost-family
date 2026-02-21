@@ -107,7 +107,11 @@ button:hover {
     max-height: 320px;
     overflow-y: auto;
 }
-
+.part.selected {
+    border-color: #ff7a00;
+    background: #1f2633;
+    box-shadow: 0 0 10px rgba(255,122,0,0.4);
+}
 .part {
     background: #12161d;
     padding: 10px 12px;
@@ -315,19 +319,28 @@ div.innerHTML = `
 `;
 
         const checkbox = div.querySelector("input");
+		if (checked) {
+    div.classList.add("selected");
+}
 
-        // zapisuj stan po kliknięciu
-        checkbox.addEventListener("change", function() {
-            if (this.checked) {
-                selectedParts[part.name] = part.price;
-            } else {
-                delete selectedParts[part.name];
-            }
-            calculate();
-        });
-
-        partsList.appendChild(div);
-    });
+// zapisuj stan po kliknięciu
+checkbox.addEventListener("change", function() {
+    if (this.checked) {
+        selectedParts[part.name] = part.price;
+        div.classList.add("selected");
+    } else {
+        delete selectedParts[part.name];
+        div.classList.remove("selected");
+    }
+    calculate();
+});
+		// kliknięcie w cały element
+div.addEventListener("click", function(e) {
+    if (e.target.tagName !== "INPUT") {
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event("change"));
+    }
+});
 }
 
 renderParts();
@@ -735,6 +748,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
