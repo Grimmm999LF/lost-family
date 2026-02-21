@@ -272,6 +272,8 @@ const categoryTabs = document.getElementById("categoryTabs");
 let activeCategory = 0;
 let selectedParts = {};
 
+	let lastSendTime = 0;
+const sendCooldown = 15000; // 15 sekund (zmień jeśli chcesz)
 // Tworzenie zakładek
 parts.forEach((category, index) => {
     const tab = document.createElement("div");
@@ -598,14 +600,26 @@ function updatePreview() {
 updatePreview();
 	function sendToDiscord() {
 
+		// BLOKADA SPAMU
+const now = Date.now();
+if (now - lastSendTime < sendCooldown) {
+    const secondsLeft = Math.ceil((sendCooldown - (now - lastSendTime)) / 1000);
+    alert("Możesz wysłać ponownie za " + secondsLeft + " sek.");
+    return;
+}
     // SPRAWDZENIE CZY COŚ WYBRANO
 	const carValue = document.getElementById("carSelect").value;
 	const partsCount = Object.keys(selectedParts).length;
 	const upgradesCount = cyl + engine + fuel;
 
+	if (carValue == 0) {
+    alert("Najpierw wybierz auto!");
+    return;
+	
 	if (carValue == 0 && partsCount === 0 && upgradesCount === 0) {
     alert("Nie wybrano żadnego auta ani ulepszeń!");
     return;
+		
 }
 	const webhookURL = "https://discord.com/api/webhooks/1474591220624916753/zZSsBBp4j09LqwdudXFM6CiavLJvETznhltKTN0SdrMkohRcJT2M2J9pEtqSxWKF3RAU";
 
@@ -639,7 +653,9 @@ updatePreview();
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(message)
     })
-    .then(() => alert("Wysłano na Discord!"))
+    .then(() => {
+    lastSendTime = Date.now();
+    alert("Wysłano na Discord!");
     .catch(() => alert("Błąd wysyłania"));
 }
 </script>
@@ -682,5 +698,6 @@ updatePreview();
 </body>
 
 </html>
+
 
 
