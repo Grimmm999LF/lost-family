@@ -694,7 +694,7 @@ const message = {
     ]
 };
 
-    fetch(webhookURL, {
+fetch(webhookURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(message)
@@ -706,7 +706,6 @@ const message = {
 .catch(() => {
     alert("Błąd wysyłania");
 });
-}
 </script>
 
 </div> <!-- KONIEC lewej strony -->
@@ -747,6 +746,7 @@ const message = {
 </body>
 
 </html>
+
 
 
 
