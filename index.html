@@ -635,9 +635,9 @@ if (now - lastSendTime < sendCooldown) {
     const cylText = document.getElementById("cyl").innerText;
     const engineText = document.getElementById("engine").innerText;
     const fuelText = document.getElementById("fuel").innerText;
-	}
-// EMBED
-const message = {
+	
+    // EMBED
+    const message = {
     embeds: [
         {
             title: "📋 Kosztorys pojazdu",
@@ -690,6 +690,7 @@ fetch(webhookURL, {
 .catch(() => {
     alert("Błąd wysyłania");
 });
+}
 </script>
 
 </div> <!-- KONIEC lewej strony -->
@@ -730,6 +731,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
