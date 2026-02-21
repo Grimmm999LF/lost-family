@@ -615,7 +615,7 @@ if (now - lastSendTime < sendCooldown) {
 	if (carValue == 0) {
     alert("Najpierw wybierz auto!");
     return;
-	
+}	
 	if (carValue == 0 && partsCount === 0 && upgradesCount === 0) {
     alert("Nie wybrano żadnego auta ani ulepszeń!");
     return;
@@ -649,14 +649,17 @@ if (now - lastSendTime < sendCooldown) {
     };
 
     fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(message)
-    })
-    .then(() => {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(message)
+})
+.then(() => {
     lastSendTime = Date.now();
     alert("Wysłano na Discord!");
-    .catch(() => alert("Błąd wysyłania"));
+})
+.catch(() => {
+    alert("Błąd wysyłania");
+});
 }
 </script>
 
@@ -698,6 +701,7 @@ if (now - lastSendTime < sendCooldown) {
 </body>
 
 </html>
+
 
 
 
