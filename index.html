@@ -170,9 +170,9 @@ button:hover {
 <input type="hidden" id="carSelect" value="0">
 
     <h2>Części tuningowe</h2>
-	<div style="margin-bottom:15px;">
-    <label style="cursor:pointer; font-weight:bold;">
-        <input type="checkbox" id="tftOption" onchange="toggleTFT()" style="margin-right:8px;">
+<div style="margin-bottom:15px; display:flex; align-items:center; gap:10px;">
+    <input type="checkbox" id="tftOption" onchange="toggleTFT()">
+    <label for="tftOption" style="cursor:pointer; font-weight:bold;">
         TFT (Zaznacz wszystkie części - bez nitra!)
     </label>
 </div>
@@ -754,6 +754,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
