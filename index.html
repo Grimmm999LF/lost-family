@@ -207,6 +207,7 @@ button:hover {
     <div>Wybrane części: <span id="count">0</span></div>
     <div class="total">Cena końcowa: <span id="total">0</span> PLN</div>
     <button onclick="resetAll()">Wyczyść wszystko</button>
+	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
 <script>
 // Lista części tuningowych
@@ -595,6 +596,43 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
+	function sendToDiscord() {
+
+    const webhookURL = "https://discord.com/api/webhooks/1474591220624916753/zZSsBBp4j09LqwdudXFM6CiavLJvETznhltKTN0SdrMkohRcJT2M2J9pEtqSxWKF3RAU";
+
+    const car = document.getElementById("carSearch").value || "Brak";
+    const total = document.getElementById("total").innerText;
+
+    let partsText = "";
+    for (let name in selectedParts) {
+        partsText += "• " + name + "\n";
+    }
+    if (partsText === "") partsText = "Brak";
+
+    const cylText = document.getElementById("cyl").innerText;
+    const engineText = document.getElementById("engine").innerText;
+    const fuelText = document.getElementById("fuel").innerText;
+
+    const message = {
+        content:
+            "**Kosztorys pojazdu**\n" +
+            "Auto: " + car + "\n\n" +
+            "Części:\n" + partsText + "\n" +
+            "Ulepszenia:\n" +
+            "Cylindry: " + cylText + "\n" +
+            "Pojemność: " + engineText + "\n" +
+            "Zbiornik: " + fuelText + "\n\n" +
+            "Cena: **" + total + " PLN**"
+    };
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(message)
+    })
+    .then(() => alert("Wysłano na Discord!"))
+    .catch(() => alert("Błąd wysyłania"));
+}
 </script>
 
 </div> <!-- KONIEC lewej strony -->
@@ -635,3 +673,4 @@ updatePreview();
 </body>
 
 </html>
+
