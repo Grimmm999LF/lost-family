@@ -128,10 +128,19 @@ button:hover {
     transform: scale(1.2);
     margin-right: 6px;
 }
-	.part label {
+	.part-left {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
+}
+
+.part-name {
+    font-weight: 500;
+}
+
+.part-price {
+    color: #c7cbd1;
+    font-size: 13px;
 }
 </style>
 </head>
@@ -295,13 +304,13 @@ function renderParts() {
         // sprawdź czy było wcześniej zaznaczone
         const checked = selectedParts[part.name] ? "checked" : "";
 
-        div.innerHTML = `
-            <label>
-                <input type="checkbox" data-name="${part.name}" data-price="${part.price}" ${checked}>
-                ${part.name}
-            </label>
-            <span>${part.price.toLocaleString()} PLN</span>
-        `;
+div.innerHTML = `
+    <div class="part-left">
+        <input type="checkbox" data-name="${part.name}" data-price="${part.price}" ${checked}>
+        <span class="part-name">${part.name}</span>
+    </div>
+    <span class="part-price">${part.price.toLocaleString()} PLN</span>
+`;
 
         const checkbox = div.querySelector("input");
 
@@ -724,6 +733,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
