@@ -100,27 +100,38 @@ button:hover {
     color: #000;
     font-weight: 600;
 }
-	.parts {
+.parts {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
+    grid-template-columns: 1fr 1fr; /* DWIE kolumny */
+    gap: 10px;
     max-height: 320px;
     overflow-y: auto;
 }
 
 .part {
-    background: #0f1115;
-    padding: 10px;
+    background: #12161d;
+    padding: 10px 12px;
     border-radius: 8px;
     border: 1px solid #2a2f3a;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.part:hover {
+    border-color: #ff7a00;
 }
 
 .part input {
     transform: scale(1.2);
     margin-right: 6px;
+}
+	.part label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 </style>
 </head>
@@ -713,6 +724,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
