@@ -148,6 +148,50 @@ button:hover {
     color: #c7cbd1;
     font-size: 13px;
 }
+	/* LOGO LOST FAMILY */
+.logo {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    display: flex;
+    gap: 2px;
+    margin-bottom: 20px;
+    cursor: default;
+}
+
+.logo span {
+    background: linear-gradient(45deg, #ff7a00, #ffae00, #ff3c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s ease-in-out infinite;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+/* Opóźnienie animacji dla każdej litery */
+.logo span:nth-child(1) { animation-delay: 0s; }
+.logo span:nth-child(2) { animation-delay: 0.1s; }
+.logo span:nth-child(3) { animation-delay: 0.2s; }
+.logo span:nth-child(4) { animation-delay: 0.3s; }
+.logo span:nth-child(6) { animation-delay: 0.4s; }
+.logo span:nth-child(7) { animation-delay: 0.5s; }
+.logo span:nth-child(8) { animation-delay: 0.6s; }
+.logo span:nth-child(9) { animation-delay: 0.7s; }
+.logo span:nth-child(10) { animation-delay: 0.8s; }
+.logo span:nth-child(11) { animation-delay: 0.9s; }
+
+/* Efekt pulsowania */
+@keyframes glow {
+    0% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,122,0,0.5); }
+    50% { transform: translateY(-6px); text-shadow: 0 0 20px rgba(255,122,0,1); }
+    100% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,122,0,0.5); }
+}
+
+/* Efekt hover */
+.logo span:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 25px #ff7a00;
+}
 </style>
 </head>
 <body>
@@ -155,7 +199,19 @@ button:hover {
 <div class="container">
 <div style="flex:2;">
 
-<h1 class="logo">Lost Family</h1>
+<h1 class="logo">
+    <span>L</span>
+    <span>o</span>
+    <span>s</span>
+    <span>t</span>
+    <span> </span>
+    <span>F</span>
+    <span>a</span>
+    <span>m</span>
+    <span>i</span>
+    <span>l</span>
+    <span>y</span>
+</h1>
 
    <input 
     type="text" 
@@ -754,6 +810,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
