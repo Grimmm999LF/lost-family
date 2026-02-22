@@ -66,7 +66,22 @@ button {
 button:hover {
     background: #ff9500;
 }
+.variant-select {
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    background:#1b1b1b;
+    color:white;
+    border:1px solid #ff8c00;
+    border-radius:6px;
+    cursor:pointer;
+    appearance:none;
+}
 
+.variant-select:focus {
+    outline:none;
+    box-shadow:0 0 10px rgba(255,140,0,0.5);
+}
 /* CENA */
 .total-price {
     font-size: 22px;
@@ -248,8 +263,8 @@ button:hover {
 >
 
 <div id="carResults" style="background:#1b1b1b; border:1px solid #ff8c00; border-radius:6px; max-height:200px; overflow-y:auto;"></div>
-	<div id="variantWrapper" style="margin-bottom:10px; display:none;">
-    <select id="variantSelect" onchange="calculate()"></select>
+    <div id="variantWrapper" style="display:none;">
+    <select id="variantSelect" class="variant-select" onchange="calculate()"></select>
 </div>
 
 <input type="hidden" id="carSelect" value="0">
@@ -872,6 +887,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
