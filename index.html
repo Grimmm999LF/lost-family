@@ -248,6 +248,9 @@ button:hover {
 >
 
 <div id="carResults" style="background:#1b1b1b; border:1px solid #ff8c00; border-radius:6px; max-height:200px; overflow-y:auto;"></div>
+	<div id="variantWrapper" style="margin-bottom:10px; display:none;">
+    <select id="variantSelect" onchange="calculate()"></select>
+</div>
 
 <input type="hidden" id="carSelect" value="0">
 
@@ -434,97 +437,97 @@ function renderParts() {
 
 renderParts();
 const cars = [
-    {name: "Audi RS2", price: 800000},
-    {name: "Audi RS5", price: 22500000},
-    {name: "Audi RS6", price: 8500000},
-    {name: "Audi RS7", price: 32000000},
-    {name: "Audi RS8", price: 20000000},
+    {name: "Audi RS2", price: 800000, variants:[{name:"Brak",price:0}]},
+    {name: "Audi RS5", price: 22500000, variants:[{name:"Brak",price:0}]},
+    {name: "Audi RS6", price: 8500000, variants:[{name:"Brak",price:0}]},
+    {name: "Audi RS7", price: 32000000, variants:[{name:"Brak",price:0}]},
+    {name: "Audi RS8", price: 20000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "BMW M3 e30", price: 8750000},
-    {name: "BMW M3 e36", price: 6500000},
-    {name: "BMW E38", price: 35000000},
-    {name: "BMW E60", price: 35000000},
-    {name: "BMW G81", price: 45000000},
-    {name: "BMW F90", price: 33000000},
-    {name: "BMW X7", price: 10000000},
-    {name: "BMW G82", price: 13500000},
+    {name: "BMW M3 e30", price: 8750000, variants:[{name:"Brak",price:0}]},
+    {name: "BMW M3 e36", price: 6500000, variants:[{name:"Brak",price:0}]},
+    {name: "BMW E38", price: 35000000, variants:[{name:"Brak",price:0}]},
+    {name: "BMW E60", price: 35000000, variants:[{name:"Brak",price:0}]},
+    {name: "BMW G81", price: 45000000, variants:[{name:"Brak",price:0}]},
+    {name: "BMW F90", price: 33000000, variants:[{name:"Brak",price:0}]},
+    {name: "BMW X7", price: 10000000, variants:[{name:"Brak",price:0}]},
+    {name: "BMW G82", price: 13500000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Mercedes-Benz S600", price: 700000},
-    {name: "Mercedes-Benz S600L", price: 10000000},
-    {name: "Mercedes-Benz GT63s", price: 13000000},
-    {name: "Mercedes-Benz E63s", price: 40000000},
-    {name: "Mercedes-Benz C63s", price: 30000000},
-    {name: "Mercedes-Benz GLE", price: 55000000},
-    {name: "Mercedes-Benz G63", price: 6500000},
-    {name: "Mercedes-Benz Actros", price: 8000000},
+    {name: "Mercedes-Benz S600", price: 700000, variants:[{name:"Brak",price:0}]},
+    {name: "Mercedes-Benz S600L", price: 10000000, variants:[{name:"Brak",price:0}]},
+    {name: "Mercedes-Benz GT63s", price: 13000000, variants:[{name:"Brak",price:0}]},
+    {name: "Mercedes-Benz E63s", price: 40000000, variants:[{name:"Brak",price:0}]},
+    {name: "Mercedes-Benz C63s", price: 30000000, variants:[{name:"Brak",price:0}]},
+    {name: "Mercedes-Benz GLE", price: 55000000, variants:[{name:"Brak",price:0}]},
+    {name: "Mercedes-Benz G63", price: 6500000, variants:[{name:"Brak",price:0}]},
+	{name: "Mercedes-Benz Actros", price: 8000000, variants:[{name:"Brak",price:0},{name:"Dodatki",price:5000000}]},
 
-    {name: "Lamborghini Aventador", price: 57000000},
-    {name: "Lamborghini Galardo", price: 75000000},
-    {name: "Lamborghini Huracan", price: 85500000},
-    {name: "Lamborghini Urus", price: 50000000},
+    {name: "Lamborghini Aventador", price: 57000000, variants:[{name:"Brak",price:0}]},
+    {name: "Lamborghini Galardo", price: 75000000, variants:[{name:"Brak",price:0}]},
+    {name: "Lamborghini Huracan", price: 85500000, variants:[{name:"Brak",price:0}]},
+    {name: "Lamborghini Urus", price: 50000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Mitsubishi Lancer Evo X", price: 10000000},
-    {name: "Mitsubishi Lancer VI", price: 17500000},
+    {name: "Mitsubishi Lancer Evo X", price: 10000000, variants:[{name:"Brak",price:0}]},
+    {name: "Mitsubishi Lancer VI", price: 17500000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Bugatti Chiron", price: 55000000},
-    {name: "Porsche 718 Cayman S", price: 35000000},
-    {name: "Ferrari F8 Tributo", price: 45000000},
+    {name: "Bugatti Chiron", price: 55000000, variants:[{name:"Brak",price:0}]},
+    {name: "Porsche 718 Cayman S", price: 35000000, variants:[{name:"Brak",price:0}]},
+    {name: "Ferrari F8 Tributo", price: 45000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Chevrolet Corvette C8", price: 48000000},
-    {name: "Chevrolet Camaro III", price: 9000000},
-    {name: "Chevrolet Camaro VI", price: 10000000},
-    {name: "Chevrolet Suburban", price: 55000000},
+    {name: "Chevrolet Corvette C8", price: 48000000, variants:[{name:"Brak",price:0}]},
+    {name: "Chevrolet Camaro III", price: 9000000, variants:[{name:"Brak",price:0}]},
+    {name: "Chevrolet Camaro VI", price: 10000000, variants:[{name:"Brak",price:0}]},
+    {name: "Chevrolet Suburban", price: 55000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Mazda RX 8", price: 18000000},
+    {name: "Mazda RX 8", price: 18000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Volkswagen Golf R GTI", price: 4200000},
-    {name: "Volkswagen Golf R32", price: 9450000},
+    {name: "Volkswagen Golf R GTI", price: 4200000, variants:[{name:"Brak",price:0}]},
+    {name: "Volkswagen Golf R32", price: 9450000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Subaru WRX", price: 11000000},
-    {name: "Subaru BRZ", price: 16000000},
+    {name: "Subaru WRX", price: 11000000, variants:[{name:"Brak",price:0}]},
+    {name: "Subaru BRZ", price: 16000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Ford F-150 Raptor", price: 8500000},
-    {name: "Ford Explorer", price: 55000000},
-    {name: "Ford F-150 Lightning", price: 6000000},
-    {name: "Ford Shelby GT500", price: 8500000},
-    {name: "Ford Crown Victoria", price: 13000000},
+    {name: "Ford F-150 Raptor", price: 8500000, variants:[{name:"Brak",price:0}]},
+    {name: "Ford Explorer", price: 55000000, variants:[{name:"Brak",price:0}]},
+    {name: "Ford F-150 Lightning", price: 6000000, variants:[{name:"Brak",price:0}]},
+    {name: "Ford Shelby GT500", price: 8500000, variants:[{name:"Brak",price:0}]},
+    {name: "Ford Crown Victoria", price: 13000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Rolls Royce Phantom VIII", price: 23000000},
-    {name: "Rolls Royce Cullinan", price: 25000000},
+    {name: "Rolls Royce Phantom VIII", price: 23000000, variants:[{name:"Brak",price:0}]},
+    {name: "Rolls Royce Cullinan", price: 25000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Chrysler 300C", price: 32000000},
+    {name: "Chrysler 300C", price: 32000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Nissan 350Z", price: 20000000},
-    {name: "Nissan GT-R R35", price: 8000000},
-    {name: "Nissan Skyline R34", price: 40000000},
-    {name: "Nissan Silva S15", price: 8000000},
-    {name: "Nissan 240SX S13", price: 13000000},
+    {name: "Nissan 350Z", price: 20000000, variants:[{name:"Brak",price:0}]},
+    {name: "Nissan GT-R R35", price: 8000000, variants:[{name:"Brak",price:0}]},
+    {name: "Nissan Skyline R34", price: 40000000, variants:[{name:"Brak",price:0}]},
+    {name: "Nissan Silva S15", price: 8000000, variants:[{name:"Brak",price:0}]},
+    {name: "Nissan 240SX S13", price: 13000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Dodge Challenger SRT Hellcat", price: 8500000},
-    {name: "Dodge Monaco", price: 4500000},
-    {name: "Dodge RAM Laramie 1500", price: 65000000},
-    {name: "Dodge Viper ACR", price: 70000000},
-    {name: "Dodge Charger II SRT Hellcat", price: 27000000},
+    {name: "Dodge Challenger SRT Hellcat", price: 8500000, variants:[{name:"Brak",price:0}]},
+    {name: "Dodge Monaco", price: 4500000, variants:[{name:"Brak",price:0}]},
+    {name: "Dodge RAM Laramie 1500", price: 65000000, variants:[{name:"Brak",price:0}]},
+    {name: "Dodge Viper ACR", price: 70000000, variants:[{name:"Brak",price:0}]},
+    {name: "Dodge Charger II SRT Hellcat", price: 27000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Toyota Supra MK4", price: 45000000},
-    {name: "Toyota Supra MK5", price: 40000000},
+    {name: "Toyota Supra MK4", price: 45000000, variants:[{name:"Brak",price:0}]},
+    {name: "Toyota Supra MK5", price: 40000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Skoda Octavia", price: 2000000},
-    {name: "Iveco Bus", price: 25000000},
-    {name: "Fiat Ducato", price: 4000000},
+    {name: "Skoda Octavia", price: 2000000, variants:[{name:"Brak",price:0}]},
+    {name: "Iveco Bus", price: 25000000, variants:[{name:"Brak",price:0}]},
+    {name: "Fiat Ducato", price: 4000000, variants:[{name:"Brak",price:0}]},
 
-    {name: "Karin Futo", price: 16500000},
-    {name: "Karin Sultan", price: 3000000},
-    {name: "DMC", price: 30000000},
-    {name: "Annis Elegy Retro", price: 4000000},
-    {name: "Dinka Jester Retro", price: 4500000},
-    {name: "Vapid Bullet", price: 6000000},
-    {name: "Jeep Wrangler", price: 3000000},
-    {name: "Grotti Turismo", price: 7000000},
-    {name: "Infernus", price: 5000000},
-    {name: "Koenigsegg Jesko", price: 105000000},
-    {name: "Patriot", price: 8500000},
-    {name: "Declase Burito", price: 2000000}
+    {name: "Karin Futo", price: 16500000, variants:[{name:"Brak",price:0}]},
+    {name: "Karin Sultan", price: 3000000, variants:[{name:"Brak",price:0}]},
+    {name: "DMC", price: 30000000, variants:[{name:"Brak",price:0}]},
+    {name: "Annis Elegy Retro", price: 4000000, variants:[{name:"Brak",price:0}]},
+    {name: "Dinka Jester Retro", price: 4500000, variants:[{name:"Brak",price:0}]},
+    {name: "Vapid Bullet", price: 6000000, variants:[{name:"Brak",price:0}]},
+    {name: "Jeep Wrangler", price: 3000000, variants:[{name:"Brak",price:0}]},
+    {name: "Grotti Turismo", price: 7000000, variants:[{name:"Brak",price:0}]},
+    {name: "Infernus", price: 5000000, variants:[{name:"Brak",price:0}]},
+    {name: "Koenigsegg Jesko", price: 105000000, variants:[{name:"Brak",price:0}]},
+    {name: "Patriot", price: 8500000, variants:[{name:"Brak",price:0}]},
+    {name: "Declase Burito", price: 2000000, variants:[{name:"Brak",price:0}]}
 ];
 function filterCars() {
     const input = document.getElementById("carSearch").value.toLowerCase();
@@ -544,6 +547,7 @@ function filterCars() {
                 document.getElementById("carSearch").value = car.name;
                 document.getElementById("carSelect").value = car.price;
                 results.innerHTML = "";
+				renderVariants(car);
                 calculate();
             };
 
@@ -553,6 +557,26 @@ function filterCars() {
             results.appendChild(div);
         }
     });
+}
+	function renderVariants(car) {
+    const wrapper = document.getElementById("variantWrapper");
+    const select = document.getElementById("variantSelect");
+
+    select.innerHTML = "";
+
+    if (!car.variants || car.variants.length === 0) {
+        wrapper.style.display = "none";
+        return;
+    }
+
+    car.variants.forEach(variant => {
+        const option = document.createElement("option");
+        option.value = variant.price;
+        option.textContent = variant.name + " – " + variant.price.toLocaleString() + " PLN";
+        select.appendChild(option);
+    });
+
+    wrapper.style.display = "block";
 }
 // Generowanie listy
 
@@ -587,7 +611,12 @@ parts.forEach(category => {
 }
 function calculate() {
     let total = parseInt(document.getElementById("carSelect").value) || 0;
+
+// 🔥 DODAJ WARIANT
+const variantPrice = parseInt(document.getElementById("variantSelect")?.value) || 0;
+total += variantPrice;
     let count = 0;
+	
 
 for (let name in selectedParts) {
     total += selectedParts[name];
@@ -729,6 +758,7 @@ if (now - lastSendTime < sendCooldown) {
 	const webhookURL = "https://discord.com/api/webhooks/1474591220624916753/zZSsBBp4j09LqwdudXFM6CiavLJvETznhltKTN0SdrMkohRcJT2M2J9pEtqSxWKF3RAU";
 
     const car = document.getElementById("carSearch").value || "Brak";
+	const variantName = document.getElementById("variantSelect")?.selectedOptions[0]?.textContent || "Brak";
     const total = document.getElementById("total").innerText;
 
     let partsText = "";
@@ -754,6 +784,11 @@ if (now - lastSendTime < sendCooldown) {
                     value: car,
                     inline: false
                 },
+				{
+    name: "🎨 Wariant",
+    value: variantName,
+    inline: false
+},
                 {
                     name: "🔧 Części",
                     value: partsText,
@@ -837,6 +872,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
