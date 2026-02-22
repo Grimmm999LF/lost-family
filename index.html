@@ -280,7 +280,14 @@ button:hover {
     onkeyup="filterCars()"
 >
 
-<div id="carResults" style="background:#1b1b1b; border:1px solid #ff8c00; border-radius:6px; max-height:200px; overflow-y:auto;"></div>
+<div id="carResults" 
+     style="background:#1b1b1b; 
+            border:1px solid #ff8c00; 
+            border-top:none;
+            border-radius:0 0 6px 6px; 
+            max-height:200px; 
+            overflow-y:auto;">
+</div>
     <div id="variantWrapper" style="display:none;">
     <select 
         id="variantSelect" 
@@ -909,6 +916,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
