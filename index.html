@@ -35,7 +35,14 @@ body {
     outline: none;
     box-shadow: 0 0 10px rgba(255,140,0,0.5);
 }
-
+#carResults {
+    background:#1b1b1b;
+    border:1px solid #ff8c00;
+    border-top:none;
+    border-radius:0 0 6px 6px;
+    max-height:200px;
+    overflow-y:auto;
+}
 /* usuwa systemową strzałkę selecta i wyrównuje wysokość */
 .top-input select,
 select.top-input {
@@ -280,14 +287,7 @@ button:hover {
     onkeyup="filterCars()"
 >
 
-<div id="carResults" 
-     style="background:#1b1b1b; 
-            border:1px solid #ff8c00; 
-            border-top:none;
-            border-radius:0 0 6px 6px; 
-            max-height:200px; 
-            overflow-y:auto;">
-</div>
+<div id="carResults"></div>
     <div id="variantWrapper" style="display:none;">
     <select 
         id="variantSelect" 
@@ -916,6 +916,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
