@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: #0f1115;
+    background: radial-gradient(circle at top left, #1a1f2b, #0f1115 60%);
     color: #e4e6eb;
 }
 
@@ -53,7 +53,9 @@ select.top-input {
 }
 /* KARTY */
 .card {
-    background: #181c24;
+    background: rgba(24, 28, 36, 0.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 122, 0, 0.2);
     border-radius: 12px;
     padding: 18px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.4);
@@ -268,6 +270,26 @@ button:hover {
     accent-color: #ff7a00;
     cursor: pointer;
 }
+.animated-price {
+    position: relative;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ff7a00;
+    animation: priceGlow 2s ease-in-out infinite;
+}
+
+@keyframes priceGlow {
+    0% {
+        text-shadow: 0 0 5px rgba(255,122,0,0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(255,122,0,1),
+                     0 0 40px rgba(255,122,0,0.7);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(255,122,0,0.5);
+    }
+}
 </style>
 </head>
 <body>
@@ -359,7 +381,7 @@ button:hover {
 </div>
 <div class="summary">
     <div>Wybrane części: <span id="count">0</span></div>
-    <div class="total">Cena końcowa: <span id="total">0</span> PLN</div>
+    <div class="total animated-price">Cena końcowa: <span id="total">0</span> PLN</div>
     <button onclick="resetAll()">Wyczyść wszystko</button>
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
@@ -934,6 +956,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
