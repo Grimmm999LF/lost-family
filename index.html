@@ -805,7 +805,7 @@ function toggleTFTPanel() {
 
         parts.forEach(category => {
             category.items.forEach(part => {
-                const excluded = ["𝓝𝓲𝓽𝓻𝓸 10𝓛", "𝓝𝓲𝓽𝓻𝓸 5", "𝓝𝓲𝓽𝓻𝓸 15", "𝓥𝓸𝓹𝓲𝓼", "𝓢𝓲𝓵𝓷𝓲𝓴 𝓑𝓮𝓷𝔃𝔂𝓷𝓸𝔀𝔂", "𝓢𝓲𝓵𝓷𝓲𝓴 𝓔𝓵𝓮𝓴𝓽𝓻𝔂𝓬𝔃𝓷𝔂", "𝓤𝓷𝓲 𝓑𝓪𝓴"];
+                const excluded = ["𝓝𝓲𝓽𝓻𝓸 10𝓛", "𝓝𝓲𝓽𝓻𝓸 5𝓛", "𝓝𝓲𝓽𝓻𝓸 15𝓛", "𝓥𝓸𝓹𝓲𝓼", "𝓢𝓲𝓵𝓷𝓲𝓴 𝓑𝓮𝓷𝔃𝔂𝓷𝓸𝔀𝔂", "𝓢𝓲𝓵𝓷𝓲𝓴 𝓔𝓵𝓮𝓴𝓽𝓻𝔂𝓬𝔃𝓷𝔂", "𝓤𝓷𝓲 𝓑𝓪𝓴"];
                 if (!excluded.includes(part.name)) {
                     selectedParts[part.name] = part.price;
                 }
@@ -1469,6 +1469,7 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
 
