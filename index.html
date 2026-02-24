@@ -84,7 +84,13 @@ select.top-input {
 .main-panel {
     flex: 3;
 }
-
+.creator-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    object-fit: cover;
+}
 /* PRAWA – PODGLĄD */
 .preview-panel {
     flex: 1;
@@ -1346,7 +1352,7 @@ fetch(webhookURL, {
         class="creator-card"
     >
         <div class="creator-left">
-            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" class="discord-icon">
+            <img src="https://cdn.discordapp.com/avatars/290967936183697408/0888e8ad1f5cd2e0169e012e65cb1478.webp?size=28" class="creator-avatar">
             <span class="creator-name">Grim</span>
         </div>
 
@@ -1441,6 +1447,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
