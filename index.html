@@ -104,7 +104,7 @@ input, select {
 
 /* PRZYCISKI */
 button {
-    background: var(--primary)
+    background: var(--primary);
     border: none;
     padding: 12px;
     border-radius: 8px;
@@ -136,7 +136,7 @@ button:hover {
 .total-price {
     font-size: 22px;
     font-weight: 700;
-    color: var(--primary)
+    color: var(--primary);
 }
 	/* KATEGORIE (zakładki) */
 .tabs {
@@ -223,21 +223,21 @@ button:hover {
     transition: 0.2s;
 }
 
-/* FAJECZKA */
 .checkmark::after {
     content: "";
     width: 6px;
     height: 12px;
-    border: solidvar(--primary);
+    border: solid white;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
     opacity: 0;
 }
 
-/* ZAZNACZONY */
+/* AKTYWNY */
 .custom-check input:checked + .checkmark {
-    background: #1f2633;
-    box-shadow: 0 0 10px rgba(255,122,0,0.6);
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 0 12px rgba(255,122,0,0.8);
 }
 
 .custom-check input:checked + .checkmark::after {
