@@ -510,6 +510,7 @@ button:hover {
 <div class="main-tabs">
     <button class="main-tab active" onclick="switchMainTab('config')">Konfigurator</button>
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
+	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -645,6 +646,8 @@ parts.forEach((category, index) => {
 function switchMainTab(tab) {
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
+    const salon = document.getElementById("salonTab");
+
     const buttons = document.querySelectorAll(".main-tab");
 
     const carSearchWrapper = document.getElementById("carSearchWrapper");
@@ -653,24 +656,35 @@ function switchMainTab(tab) {
     buttons.forEach(btn => btn.classList.remove("active"));
 
     if (tab === "config") {
-        // pokaż konfigurator
         config.style.display = "block";
         info.style.display = "none";
+        salon.style.display = "none";
         buttons[0].classList.add("active");
 
-        // POKAŻ elementy
         carSearchWrapper.style.display = "block";
         previewPanel.style.display = "block";
+    }
 
-    } else {
-        // pokaż informacje
+    else if (tab === "info") {
         config.style.display = "none";
         info.style.display = "block";
+        salon.style.display = "none";
         buttons[1].classList.add("active");
 
-        // UKRYJ elementy
         carSearchWrapper.style.display = "none";
         previewPanel.style.display = "none";
+    }
+
+    else if (tab === "salon") {
+        config.style.display = "none";
+        info.style.display = "none";
+        salon.style.display = "block";
+        buttons[2].classList.add("active");
+
+        carSearchWrapper.style.display = "none";
+        previewPanel.style.display = "none";
+
+        renderSalon(); // załaduje listę aut
     }
 }
 	let tftEnabled = false;
@@ -870,6 +884,22 @@ function filterCars() {
 
             results.appendChild(div);
         }
+    });
+}
+	function renderSalon() {
+    const container = document.getElementById("salonList");
+    container.innerHTML = "";
+
+    cars.forEach(car => {
+        const div = document.createElement("div");
+        div.className = "part";
+
+        div.innerHTML = `
+            <span class="part-name">${car.name}</span>
+            <span class="part-price">${car.price.toLocaleString()} PLN</span>
+        `;
+
+        container.appendChild(div);
     });
 }
 	function renderVariants(car) {
@@ -1187,6 +1217,14 @@ fetch(webhookURL, {
 	24.02.2026</p>
 
 </div>
+	<div id="salonTab" style="display:none;">
+
+    <h2>🚗 Auta dostępne w salonie</h2>
+
+    <div id="salonList" class="parts" style="grid-template-columns: 1fr;">
+    </div>
+
+</div>
 
 </div> <!-- KONIEC lewej strony -->
 
@@ -1224,6 +1262,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
