@@ -436,15 +436,10 @@ button:hover {
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
-<div class="tft-wrapper">
-    <label class="tft-switch">
-        <input type="checkbox" id="tftOption" onchange="toggleTFT()">
-        <span class="tft-slider"></span>
-    </label>
-    <span class="tft-text">
-        Tryb TFT
-        <small>(Zaznacz wszystkie części – bez nitra oraz Vopisu)</small>
-    </span>
+		<div class="tabs">
+    <div class="tab" id="tftTab" onclick="toggleTFTPanel()">
+        ⚡ Tryb TFT
+    </div>
 </div>
 <div class="tabs" id="categoryTabs"></div>
 <div class="parts" id="partsList"></div>
@@ -585,6 +580,33 @@ function switchMainTab(tab) {
         info.style.display = "block";
         buttons[1].classList.add("active");
     }
+}
+	let tftEnabled = false;
+
+function toggleTFTPanel() {
+    const tab = document.getElementById("tftTab");
+
+    tftEnabled = !tftEnabled;
+
+    if (tftEnabled) {
+        tab.classList.add("active");
+
+        parts.forEach(category => {
+            category.items.forEach(part => {
+                const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L", "Vopis", "Silnik Benzynowy", "Silnik Elektryczny"];
+                if (!excluded.includes(part.name)) {
+                    selectedParts[part.name] = part.price;
+                }
+            });
+        });
+
+    } else {
+        tab.classList.remove("active");
+        selectedParts = {};
+    }
+
+    renderParts();
+    calculate();
 }
 // Funkcja renderująca części
 function renderParts() {
@@ -785,31 +807,6 @@ function filterCars() {
 document.getElementById("carSelect").addEventListener("change", calculate);
 
 
-function toggleTFT() {
-    const tftChecked = document.getElementById("tftOption").checked;
-
-    if (tftChecked) {
-        // zaznacz WSZYSTKIE części ze wszystkich kategorii
-parts.forEach(category => {
-    category.items.forEach(part => {
-
-        // części wykluczone z TFT
-        const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L", "Vopis", "Silnik Benzynowy", "Silnik Elektryczny"];
-
-        if (!excluded.includes(part.name)) {
-            selectedParts[part.name] = part.price;
-        }
-    });
-});
-    } else {
-        // odznacz wszystko
-        selectedParts = {};
-    }
-
-    // odśwież widok aktualnej zakładki
-    renderParts();
-    calculate();
-}
 function calculate() {
     let total = parseInt(document.getElementById("carSelect").value) || 0;
 
@@ -1106,6 +1103,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
