@@ -437,7 +437,7 @@ button:hover {
 	<div id="configTab">
     <h2>Części tuningowe</h2>
 		<div class="tabs">
-    <div class="tab" id="tftTab" onclick="toggleTFTPanel()">
+    <div class="tab tft-tab" id="tftTab" onclick="toggleTFTPanel()">
         ⚡ Tryb TFT
     </div>
 </div>
@@ -532,7 +532,8 @@ const parts = [
             {name: "Nitro 5L", price: 55000000},
 			{name: "Nitro 10L", price: 65000000},
 			{name: "Nitro 15L", price: 75000000},
-			{name: "Vopis", price: 8000000}
+			{name: "Vopis", price: 8000000},
+			{name: "Uni Bak 125L", price: 16500000}
         ]
     }
 ];
@@ -556,7 +557,7 @@ parts.forEach((category, index) => {
     if(index === 0) tab.classList.add("active");
 
     tab.onclick = function() {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".tab:not(.tft-tab)").forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
         activeCategory = index;
         renderParts();
@@ -1103,6 +1104,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
