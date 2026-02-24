@@ -178,7 +178,57 @@ button:hover {
 .part:hover {
     border-color: #ff7a00;
 }
+/* ===== CUSTOM CHECKBOX ===== */
 
+.custom-check {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.custom-check input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    background: #0f1115;
+    border: 2px solid #ff7a00;
+    border-radius: 4px;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+/* Fajeczka */
+.checkmark::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #ff7a00;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: 0.2s;
+}
+
+/* Stan zaznaczony */
+.custom-check input:checked + .checkmark {
+    background: #1f2633;
+    box-shadow: 0 0 10px rgba(255,122,0,0.6);
+}
+
+.custom-check input:checked + .checkmark::after {
+    opacity: 1;
+}
 .part input {
     width: 16px;
     height: 16px;
@@ -619,11 +669,13 @@ function renderParts() {
 
         const checked = selectedParts[part.name] ? "checked" : "";
 
-        div.innerHTML = `
-            <div class="part-left">
-                <input type="checkbox" ${checked}>
-                <span class="part-name">${part.name}</span>
-            </div>
+	<div class="part-left">
+    	<label class="custom-check">
+        <input type="checkbox" ${checked}>
+        <span class="checkmark"></span>
+    </label>
+    <span class="part-name">${part.name}</span>
+</div>
             <span class="part-price">${part.price.toLocaleString()} PLN</span>
         `;
 
@@ -1104,6 +1156,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
