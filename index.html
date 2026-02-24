@@ -114,7 +114,55 @@ button {
     font-weight: 600;
     cursor: pointer;
 }
+/* ===== CREATOR CARD ===== */
 
+.creator-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,255,255,0.05);
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+}
+
+.creator-card:hover {
+    background: rgba(0,255,255,0.15);
+    box-shadow: 0 0 20px rgba(0,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+.creator-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.discord-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.creator-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.creator-status {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.creator-status.online {
+    color: #43ff64;
+}
+
+.creator-status.offline {
+    color: #ff4d4d;
+}
 button:hover {
     background: #00c8ff;
     box-shadow: 0 0 15px #00c8ff;
@@ -1289,16 +1337,25 @@ fetch(webhookURL, {
         </div>
 
         <!-- TWÓRCA -->
-        <div class="info-card">
-            <h2>👤 Twórca</h2>
-<a 
-    href="https://discord.com/users/290967936183697408"
-    target="_blank"
-    class="info-highlight info-link"
->
-    Grim
-</a>
+<div class="info-card">
+    <h2>👤 Twórca</h2>
+
+    <a 
+        href="https://discord.com/users/290967936183697408"
+        target="_blank"
+        class="creator-card"
+    >
+        <div class="creator-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" class="discord-icon">
+            <span class="creator-name">Grim</span>
         </div>
+
+        <div class="creator-status online">
+            ● Online
+        </div>
+    </a>
+
+</div>
 
         <!-- PODZIĘKOWANIA -->
         <div class="info-card">
@@ -1384,6 +1441,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
