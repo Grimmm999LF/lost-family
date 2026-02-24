@@ -199,6 +199,31 @@ button:hover {
     color: #c7cbd1;
     font-size: 13px;
 }
+	.main-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.main-tab {
+    padding: 10px 16px;
+    background: #0f1115;
+    border: 1px solid #2a2f3a;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.main-tab:hover {
+    border-color: #ff7a00;
+}
+
+.main-tab.active {
+    background: #ff7a00;
+    color: black;
+    font-weight: 600;
+}
 	/* LOGO LOST FAMILY */
 .logo {
     font-size: 60px;
@@ -340,7 +365,12 @@ button:hover {
 </div>
 
 <input type="hidden" id="carSelect" value="0">
-
+	
+<div class="main-tabs">
+    <button class="main-tab active" onclick="switchMainTab('config')">Konfigurator</button>
+    <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
+</div>
+	<div id="configTab">
     <h2>Części tuningowe</h2>
 <div class="tft-wrapper">
     <label class="tft-label">
@@ -471,7 +501,23 @@ parts.forEach((category, index) => {
 
     categoryTabs.appendChild(tab);
 });
+function switchMainTab(tab) {
+    const config = document.getElementById("configTab");
+    const info = document.getElementById("infoTab");
 
+    const buttons = document.querySelectorAll(".main-tab");
+    buttons.forEach(btn => btn.classList.remove("active"));
+
+    if (tab === "config") {
+        config.style.display = "block";
+        info.style.display = "none";
+        buttons[0].classList.add("active");
+    } else {
+        config.style.display = "none";
+        info.style.display = "block";
+        buttons[1].classList.add("active");
+    }
+}
 // Funkcja renderująca części
 function renderParts() {
     partsList.innerHTML = "";
@@ -920,6 +966,27 @@ fetch(webhookURL, {
 }
 </script>
 
+</div> <!-- zamyka configTab -->
+
+<div id="infoTab" style="display:none;">
+
+    <h2>O Projekcie</h2>
+    <p>
+        Kalkulator Lost Family to system wyceny pojazdów
+        stworzony na potrzeby serwera RP.
+    </p>
+
+    <h3>Twórca</h3>
+    <p>
+        Grim<br>
+        Projekt 2026
+    </p>
+
+    <h3>Wersja</h3>
+    <p>v1.0</p>
+
+</div>
+
 </div> <!-- KONIEC lewej strony -->
 
 <!-- PANEL PODGLĄDU -->
@@ -959,6 +1026,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
