@@ -619,7 +619,7 @@ button:hover {
     <button class="main-tab active" onclick="switchMainTab('config')">Konfigurator</button>
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
-	<button onclick="openTab('demontaz')">🔧 Demontaż</button>
+	<button class="main-tab" onclick="switchMainTab('demontaz')">🔧 Demontaż</button>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -627,6 +627,51 @@ button:hover {
     <div class="tab tft-tab" id="tftTab" onclick="toggleTFTPanel()">
         ⚡ Tryb TFT
     </div>
+	</div> <!-- KONIEC configTab -->
+
+<div id="demontazTab" style="display:none;">
+
+<h2>🔧 Demontaż pojazdu</h2>
+
+<div class="parts">
+
+<div class="part">
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="500000">
+Silnik – 500 000 PLN
+</label>
+</div>
+
+<div class="part">
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="300000">
+Skrzynia – 300 000 PLN
+</label>
+</div>
+
+<div class="part">
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="200000">
+Zawieszenie – 200 000 PLN
+</label>
+</div>
+
+<div class="part">
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="150000">
+Turbo – 150 000 PLN
+</label>
+</div>
+
+</div>
+
+<h3>Podgląd:</h3>
+<p id="demontazPreview">Brak części</p>
+
+<h3>Kwota:</h3>
+<p id="demontazTotal">0 PLN</p>
+
+</div>
 </div>
 <div class="tabs" id="categoryTabs"></div>
 <div class="parts" id="partsList"></div>
@@ -667,58 +712,7 @@ button:hover {
     <div class="total animated-price">Cena końcowa: <span id="total">0</span> PLN</div>
     <button onclick="resetAll()">Wyczyść wszystko</button>
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
-</div>
-<div id="demontaz" class="tab-content">
-
-<h2 class="section-title">🔧 Demontaż pojazdu</h2>
-
-<div class="configurator">
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="500000">
-Silnik – 500 000 PLN
-</label>
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="300000">
-Skrzynia biegów – 300 000 PLN
-</label>
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="200000">
-Zawieszenie – 200 000 PLN
-</label>
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="150000">
-Turbo – 150 000 PLN
-</label>
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="80000">
-Hamulce – 80 000 PLN
-</label>
-
-</div>
-
-
-<div class="preview-box">
-
-<h3 class="section-title">Podgląd demontażu:</h3>
-
-<p id="demontazPreview">
-Brak wybranych części
-</p>
-
-<h3 class="section-title">Kwota za demontaż:</h3>
-
-<p id="demontazTotal">
-0 PLN
-</p>
-
-</div>
-
-</div>		
+</div>	
 <script>
 // Lista części tuningowych
 const parts = [
@@ -804,49 +798,76 @@ parts.forEach((category, index) => {
     categoryTabs.appendChild(tab);
 });
 function switchMainTab(tab) {
-    const config = document.getElementById("configTab");
-    const info = document.getElementById("infoTab");
-    const salon = document.getElementById("salonTab");
 
-    const buttons = document.querySelectorAll(".main-tab");
+const config = document.getElementById("configTab");
+const info = document.getElementById("infoTab");
+const salon = document.getElementById("salonTab");
+const demontaz = document.getElementById("demontazTab");
 
-    const carSearchWrapper = document.getElementById("carSearchWrapper");
-    const previewPanel = document.getElementById("previewPanel");
+const buttons = document.querySelectorAll(".main-tab");
 
-    buttons.forEach(btn => btn.classList.remove("active"));
+const carSearchWrapper = document.getElementById("carSearchWrapper");
+const previewPanel = document.getElementById("previewPanel");
 
-    if (tab === "config") {
-        config.style.display = "block";
-        info.style.display = "none";
-        salon.style.display = "none";
-        buttons[0].classList.add("active");
+buttons.forEach(btn => btn.classList.remove("active"));
 
-        carSearchWrapper.style.display = "block";
-        previewPanel.style.display = "block";
-    }
 
-    else if (tab === "info") {
-        config.style.display = "none";
-        info.style.display = "block";
-        salon.style.display = "none";
-        buttons[1].classList.add("active");
+if (tab === "config") {
 
-        carSearchWrapper.style.display = "none";
-        previewPanel.style.display = "none";
-    }
+config.style.display="block";
+info.style.display="none";
+salon.style.display="none";
+demontaz.style.display="none";
 
-    else if (tab === "salon") {
-        config.style.display = "none";
-        info.style.display = "none";
-        salon.style.display = "block";
-        buttons[2].classList.add("active");
+buttons[0].classList.add("active");
 
-        carSearchWrapper.style.display = "none";
-        previewPanel.style.display = "none";
+carSearchWrapper.style.display="block";
+previewPanel.style.display="block";
 
-		populateBrands();
-        renderSalon(); // załaduje listę aut
-    }
+}
+
+else if (tab === "info") {
+
+config.style.display="none";
+info.style.display="block";
+salon.style.display="none";
+demontaz.style.display="none";
+
+buttons[1].classList.add("active");
+
+carSearchWrapper.style.display="none";
+previewPanel.style.display="none";
+
+}
+
+else if (tab === "salon") {
+
+config.style.display="none";
+info.style.display="none";
+salon.style.display="block";
+demontaz.style.display="none";
+
+buttons[2].classList.add("active");
+
+carSearchWrapper.style.display="none";
+previewPanel.style.display="none";
+
+}
+
+else if (tab === "demontaz") {
+
+config.style.display="none";
+info.style.display="none";
+salon.style.display="none";
+demontaz.style.display="block";
+
+buttons[3].classList.add("active");
+
+carSearchWrapper.style.display="none";
+previewPanel.style.display="none";
+
+}
+
 }
 	let tftEnabled = false;
 function updateDemontaz() {
@@ -1552,6 +1573,7 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
 
