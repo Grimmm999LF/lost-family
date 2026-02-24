@@ -394,6 +394,17 @@ button:hover {
     justify-content: flex-end; /* wyrównanie w prawo */
     margin-bottom: 15px;
 }
+	.info-link {
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.info-link:hover {
+    background: rgba(0,255,255,0.18);
+    box-shadow: 0 0 15px rgba(0,255,255,0.4);
+    transform: scale(1.03);
+}
 /* ===== NOWY TFT SWITCH ===== */
 
 .tft-wrapper {
@@ -1280,9 +1291,13 @@ fetch(webhookURL, {
         <!-- TWÓRCA -->
         <div class="info-card">
             <h2>👤 Twórca</h2>
-            <div class="info-highlight">
-                Grim
-            </div>
+<a 
+    href="https://discord.com/users/290967936183697408"
+    target="_blank"
+    class="info-highlight info-link"
+>
+    Grim (Kliknij, aby skontaktować się)
+</a>
         </div>
 
         <!-- PODZIĘKOWANIA -->
@@ -1369,6 +1384,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
