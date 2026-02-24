@@ -1442,50 +1442,32 @@ fetch(webhookURL, {
 </div>
 
 </div> <!-- ZAMYKA container -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" autoplay loop>
     <source src="muzyka.mp3" type="audio/mpeg">
 </audio>
 
-<button id="musicBtn" style="
-position:fixed;
-bottom:20px;
-right:20px;
-background:#ff7a00;
-color:white;
-border:none;
-padding:10px 15px;
-border-radius:8px;
-cursor:pointer;
-">
-🎵 Muzyka OFF
-</button>
-
 <script>
 const music = document.getElementById("bgMusic");
-const btn = document.getElementById("musicBtn");
 
+// ustaw głośność
 music.volume = 0.25;
 
-let playing = true;
-
-btn.onclick = () => {
-
-    if(!playing){
-        music.play();
-        btn.innerText = "🎵 Muzyka ON";
-        playing = true;
-    } else {
-        music.pause();
-        btn.innerText = "🎵 Muzyka OFF";
-        playing = false;
-    }
-
-}
+// próba automatycznego startu
+window.addEventListener("load", () => {
+    music.play().catch(() => {
+        // jeśli przeglądarka zablokuje autoplay
+        document.addEventListener("click", () => {
+            music.play();
+        }, { once: true });
+    });
+});
+</script>
 </script>
 
 </body>
 
 </html>
+
 
 
 
