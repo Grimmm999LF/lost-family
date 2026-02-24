@@ -79,7 +79,9 @@ select.top-input {
     padding: 18px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.4);
 }
-
+h3 {
+    color: orange;
+}
 /* LEWA STRONA */
 .main-panel {
     flex: 3;
@@ -1416,10 +1418,10 @@ fetch(webhookURL, {
 
 <!-- PANEL PODGLĄDU -->
 <div id="previewPanel" style="flex:1; background:#0d0d0d; border:1px solid var(--primary); border-radius:10px; padding:15px;">
-    <h2>Podgląd</h2>
+    <h3 class="category-title">Podgląd:</h3>
 
     <div>
-        <b>Auto:</b>
+        <h3 class="category-title">Auto:</h3>
         <div id="previewCar">Brak</div>
     </div>
 
@@ -1430,7 +1432,7 @@ fetch(webhookURL, {
         <b></b>
         <div id="previewParts"></div>
     </div>
-        <b>Ulepszenia:</b>
+        <h3 class="category-title">Ulepszenia:</h3>
         <div id="previewUpgrades"></div>
     </div>
 
@@ -1467,6 +1469,7 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
 
