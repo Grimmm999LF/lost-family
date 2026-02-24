@@ -965,47 +965,58 @@ function resetAll() {
     calculate();
 }
 function updatePreview() {
+
     // AUTO
     const carName = document.getElementById("carSearch").value || "Brak";
     document.getElementById("previewCar").innerText = carName;
 
-    // CZĘŚCI
-let visual = [];
-let mechanical = [];
-let suspension = [];
-let service = [];
+    // ===== CZĘŚCI PO KATEGORIACH =====
+    let visual = [];
+    let mechanical = [];
+    let suspension = [];
+    let service = [];
 
-selectedParts.forEach(p => {
+    for (let name in selectedParts) {
 
-    if (p.category === "Wizualne") visual.push("• " + p.name);
-    if (p.category === "Silnik") mechanical.push("• " + p.name);
-    if (p.category === "Regulacje") suspension.push("• " + p.name);
-    if (p.category === "Pozostałe") service.push("• " + p.name);
+        // szukamy kategorii tej części
+        parts.forEach(category => {
+            category.items.forEach(item => {
+                if (item.name === name) {
 
-});
+                    if (item.category === "Wizualne")
+                        visual.push("• " + name);
 
-let output = "";
+                    if (item.category === "Silnik")
+                        mechanical.push("• " + name);
 
-if (visual.length) {
-    output += "<b>Wizualne:</b><br>" + visual.join("<br>") + "<br><br>";
-}
+                    if (item.category === "Regulacje")
+                        suspension.push("• " + name);
 
-if (mechanical.length) {
-    output += "<b>Mechaniczne:</b><br>" + mechanical.join("<br>") + "<br><br>";
-}
+                    if (item.category === "Pozostałe")
+                        service.push("• " + name);
+                }
+            });
+        });
 
-if (suspension.length) {
-    output += "<b>Zawieszenie:</b><br>" + suspension.join("<br>") + "<br><br>";
-}
+    }
 
-if (service.length) {
-    output += "<b>Służbowe:</b><br>" + service.join("<br>") + "<br><br>";
-}
+    let output = "";
 
-document.getElementById("previewParts").innerHTML = output;
-}
+    if (visual.length)
+        output += "<b>Wizualne:</b><br>" + visual.join("<br>") + "<br><br>";
 
-    // ULEPSZENIA
+    if (mechanical.length)
+        output += "<b>Silnik:</b><br>" + mechanical.join("<br>") + "<br><br>";
+
+    if (suspension.length)
+        output += "<b>Regulacje:</b><br>" + suspension.join("<br>") + "<br><br>";
+
+    if (service.length)
+        output += "<b>Pozostałe:</b><br>" + service.join("<br>") + "<br><br>";
+
+    document.getElementById("previewParts").innerHTML = output || "Brak";
+
+    // ===== ULEPSZENIA =====
     const cylText = document.getElementById("cyl").innerText;
     const engineText = document.getElementById("engine").innerText;
     const fuelText = document.getElementById("fuel").innerText;
@@ -1015,7 +1026,7 @@ document.getElementById("previewParts").innerHTML = output;
         "Pojemność: " + engineText + "<br>" +
         "Zbiornik: " + fuelText;
 
-    // CENA
+    // ===== CENA =====
     document.getElementById("previewTotal").innerText =
         document.getElementById("total").innerText;
 }
@@ -1193,6 +1204,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
