@@ -684,6 +684,7 @@ function switchMainTab(tab) {
         carSearchWrapper.style.display = "none";
         previewPanel.style.display = "none";
 
+		populateBrands();
         renderSalon(); // załaduje listę aut
     }
 }
@@ -886,21 +887,34 @@ function filterCars() {
         }
     });
 }
-	function renderSalon() {
+function renderSalon() {
     const container = document.getElementById("salonList");
+    const search = document.getElementById("salonSearch").value.toLowerCase();
+    const brand = document.getElementById("brandFilter").value;
+
     container.innerHTML = "";
 
-    cars.forEach(car => {
-        const div = document.createElement("div");
-        div.className = "part";
+    cars
+        .filter(car => {
+            const carBrand = getBrand(car.name);
 
-        div.innerHTML = `
-            <span class="part-name">${car.name}</span>
-            <span class="part-price">${car.price.toLocaleString()} PLN</span>
-        `;
+            const matchSearch = car.name.toLowerCase().includes(search);
+            const matchBrand = (brand === "all" || carBrand === brand);
 
-        container.appendChild(div);
-    });
+            return matchSearch && matchBrand;
+        })
+        .sort((a, b) => a.price - b.price)
+        .forEach(car => {
+            const div = document.createElement("div");
+            div.className = "part";
+
+            div.innerHTML = `
+                <span class="part-name">${car.name}</span>
+                <span class="part-price">${car.price.toLocaleString()} PLN</span>
+            `;
+
+            container.appendChild(div);
+        });
 }
 	function renderVariants(car) {
     const wrapper = document.getElementById("variantWrapper");
@@ -1010,6 +1024,26 @@ function removeFuel() {
         document.getElementById("fuel").innerText = value + "L";
         calculate();
     }
+}
+	function getBrand(carName) {
+    return carName.split(" ")[0];
+}
+	function populateBrands() {
+    const select = document.getElementById("brandFilter");
+    const brands = new Set();
+
+    cars.forEach(car => {
+        brands.add(getBrand(car.name));
+    });
+
+    const sortedBrands = Array.from(brands).sort();
+
+    sortedBrands.forEach(brand => {
+        const option = document.createElement("option");
+        option.value = brand;
+        option.textContent = brand;
+        select.appendChild(option);
+    });
 }
 function resetAll() {
     document.getElementById("carSelect").value = 0;
@@ -1217,12 +1251,26 @@ fetch(webhookURL, {
 	24.02.2026</p>
 
 </div>
-	<div id="salonTab" style="display:none;">
+<div id="salonTab" style="display:none;">
 
     <h2>🚗 Auta dostępne w salonie</h2>
 
-    <div id="salonList" class="parts" style="grid-template-columns: 1fr;">
-    </div>
+    <!-- WYSZUKIWARKA -->
+    <input 
+        type="text"
+        id="salonSearch"
+        class="top-input"
+        placeholder="Szukaj auta lub marki..."
+        onkeyup="renderSalon()"
+    >
+
+    <!-- FILTR MARKI -->
+    <select id="brandFilter" class="top-input" onchange="renderSalon()">
+        <option value="all">Wszystkie marki</option>
+    </select>
+
+    <!-- LISTA -->
+    <div id="salonList" class="parts" style="grid-template-columns: 1fr;"></div>
 
 </div>
 
@@ -1262,6 +1310,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
