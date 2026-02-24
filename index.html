@@ -619,6 +619,7 @@ button:hover {
     <button class="main-tab active" onclick="switchMainTab('config')">Konfigurator</button>
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
+	<button onclick="openTab('demontaz')">🔧 Demontaż</button>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -667,6 +668,57 @@ button:hover {
     <button onclick="resetAll()">Wyczyść wszystko</button>
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
+<div id="demontaz" class="tab-content">
+
+<h2 class="section-title">🔧 Demontaż pojazdu</h2>
+
+<div class="configurator">
+
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="500000">
+Silnik – 500 000 PLN
+</label>
+
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="300000">
+Skrzynia biegów – 300 000 PLN
+</label>
+
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="200000">
+Zawieszenie – 200 000 PLN
+</label>
+
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="150000">
+Turbo – 150 000 PLN
+</label>
+
+<label>
+<input type="checkbox" onchange="updateDemontaz()" value="80000">
+Hamulce – 80 000 PLN
+</label>
+
+</div>
+
+
+<div class="preview-box">
+
+<h3 class="section-title">Podgląd demontażu:</h3>
+
+<p id="demontazPreview">
+Brak wybranych części
+</p>
+
+<h3 class="section-title">Kwota za demontaż:</h3>
+
+<p id="demontazTotal">
+0 PLN
+</p>
+
+</div>
+
+</div>		
 <script>
 // Lista części tuningowych
 const parts = [
@@ -797,7 +849,35 @@ function switchMainTab(tab) {
     }
 }
 	let tftEnabled = false;
+function updateDemontaz() {
 
+let total = 0;
+let text = "";
+
+const checkboxes = document.querySelectorAll("#demontaz input[type=checkbox]");
+
+checkboxes.forEach(cb => {
+
+if(cb.checked){
+
+total += parseInt(cb.value);
+
+text += cb.parentElement.innerText + "\n";
+
+}
+
+});
+
+if(text === ""){
+text = "Brak wybranych części";
+}
+
+document.getElementById("demontazPreview").innerText = text;
+
+document.getElementById("demontazTotal").innerText =
+total.toLocaleString() + " PLN";
+
+}
 function toggleTFTPanel() {
     const tab = document.getElementById("tftTab");
 
@@ -1472,6 +1552,7 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
 
