@@ -282,7 +282,71 @@ button:hover {
     justify-content: flex-end; /* wyrównanie w prawo */
     margin-bottom: 15px;
 }
+/* ===== NOWY TFT SWITCH ===== */
 
+.tft-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Ukrycie default checkbox */
+.tft-switch input {
+    display: none;
+}
+
+/* Slider */
+.tft-slider {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: #2a2f3a;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* Kółko */
+.tft-slider::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 3px;
+    top: 3px;
+    background: #777;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+/* AKTYWNY STAN */
+.tft-switch input:checked + .tft-slider {
+    background: linear-gradient(45deg, #ff7a00, #ffae00);
+    box-shadow: 0 0 15px rgba(255,122,0,0.8);
+}
+
+.tft-switch input:checked + .tft-slider::before {
+    transform: translateX(30px);
+    background: white;
+}
+
+/* Tekst */
+.tft-text {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    font-weight: 700;
+    color: #ff8c00;
+}
+
+.tft-text small {
+    font-weight: 400;
+    font-size: 12px;
+    color: #aaa;
+}
 .tft-label {
     display: flex;
     align-items: center;
@@ -373,10 +437,14 @@ button:hover {
 	<div id="configTab">
     <h2>Części tuningowe</h2>
 <div class="tft-wrapper">
-    <label class="tft-label">
+    <label class="tft-switch">
         <input type="checkbox" id="tftOption" onchange="toggleTFT()">
-        <span>TFT (Zaznacz wszystkie części – bez nitra oraz Vopisu!)</span>
+        <span class="tft-slider"></span>
     </label>
+    <span class="tft-text">
+        Tryb TFT
+        <small>(Zaznacz wszystkie części – bez nitra oraz Vopisu)</small>
+    </span>
 </div>
 <div class="tabs" id="categoryTabs"></div>
 <div class="parts" id="partsList"></div>
@@ -1038,6 +1106,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
