@@ -147,6 +147,44 @@ button:hover {
     font-size: 16px;
     letter-spacing: 0.5px;
 }
+	/* ===== INFO TAB ===== */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.info-card {
+    background: #0d0d0d;
+    border: 1px solid var(--primary);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0,255,255,0.05);
+    transition: 0.2s;
+}
+
+.info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0,255,255,0.15);
+}
+
+.info-card h2 {
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.info-highlight {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0,255,255,0.08);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 10px;
+    display: inline-block;
+}
 	/* KATEGORIE (zakładki) */
 .tabs {
     display: flex;
@@ -1223,32 +1261,52 @@ fetch(webhookURL, {
 
 <div id="infoTab" style="display:none;">
 
-    <h2>Kalkulator Wycen pojazdów</h2>
-    <p>
-        Kalkulator został stworzony w celu ułatwienia sobie kalkulacji związanych z pojazdami na giełdach oraz salonach.
-        Zamieściłem tutaj wszelkie warianty pojazdów wraz z ich cenami jak i wszystkie pojazdy możliwe do kupienia!
+    <div class="info-grid">
 
-		Do Nitra jest doliczona aktualna ostatnia kwota montażu butli (55 000 000 PLN).
-		Kwestia Vopisu jest sporna, uśredniłem ceny i tymczasowo zostało uwzględnione jako 8kk - Kwestia sporna. 
+        <!-- O PROJEKCIE -->
+        <div class="info-card">
+            <h2>📊 O projekcie</h2>
+            <p>
+                Kalkulator został stworzony w celu ułatwienia obliczeń związanych z pojazdami
+                na giełdach oraz w salonach. Zawiera warianty pojazdów wraz z ich cenami
+                oraz wszystkie dostępne modele do zakupu.
+            </p>
+            <p>
+                Do Nitry doliczona została aktualna kwota montażu butli (55 000 000 PLN).
+                Kwestia Voipisu jest sporna — przyjęto uśrednioną wartość 8k.
+            </p>
+        </div>
 
-		Chciałbym podziękować wszystkim, którzy dołożyli cegiełkę do tego projektu.
-    </p>
+        <!-- TWÓRCA -->
+        <div class="info-card">
+            <h2>👤 Twórca</h2>
+            <div class="info-highlight">
+                Grim
+            </div>
+        </div>
 
-    <h3>Twórca</h3>
-    <p>
-        Grim<br>
-    </p>
-	<h3> Szczególne podziękowania:</h3>
-	<p>Siewcyk4
-	BlackShen
-	Maciekxxx3
-	Flip;x
-	Zi-Bi
-	Vedixx_</p>
-	
-    <h3>Wersja</h3>
-    <p>v1.0
-	24.02.2026</p>
+        <!-- PODZIĘKOWANIA -->
+        <div class="info-card">
+            <h2>🙏 Podziękowania</h2>
+            <p>
+                Siewcyk4<br>
+                BlackShen<br>
+                Maciexxxx3<br>
+                Flipx<br>
+                Zi-Bi<br>
+                Vedixx
+            </p>
+        </div>
+
+        <!-- WERSJA -->
+        <div class="info-card">
+            <h2>⚙️ Wersja</h2>
+            <div class="info-highlight">
+                v1.0 • 24.02.2026
+            </div>
+        </div>
+
+    </div>
 
 </div>
 <div id="salonTab" style="display:none;">
@@ -1310,6 +1368,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
