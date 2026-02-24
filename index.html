@@ -555,53 +555,53 @@ const parts = [
     {
         category: "Wizualne",
         items: [
-            {name: "Lacze Przód", price: 2000000},
-            {name: "Lacze Tył", price: 2000000},
-            {name: "Paintjob", price: 12500000},
-            {name: "Kolor świateł", price: 2000000},
-            {name: "Neony", price: 550000},
-            {name: "Licznik driftu", price: 650000},
-            {name: "Przyciemniane Szyby", price: 1500000},
-            {name: "Przyciemniane Lampy", price: 1500000}
+            {name: "Lacze Przód", price: 2000000, category: "Wizualne" },
+            {name: "Lacze Tył", price: 2000000, category: "Wizualne" },
+            {name: "Paintjob", price: 12500000, category: "Wizualne" },
+            {name: "Kolor świateł", price: 2000000, category: "Wizualne" },
+            {name: "Neony", price: 550000, category: "Wizualne" },
+            {name: "Licznik driftu", price: 650000,category: "Wizualne" },
+            {name: "Przyciemniane Szyby", price: 1500000,category: "Wizualne" },
+            {name: "Przyciemniane Lampy", price: 1500000, category: "Wizualne" }
         ]
     },
     {
         category: "Silnik",
         items: [
-            {name: "US 1", price: 300000},
-            {name: "US 2", price: 400000},
-            {name: "US 3", price: 500000},
-            {name: "US 4", price: 1300000},
-            {name: "Turbo", price: 700000},
-            {name: "Chip ", price: 800000},
-            {name: "Silnik Benzynowy", price: 150000},
-            {name: "Silnik Diesel", price: 300000},
-            {name: "Silnik Elektryczny", price: 400000}
+            {name: "US 1", price: 300000, category: "Silnik" },
+            {name: "US 2", price: 400000, category: "Silnik" },
+            {name: "US 3", price: 500000, category: "Silnik" },
+            {name: "US 4", price: 1300000, category: "Silnik" },
+            {name: "Turbo", price: 700000,category: "Silnik" },
+            {name: "Chip ", price: 800000, category: "Silnik" },
+            {name: "Silnik Benzynowy", price: 150000, category: "Silnik" },
+            {name: "Silnik Diesel", price: 300000, category: "Silnik" },
+            {name: "Silnik Elektryczny", price: 400000, category: "Silnik" }
         ]
     },
     {
         category: "Regulacje",
         items: [
-            {name: "Regulacja mocy", price: 2000000},
-            {name: "Regulacja trakcji", price: 2000000},
-            {name: "Regulacja hamulców", price: 500000},
-            {name: "Regulacja masy", price: 500000},
-            {name: "Regulacja kątu skrętu", price: 1000000}
+            {name: "Regulacja mocy", price: 2000000, category: "Regulacje" },
+            {name: "Regulacja trakcji", price: 2000000, category: "Regulacje" },
+            {name: "Regulacja hamulców", price: 500000, category: "Regulacje" },
+            {name: "Regulacja masy", price: 500000, category: "Regulacje" },
+            {name: "Regulacja kątu skrętu", price: 1000000, category: "Regulacje" }
         ]
     },
     {
         category: "Pozostałe",
         items: [
-            {name: "Gwintowane zawieszenie", price: 150000},
-            {name: "ABS", price: 1000000},
-            {name: "Napęd", price: 200000},
-            {name: "Taksometr", price: 2500000},
-            {name: "LPG", price: 150000},
-            {name: "Nitro 5L", price: 55000000},
-			{name: "Nitro 10L", price: 65000000},
-			{name: "Nitro 15L", price: 75000000},
-			{name: "Vopis", price: 8000000},
-			{name: "Uni Bak", price: 17500000}
+            {name: "Gwintowane zawieszenie", price: 150000, category: "Pozostałe" },
+            {name: "ABS", price: 1000000, category: "Pozostałe" },
+            {name: "Napęd", price: 200000, category: "Pozostałe" },
+            {name: "Taksometr", price: 2500000, category: "Pozostałe" },
+            {name: "LPG", price: 150000, category: "Pozostałe" },
+            {name: "Nitro 5L", price: 55000000, category: "Pozostałe" },
+			{name: "Nitro 10L", price: 65000000, category: "Pozostałe" },
+			{name: "Nitro 15L", price: 75000000, category: "Pozostałe" },
+			{name: "Vopis", price: 8000000, category: "Pozostałe" },
+			{name: "Uni Bak", price: 17500000, category: "Pozostałe" }
         ]
     }
 ];
@@ -970,18 +970,40 @@ function updatePreview() {
     document.getElementById("previewCar").innerText = carName;
 
     // CZĘŚCI
-    const partsDiv = document.getElementById("previewParts");
-    partsDiv.innerHTML = "";
+let visual = [];
+let mechanical = [];
+let suspension = [];
+let service = [];
 
-    for (let name in selectedParts) {
-        const div = document.createElement("div");
-        div.innerText = "• " + name;
-        partsDiv.appendChild(div);
-    }
+selectedParts.forEach(p => {
 
-    if (partsDiv.innerHTML === "") {
-        partsDiv.innerText = "Brak";
-    }
+    if (p.category === "Wizualne") visual.push("• " + p.name);
+    if (p.category === "Silnik") mechanical.push("• " + p.name);
+    if (p.category === "Regulacje") suspension.push("• " + p.name);
+    if (p.category === "Pozostałe") service.push("• " + p.name);
+
+});
+
+let output = "";
+
+if (visual.length) {
+    output += "<b>Wizualne:</b><br>" + visual.join("<br>") + "<br><br>";
+}
+
+if (mechanical.length) {
+    output += "<b>Mechaniczne:</b><br>" + mechanical.join("<br>") + "<br><br>";
+}
+
+if (suspension.length) {
+    output += "<b>Zawieszenie:</b><br>" + suspension.join("<br>") + "<br><br>";
+}
+
+if (service.length) {
+    output += "<b>Służbowe:</b><br>" + service.join("<br>") + "<br><br>";
+}
+
+document.getElementById("previewParts").innerHTML = output;
+}
 
     // ULEPSZENIA
     const cylText = document.getElementById("cyl").innerText;
@@ -1171,6 +1193,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
