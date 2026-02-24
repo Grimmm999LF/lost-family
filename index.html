@@ -1026,16 +1026,16 @@ function updatePreview() {
     let output = "";
 
     if (visual.length)
-        output += "<span class='summary-category'>Wizualne:</span><br>" + visual.join("<br>") + "<br><br>";
+        output += "<span class='summary-category'>✨ Wizualne:</span><br>" + visual.join("<br>") + "<br><br>";
 
     if (mechanical.length)
-        output += "<span class='summary-category'>Silnik:</span><br>" + mechanical.join("<br>") + "<br><br>";
+        output += "<span class='summary-category'>⚙️ Silnik:</span><br>" + mechanical.join("<br>") + "<br><br>";
 
     if (suspension.length)
-        output += "<span class='summary-category'>Regulacje:</span><br>" + suspension.join("<br>") + "<br><br>";
+        output += "<span class='summary-category'>📏 Regulacje:</span><br>" + suspension.join("<br>") + "<br><br>";
 
     if (service.length)
-        output += "<span class='summary-category'>Pozostałe:</span><br>" + service.join("<br>") + "<br><br>";
+        output += "<span class='summary-category'>🧰 Pozostałe:</span><br>" + service.join("<br>") + "<br><br>";
 
     document.getElementById("previewParts").innerHTML = output || "Brak";
 
@@ -1224,6 +1224,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
