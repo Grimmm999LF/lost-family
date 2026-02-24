@@ -533,7 +533,7 @@ const parts = [
 			{name: "Nitro 10L", price: 65000000},
 			{name: "Nitro 15L", price: 75000000},
 			{name: "Vopis", price: 8000000},
-			{name: "Uni Bak", price: 16500000}
+			{name: "Uni Bak", price: 17500000}
         ]
     }
 ];
@@ -594,7 +594,7 @@ function toggleTFTPanel() {
 
         parts.forEach(category => {
             category.items.forEach(part => {
-                const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L", "Vopis", "Silnik Benzynowy", "Silnik Elektryczny"];
+                const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L", "Vopis", "Silnik Benzynowy", "Silnik Elektryczny", "Uni Bak"];
                 if (!excluded.includes(part.name)) {
                     selectedParts[part.name] = part.price;
                 }
@@ -1104,6 +1104,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
