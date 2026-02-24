@@ -669,24 +669,23 @@ function renderParts() {
 
         const checked = selectedParts[part.name] ? "checked" : "";
 
-	<div class="part-left">
-    	<label class="custom-check">
-        <input type="checkbox" ${checked}>
-        <span class="checkmark"></span>
-    </label>
-    <span class="part-name">${part.name}</span>
-</div>
+        div.innerHTML = `
+            <div class="part-left">
+                <label class="custom-check">
+                    <input type="checkbox" ${checked}>
+                    <span class="checkmark"></span>
+                </label>
+                <span class="part-name">${part.name}</span>
+            </div>
             <span class="part-price">${part.price.toLocaleString()} PLN</span>
         `;
 
         const checkbox = div.querySelector("input");
 
-        // jeśli było zaznaczone wcześniej
         if (checked) {
             div.classList.add("selected");
         }
 
-        // zmiana checkboxa
         checkbox.addEventListener("change", function() {
             if (this.checked) {
                 selectedParts[part.name] = part.price;
@@ -698,7 +697,6 @@ function renderParts() {
             calculate();
         });
 
-        // kliknięcie w cały box
         div.addEventListener("click", function(e) {
             if (e.target.tagName !== "INPUT") {
                 checkbox.checked = !checkbox.checked;
@@ -706,7 +704,6 @@ function renderParts() {
             }
         });
 
-        // 🔥 TEGO BRAKOWAŁO
         partsList.appendChild(div);
     });
 }
@@ -1156,6 +1153,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
