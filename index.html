@@ -485,6 +485,7 @@ button:hover {
     <span>m</span>
 </h1>
 
+<div id="carSearchWrapper">
 <input 
     type="text" 
     id="carSearch" 
@@ -492,6 +493,7 @@ button:hover {
     placeholder="Szukaj auta..." 
     onkeyup="filterCars()"
 >
+
 
 <div id="carResults"></div>
     <div id="variantWrapper" style="display:none;">
@@ -501,6 +503,7 @@ button:hover {
         onchange="calculate()">
     </select>
 </div>
+</div> <!-- carSearchWrapper -->
 
 <input type="hidden" id="carSelect" value="0">
 	
@@ -642,18 +645,32 @@ parts.forEach((category, index) => {
 function switchMainTab(tab) {
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
-
     const buttons = document.querySelectorAll(".main-tab");
+
+    const carSearchWrapper = document.getElementById("carSearchWrapper");
+    const previewPanel = document.getElementById("previewPanel");
+
     buttons.forEach(btn => btn.classList.remove("active"));
 
     if (tab === "config") {
+        // pokaż konfigurator
         config.style.display = "block";
         info.style.display = "none";
         buttons[0].classList.add("active");
+
+        // POKAŻ elementy
+        carSearchWrapper.style.display = "block";
+        previewPanel.style.display = "block";
+
     } else {
+        // pokaż informacje
         config.style.display = "none";
         info.style.display = "block";
         buttons[1].classList.add("active");
+
+        // UKRYJ elementy
+        carSearchWrapper.style.display = "none";
+        previewPanel.style.display = "none";
     }
 }
 	let tftEnabled = false;
@@ -1174,7 +1191,7 @@ fetch(webhookURL, {
 </div> <!-- KONIEC lewej strony -->
 
 <!-- PANEL PODGLĄDU -->
-<div style="flex:1; background:#0d0d0d; border:1px solid var(--primary); border-radius:10px; padding:15px;">
+<div id="previewPanel" style="flex:1; background:#0d0d0d; border:1px solid var(--primary); border-radius:10px; padding:15px;">
     <h2>Podgląd</h2>
 
     <div>
@@ -1207,6 +1224,7 @@ fetch(webhookURL, {
 </body>
 
 </html>
+
 
 
 
