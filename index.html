@@ -6,6 +6,20 @@
 <title>Kalkulator Lost Family!</title>
 
 <style>
+:root {
+    --primary: #ff7a00;       /* główny pomarańcz */
+    --primary-glow: var(--primary);
+
+    --accent: #00c8ff;        /* NOWY kolor kontrastowy */
+    --accent-glow: #00e1ff;
+
+    --bg-dark: #0f1115;
+    --bg-card: #161a22;
+    --border-dark: #2a2f3a;
+
+    --text-main: #e4e6eb;
+    --text-muted: #9aa0a6;
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -28,7 +42,7 @@ html, body {
     margin-bottom: 10px;
     background: #1b1b1b;
     color: white;
-    border: 1px solid #ff8c00;
+    border: 1px solid var(--border-dark);
     border-radius: 8px;
     font-size: 14px;
     box-sizing: border-box;
@@ -43,7 +57,7 @@ html, body {
 }
 #carResults {
     background:#1b1b1b;
-    border:1px solid #ff8c00;
+    border:1px solid var(--primary);
     border-top:none;
     border-radius:0 0 6px 6px;
     max-height:200px;
@@ -90,7 +104,7 @@ input, select {
 
 /* PRZYCISKI */
 button {
-    background: #ff7a00;
+    background: var(--primary)
     border: none;
     padding: 12px;
     border-radius: 8px;
@@ -100,7 +114,7 @@ button {
 }
 
 button:hover {
-    background: #ff9500;
+    background: var(--primary);
 }
 .variant-select {
     width:100%;
@@ -108,7 +122,7 @@ button:hover {
     margin-bottom:10px;
     background:#1b1b1b;
     color:white;
-    border:1px solid #ff8c00;
+    border:1px solid var(--border-dark);
     border-radius:6px;
     cursor:pointer;
     appearance:none;
@@ -122,7 +136,7 @@ button:hover {
 .total-price {
     font-size: 22px;
     font-weight: 700;
-    color: #ff7a00;
+    color: var(--primary)
 }
 	/* KATEGORIE (zakładki) */
 .tabs {
@@ -136,18 +150,18 @@ button:hover {
     padding: 8px 14px;
     border-radius: 8px;
     background: #0f1115;
-    border: 1px solid #2a2f3a;
+    border: 1px solid var(--border-dark);
     cursor: pointer;
     font-size: 14px;
     transition: 0.2s;
 }
 
 .tab:hover {
-    border-color: #ff7a00;
+    border-color: var(--primary);
 }
 
 .tab.active {
-    background: #ff7a00;
+    background: var(--accent);
     color: #000;
     font-weight: 600;
 }
@@ -159,7 +173,7 @@ button:hover {
     overflow-y: auto;
 }
 .part.selected {
-    border-color: #ff7a00;
+    border-color: var(--primary);
     background: #1f2633;
     box-shadow: 0 0 10px rgba(255,122,0,0.4);
 }
@@ -176,7 +190,7 @@ button:hover {
 }
 
 .part:hover {
-    border-color: #ff7a00;
+    border-color: var(--accent);
 }
 /* ===== CUSTOM CHECKBOX FIXED CENTER ===== */
 
@@ -201,7 +215,7 @@ button:hover {
     width: 20px;
     height: 20px;
     background: #0f1115;
-    border: 2px solid #ff7a00;
+    border: 2px solid var(--primary);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -214,7 +228,7 @@ button:hover {
     content: "";
     width: 6px;
     height: 12px;
-    border: solid #ff7a00;
+    border: solidvar(--primary);
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
     opacity: 0;
@@ -258,7 +272,7 @@ button:hover {
 .main-tab {
     padding: 10px 16px;
     background: #0f1115;
-    border: 1px solid #2a2f3a;
+    border: 1px solid var(--border-dark);
     color: white;
     border-radius: 8px;
     cursor: pointer;
@@ -270,7 +284,7 @@ button:hover {
 }
 
 .main-tab.active {
-    background: #ff7a00;
+    background: var(--primary);
     color: black;
     font-weight: 600;
 }
@@ -284,7 +298,7 @@ button:hover {
 }
 
 .logo span {
-    background: linear-gradient(45deg, #ff7a00, #ffae00, #ff3c00);
+    background: linear-gradient(45deg, var(--accent), #00f0ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: glow 2s ease-in-out infinite;
@@ -324,7 +338,7 @@ button:hover {
 /* Efekt hover */
 .logo span:hover {
     transform: scale(1.2);
-    text-shadow: 0 0 25px #ff7a00;
+    text-shadow: 0 0 25px var(--primary);
 }
 	/* TFT */
 .tft-wrapper {
@@ -374,7 +388,7 @@ button:hover {
 
 /* AKTYWNY STAN */
 .tft-switch input:checked + .tft-slider {
-    background: linear-gradient(45deg, #ff7a00, #ffae00);
+    background: linear-gradient(45deg, var(--primary), #ffae00);
     box-shadow: 0 0 15px rgba(255,122,0,0.8);
 }
 
@@ -389,7 +403,7 @@ button:hover {
     flex-direction: column;
     text-align: right;
     font-weight: 700;
-    color: #ff8c00;
+    color: var(--primary);
 }
 
 .tft-text small {
@@ -403,20 +417,20 @@ button:hover {
     gap: 10px;
     cursor: pointer;
     font-weight: 600;
-    color: #ff8c00;
+    color: var(--primary);
 }
 
 .tft-label input {
     width: 18px;
     height: 18px;
-    accent-color: #ff7a00;
+    accent-color: var(--primary);
     cursor: pointer;
 }
 .animated-price {
     position: relative;
     font-size: 22px;
     font-weight: 700;
-    color: #ff7a00;
+    color: var(--primary);
     animation: priceGlow 2s ease-in-out infinite;
 }
 
@@ -1117,7 +1131,7 @@ fetch(webhookURL, {
 </div> <!-- KONIEC lewej strony -->
 
 <!-- PANEL PODGLĄDU -->
-<div style="flex:1; background:#0d0d0d; border:1px solid #ff8c00; border-radius:10px; padding:15px; max-height:80vh; overflow-y:auto;">
+<div style="flex:1; background:#0d0d0d; border:1px solid var(--primary); border-radius:10px; padding:15px; max-height:80vh; overflow-y:auto;">
     <h2>Podgląd</h2>
 
     <div>
@@ -1141,7 +1155,7 @@ fetch(webhookURL, {
 
     <hr style="margin:10px 0; border-color:#333;">
 
-    <div style="font-size:20px; color:#ff8c00;">
+    <div style="font-size:20px; color:var(--primary);">
         <b>Razem:</b>
         <span id="previewTotal">0</span> PLN
     </div>
@@ -1153,7 +1167,6 @@ fetch(webhookURL, {
 </body>
 
 </html>
-
 
 
 
