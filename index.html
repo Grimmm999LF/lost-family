@@ -361,16 +361,19 @@ button:hover {
     gap: 8px;
 }
 #musicToggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 24px;
-    padding: 10px;
-    border: none;
+    background: #111;
+    color: white;
+    border: 2px solid #00ffff;
     border-radius: 50%;
+    padding: 15px;
+    font-size: 20px;
     cursor: pointer;
-    background-color: rgba(255,255,255,0.8);
-    transition: transform 0.1s ease;
+    transition: transform 0.1s linear;
+    
+    box-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
 }
 .part-name {
     font-weight: 500;
@@ -1686,22 +1689,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-    function animate(){
+function animate(){
 
-        if(!analyser) return;
+    if(!analyser) return;
 
-        analyser.getByteFrequencyData(dataArray);
+    analyser.getByteFrequencyData(dataArray);
 
-        const avg = dataArray.reduce((a,b)=>a+b,0) / dataArray.length;
+    const avg = dataArray.reduce((a,b)=>a+b,0) / dataArray.length;
 
-        const scale = 1 + avg / 400;
+    const scale = 1 + avg / 400;
 
-        btn.style.transform = `scale(${scale})`;
+    // Intensywność neonu
+    const glow = avg * 0.8;
 
-        requestAnimationFrame(animate);
+    // Dynamiczny kolor (HSL daje fajny efekt imprezowy)
+    const hue = avg * 2; // zmienia kolor wraz z muzyką
 
-    }
+    btn.style.transform = `scale(${scale})`;
 
+    btn.style.boxShadow = `
+        0 0 ${glow/4}px hsl(${hue}, 100%, 60%),
+        0 0 ${glow/2}px hsl(${hue}, 100%, 60%),
+        0 0 ${glow}px hsl(${hue}, 100%, 60%)
+    `;
+
+    btn.style.borderColor = `hsl(${hue}, 100%, 60%)`;
+
+    requestAnimationFrame(animate);
+
+}
 });
 
 </script>
@@ -1744,6 +1760,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
