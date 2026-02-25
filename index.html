@@ -1023,15 +1023,29 @@ function renderDemontaz() {
     calculateDemontaz();
 }
 function calculateDemontaz() {
-    let total = 0;
+    // 🔹 START: suma = cena auta w demontażu
+    let total = selectedCarPrice || 0;
+    let count = 0;
 
-    for (let partName in selectedDemontaz) {
-        total += selectedDemontaz[partName];
+    // 🔹 dodaj wszystkie zaznaczone części
+    for (let name in selectedDemontaz) {
+        total += selectedDemontaz[name];
+        count++;
     }
 
-    total += selectedCarPriceDemontaz; // dodajemy cenę auta
+    // 🔹 dodatkowe koszty np. cylindry, silnik, zbiornik
+    total += cyl * 200000;
+    count += cyl;
 
-    document.getElementById("demontazTotal").innerText = total.toLocaleString() + " PLN";
+    total += engine * 200000;
+    count += engine;
+
+    total += fuel * 250000;
+    count += fuel;
+
+    // 🔹 wyświetlenie wyniku
+    document.getElementById("demontazTotal").innerText = total.toLocaleString();
+    document.getElementById("demontazCount").innerText = count;
 }
 function toggleTFTPanel() {
     const tab = document.getElementById("tftTab");
@@ -1926,6 +1940,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
