@@ -620,7 +620,6 @@ button:hover {
     <button class="main-tab active" onclick="switchMainTab('config')">Konfigurator</button>
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
-	<button onclick="openTab('demontaz')">🔧 Demontaż</button>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -819,35 +818,7 @@ function switchMainTab(tab) {
     }
 }
 	let tftEnabled = false;
-function updateDemontaz() {
 
-let total = 0;
-let text = "";
-
-const checkboxes = document.querySelectorAll("#demontaz input[type=checkbox]");
-
-checkboxes.forEach(cb => {
-
-if(cb.checked){
-
-total += parseInt(cb.value);
-
-text += cb.parentElement.innerText + "\n";
-
-}
-
-});
-
-if(text === ""){
-text = "Brak wybranych części";
-}
-
-document.getElementById("demontazPreview").innerText = text;
-
-document.getElementById("demontazTotal").innerText =
-total.toLocaleString() + " PLN";
-
-}
 function toggleTFTPanel() {
     const tab = document.getElementById("tftTab");
 
@@ -1522,5 +1493,3 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
-Dodałem zakładkę Demontaż jak na screenie, i nie działa, wyświetla ją na głownej stronie przez co cała strona się wydłuża 
-
