@@ -1751,16 +1751,17 @@ function animate(){
     btn.style.borderColor = `hsl(${hue}, 100%, 60%)`;
 
 
-    // ===== RAMKA RGB EKRANU =====
-    const bodyGlow = glow * 1.5;
+// ===== SUBTELNA RAMKA RGB =====
+const bodyGlow = glow * 0.6;   // było 1.5 → zmniejszamy
+const softHue = hue; 
 
-    rgbBorder.style.borderColor = `hsl(${hue}, 100%, 60%)`;
+rgbBorder.style.borderColor = `hsl(${softHue}, 60%, 45%)`;
 
-    rgbBorder.style.boxShadow = `
-        0 0 ${bodyGlow/2}px hsl(${hue}, 100%, 60%),
-        0 0 ${bodyGlow}px hsl(${hue}, 100%, 60%),
-        inset 0 0 ${bodyGlow/2}px hsl(${hue}, 100%, 60%)
-    `;
+rgbBorder.style.boxShadow = `
+    0 0 ${bodyGlow/4}px hsla(${softHue}, 60%, 45%, 0.4),
+    0 0 ${bodyGlow/2}px hsla(${softHue}, 60%, 45%, 0.3),
+    inset 0 0 ${bodyGlow/4}px hsla(${softHue}, 60%, 45%, 0.25)
+`;
 
     requestAnimationFrame(animate);
 }
@@ -1806,6 +1807,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
