@@ -619,7 +619,7 @@ button:hover {
     <button class="main-tab active" onclick="switchMainTab('config')">Konfigurator</button>
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
-	<button onclick="openTab('demontaz')">🔧 Demontaż</button>
+	<button class="main-tab" onclick="switchMainTab('demontaz')">🔧 Demontaż</button>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -668,7 +668,7 @@ button:hover {
     <button onclick="resetAll()">Wyczyść wszystko</button>
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
-<div id="demontaz" class="tab-content">
+<div id="demontaz" class="tab-content" style="display:none;">
 
 <h2 class="section-title">🔧 Demontaż pojazdu</h2>
 
@@ -823,6 +823,7 @@ function switchMainTab(tab) {
 
         carSearchWrapper.style.display = "block";
         previewPanel.style.display = "block";
+		document.getElementById("demontaz").style.display = "none";
     }
 
     else if (tab === "info") {
@@ -833,6 +834,7 @@ function switchMainTab(tab) {
 
         carSearchWrapper.style.display = "none";
         previewPanel.style.display = "none";
+		document.getElementById("demontaz").style.display = "none";
     }
 
     else if (tab === "salon") {
@@ -843,10 +845,24 @@ function switchMainTab(tab) {
 
         carSearchWrapper.style.display = "none";
         previewPanel.style.display = "none";
+		document.getElementById("demontaz").style.display = "none";
 
 		populateBrands();
         renderSalon(); // załaduje listę aut
     }
+		
+	else if (tab === "demontaz") {
+    config.style.display = "none";
+    info.style.display = "none";
+    salon.style.display = "none";
+    document.getElementById("demontaz").style.display = "block";
+
+    buttons.forEach(btn => btn.classList.remove("active"));
+    buttons[3].classList.add("active");
+
+    carSearchWrapper.style.display = "none";
+    previewPanel.style.display = "none";
+}
 }
 	let tftEnabled = false;
 function updateDemontaz() {
@@ -1552,3 +1568,4 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
