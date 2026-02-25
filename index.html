@@ -1630,50 +1630,6 @@ fetch(webhookURL, {
 <script>
 window.addEventListener("DOMContentLoaded", () => {
 
-    const music = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicToggle");
-
-    music.volume = 0.03;
-
-    // Autoplay (jeśli przeglądarka pozwoli)
-    music.play().catch(() => {
-        document.addEventListener("click", () => {
-            music.play();
-        }, { once: true });
-    });
-
-    window.toggleMusic = function() {
-        if (music.paused) {
-            music.play();
-            musicBtn.textContent = "🔊";
-        } else {
-            music.pause();
-            musicBtn.textContent = "🔇";
-        }
-    };
-
-	// --- PULSOWANIE W RYTM MUZYKI ---
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const analyser = audioCtx.createAnalyser();
-    const source = audioCtx.createMediaElementSource(music);
-
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-    analyser.fftSize = 256;
-
-    const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-    function animateButton() {
-        analyser.getByteFrequencyData(dataArray);
-        const avg = dataArray.reduce((a,b) => a+b, 0) / dataArray.length;
-        const scale = 1 + avg / 500; // zmiana rozmiaru przycisku
-        musicBtn.style.transform = `scale(${scale})`;
-        requestAnimationFrame(animateButton);
-    }
-
-    animateButton();
-});
-</script>
 <script>
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1681,35 +1637,35 @@ document.addEventListener("DOMContentLoaded", function() {
     const music = document.getElementById("bgMusic");
     const btn = document.getElementById("musicToggle");
 
-    if(!music || !btn) {
-        console.log("Brak audio lub przycisku");
-        return;
-    }
-
     music.volume = 0.05;
-
-    // Autoplay jeśli możliwe
-    music.play().catch(() => {
-        console.log("Autoplay zablokowany");
-    });
 
     btn.addEventListener("click", function() {
 
         if (music.paused) {
-            music.play();
+
+            music.play().then(() => {
+                console.log("Muzyka gra");
+            }).catch(err => {
+                console.log("Błąd audio:", err);
+            });
+
             btn.textContent = "🔊";
+
         } else {
+
             music.pause();
             btn.textContent = "🔇";
+
         }
 
     });
 
 });
-</script>	
+</script>
 </body>
 
 </html>
+
 
 
 
