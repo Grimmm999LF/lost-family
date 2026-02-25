@@ -49,9 +49,6 @@ html, body {
     font-size: 14px;
     box-sizing: border-box;
 }
-	.info-panel h2 {
-    text-align: center;
-}
 	#variantWrapper {
     margin-top: 8px;
 }
@@ -82,20 +79,12 @@ select.top-input {
     padding: 18px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.4);
 }
-h3 {
-    color:  #ff7a00;
-}
+
 /* LEWA STRONA */
 .main-panel {
     flex: 3;
 }
-.creator-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 2px solid var(--primary);
-    object-fit: cover;
-}
+
 /* PRAWA – PODGLĄD */
 .preview-panel {
     flex: 1;
@@ -125,55 +114,7 @@ button {
     font-weight: 600;
     cursor: pointer;
 }
-/* ===== CREATOR CARD ===== */
 
-.creator-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0,255,255,0.05);
-    border: 1px solid var(--primary);
-    border-radius: 10px;
-    padding: 12px 15px;
-    text-decoration: none;
-    color: white;
-    transition: 0.2s;
-}
-
-.creator-card:hover {
-    background: rgba(0,255,255,0.15);
-    box-shadow: 0 0 20px rgba(0,255,255,0.3);
-    transform: translateY(-2px);
-}
-
-.creator-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.discord-icon {
-    width: 24px;
-    height: 24px;
-}
-
-.creator-name {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.creator-status {
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.creator-status.online {
-    color: #43ff64;
-}
-
-.creator-status.offline {
-    color: #ff4d4d;
-}
 button:hover {
     background: #00c8ff;
     box-shadow: 0 0 15px #00c8ff;
@@ -199,50 +140,6 @@ button:hover {
     font-size: 22px;
     font-weight: 700;
     color: var(--primary);
-}
-	.summary-category {
-    color: var(--primary);
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 0.5px;
-}
-	/* ===== INFO TAB ===== */
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.info-card {
-    background: #0d0d0d;
-    border: 1px solid var(--primary);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 15px rgba(0,255,255,0.05);
-    transition: 0.2s;
-}
-
-.info-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(0,255,255,0.15);
-}
-
-.info-card h2 {
-    width: 100%;
-    color: var(--primary);
-}
-
-.info-highlight {
-    font-size: 18px;
-    font-weight: bold;
-    color: #fff;
-    background: rgba(0,255,255,0.08);
-    border: 1px solid var(--primary);
-    border-radius: 8px;
-    padding: 10px;
-    display: inline-block;
 }
 	/* KATEGORIE (zakładki) */
 .tabs {
@@ -453,17 +350,6 @@ button:hover {
     justify-content: flex-end; /* wyrównanie w prawo */
     margin-bottom: 15px;
 }
-	.info-link {
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.info-link:hover {
-    background: rgba(0,255,255,0.18);
-    box-shadow: 0 0 15px rgba(0,255,255,0.4);
-    transform: scale(1.03);
-}
 /* ===== NOWY TFT SWITCH ===== */
 
 .tft-wrapper {
@@ -593,7 +479,6 @@ button:hover {
     <span>m</span>
 </h1>
 
-<div id="carSearchWrapper">
 <input 
     type="text" 
     id="carSearch" 
@@ -601,7 +486,6 @@ button:hover {
     placeholder="Szukaj auta..." 
     onkeyup="filterCars()"
 >
-
 
 <div id="carResults"></div>
     <div id="variantWrapper" style="display:none;">
@@ -611,15 +495,12 @@ button:hover {
         onchange="calculate()">
     </select>
 </div>
-</div> <!-- carSearchWrapper -->
 
 <input type="hidden" id="carSelect" value="0">
 	
 <div class="main-tabs">
     <button class="main-tab active" onclick="switchMainTab('config')">Konfigurator</button>
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
-	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
-	<button class="main-tab" onclick="switchMainTab('demontaz')">🔧 Demontaż</button>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -668,110 +549,59 @@ button:hover {
     <button onclick="resetAll()">Wyczyść wszystko</button>
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
-<div id="demontaz" class="tab-content" style="display:none;">
-
-<h2 class="section-title">🔧 Demontaż pojazdu</h2>
-
-<div class="configurator">
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="500000">
-Silnik – 500 000 PLN
-</label>
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="300000">
-Skrzynia biegów – 300 000 PLN
-</label>
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="200000">
-Zawieszenie – 200 000 PLN
-</label>
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="150000">
-Turbo – 150 000 PLN
-</label>
-
-<label>
-<input type="checkbox" onchange="updateDemontaz()" value="80000">
-Hamulce – 80 000 PLN
-</label>
-
-</div>
-
-
-<div class="preview-box">
-
-<h3 class="section-title">Podgląd demontażu:</h3>
-
-<p id="demontazPreview">
-Brak wybranych części
-</p>
-
-<h3 class="section-title">Kwota za demontaż:</h3>
-
-<p id="demontazTotal">
-0 PLN
-</p>
-
-</div>
-
-</div>		
 <script>
 // Lista części tuningowych
 const parts = [
     {
-        category: "✨ Wizualne",
+        category: "Wizualne",
         items: [
-            {name: "𝓛𝓪𝓬𝔃𝓮 𝓟𝓻𝔃𝓸𝓭", price: 2000000, category: "Wizualne" },
-            {name: "𝓛𝓪𝓬𝔃𝓮 𝓣𝔂𝓵", price: 2000000, category: "Wizualne" },
-            {name: "𝓟𝓪𝓲𝓷𝓽𝓳𝓸𝓫", price: 12500000, category: "Wizualne" },
-            {name: "𝓚𝓸𝓵𝓸𝓻 𝓢𝔀𝓲𝓪𝓽𝓮𝓵", price: 2000000, category: "Wizualne" },
-            {name: "𝓝𝓮𝓸𝓷𝔂", price: 550000, category: "Wizualne" },
-            {name: "𝓛𝓲𝓬𝔃𝓷𝓲𝓴 𝓓𝓻𝓲𝓯𝓽𝓾", price: 650000,category: "Wizualne" },
-            {name: "𝓟𝓻𝔃𝔂𝓬𝓲𝓮𝓶𝓷𝓲𝓪𝓷𝓮 𝓢𝔃𝔂𝓫𝔂", price: 1500000,category: "Wizualne" },
-            {name: "𝓟𝓻𝔃𝔂𝓬𝓲𝓮𝓶𝓷𝓲𝓪𝓷𝓮 𝓛𝓪𝓶𝓹𝔂", price: 1500000, category: "Wizualne" }
+            {name: "Lacze Przód", price: 2000000},
+            {name: "Lacze Tył", price: 2000000},
+            {name: "Paintjob", price: 12500000},
+            {name: "Kolor świateł", price: 2000000},
+            {name: "Neony", price: 550000},
+            {name: "Licznik driftu", price: 650000},
+            {name: "Przyciemniane Szyby", price: 1500000},
+            {name: "Przyciemniane Lampy", price: 1500000}
         ]
     },
     {
-        category: "⚙️ Silnik",
+        category: "Silnik",
         items: [
-            {name: "𝓤𝓢 1", price: 300000, category: "Silnik" },
-            {name: "𝓤𝓢 2", price: 400000, category: "Silnik" },
-            {name: "𝓤𝓢 3", price: 500000, category: "Silnik" },
-            {name: "𝓤𝓢 4", price: 1300000, category: "Silnik" },
-            {name: "𝓣𝓾𝓻𝓫𝓸", price: 700000,category: "Silnik" },
-            {name: "𝓒𝓱𝓲𝓹 ", price: 800000, category: "Silnik" },
-            {name: "𝓢𝓲𝓵𝓷𝓲𝓴 𝓑𝓮𝓷𝔃𝔂𝓷𝓸𝔀𝔂", price: 150000, category: "Silnik" },
-            {name: "𝓢𝓲𝓵𝓷𝓲𝓴 𝓓𝓲𝓮𝓼𝓮𝓵", price: 300000, category: "Silnik" },
-            {name: "𝓢𝓲𝓵𝓷𝓲𝓴 𝓔𝓵𝓮𝓴𝓽𝓻𝔂𝓬𝔃𝓷𝔂", price: 400000, category: "Silnik" }
+            {name: "US 1", price: 300000},
+            {name: "US 2", price: 400000},
+            {name: "US 3", price: 500000},
+            {name: "US 4", price: 1300000},
+            {name: "Turbo", price: 700000},
+            {name: "Chip ", price: 800000},
+            {name: "Silnik Benzynowy", price: 150000},
+            {name: "Silnik Diesel", price: 300000},
+            {name: "Silnik Elektryczny", price: 400000}
         ]
     },
     {
-        category: "📏 Regulacje",
+        category: "Regulacje",
         items: [
-            {name: "𝓡𝓮𝓰𝓾𝓵𝓪𝓬𝓳𝓪 𝓶𝓸𝓬𝔂", price: 2000000, category: "Regulacje" },
-            {name: "𝓡𝓮𝓰𝓾𝓵𝓪𝓬𝓳𝓪 𝓽𝓻𝓪𝓴𝓬𝓳𝓲", price: 2000000, category: "Regulacje" },
-            {name: "𝓡𝓮𝓰𝓾𝓵𝓪𝓬𝓳𝓪 𝓱𝓪𝓶𝓾𝓵𝓬ó𝔀", price: 500000, category: "Regulacje" },
-            {name: "𝓡𝓮𝓰𝓾𝓵𝓪𝓬𝓳𝓪 𝓶𝓪𝓼𝔂", price: 500000, category: "Regulacje" },
-            {name: "𝓡𝓮𝓰𝓾𝓵𝓪𝓬𝓳𝓪 𝓴ą𝓽𝓾 𝓼𝓴𝓻ę𝓽𝓾", price: 1000000, category: "Regulacje" }
+            {name: "Regulacja mocy", price: 2000000},
+            {name: "Regulacja trakcji", price: 2000000},
+            {name: "Regulacja hamulców", price: 500000},
+            {name: "Regulacja masy", price: 500000},
+            {name: "Regulacja kątu skrętu", price: 1000000}
         ]
     },
     {
-        category: "🧰 Pozostałe",
+        category: "Pozostałe",
         items: [
-            {name: "𝓖𝔀𝓲𝓷𝓽𝓸𝔀𝓪𝓷𝓮 𝔃𝓪𝔀𝓲𝓮𝓼𝔃𝓮𝓷𝓲𝓮", price: 150000, category: "Pozostałe" },
-            {name: "𝓐𝓑𝓢", price: 1000000, category: "Pozostałe" },
-            {name: "𝓝𝓪𝓹𝓮𝓭", price: 200000, category: "Pozostałe" },
-            {name: "𝓣𝓪𝓴𝓼𝓸𝓶𝓮𝓽𝓻", price: 2500000, category: "Pozostałe" },
-            {name: "𝓛𝓟𝓖", price: 150000, category: "Pozostałe" },
-            {name: "𝓝𝓲𝓽𝓻𝓸 5𝓛", price: 55000000, category: "Pozostałe" },
-			{name: "𝓝𝓲𝓽𝓻𝓸 10𝓛", price: 65000000, category: "Pozostałe" },
-			{name: "𝓝𝓲𝓽𝓻𝓸 15𝓛", price: 75000000, category: "Pozostałe" },
-			{name: "𝓥𝓸𝓹𝓲𝓼", price: 8000000, category: "Pozostałe" },
-			{name: "𝓤𝓷𝓲 𝓑𝓪𝓴", price: 17500000, category: "Pozostałe" }
+            {name: "Gwintowane zawieszenie", price: 150000},
+            {name: "ABS", price: 1000000},
+            {name: "Napęd", price: 200000},
+            {name: "Taksometr", price: 2500000},
+            {name: "LPG", price: 150000},
+            {name: "Nitro 5L", price: 55000000},
+			{name: "Nitro 10L", price: 65000000},
+			{name: "Nitro 15L", price: 75000000},
+			{name: "Vopis", price: 8000000},
+			{name: "Uni Bak", price: 17500000}
         ]
     }
 ];
@@ -806,94 +636,22 @@ parts.forEach((category, index) => {
 function switchMainTab(tab) {
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
-    const salon = document.getElementById("salonTab");
 
     const buttons = document.querySelectorAll(".main-tab");
-
-    const carSearchWrapper = document.getElementById("carSearchWrapper");
-    const previewPanel = document.getElementById("previewPanel");
-
     buttons.forEach(btn => btn.classList.remove("active"));
 
     if (tab === "config") {
         config.style.display = "block";
         info.style.display = "none";
-        salon.style.display = "none";
         buttons[0].classList.add("active");
-
-        carSearchWrapper.style.display = "block";
-        previewPanel.style.display = "block";
-		document.getElementById("demontaz").style.display = "none";
-    }
-
-    else if (tab === "info") {
+    } else {
         config.style.display = "none";
         info.style.display = "block";
-        salon.style.display = "none";
         buttons[1].classList.add("active");
-
-        carSearchWrapper.style.display = "none";
-        previewPanel.style.display = "none";
-		document.getElementById("demontaz").style.display = "none";
     }
-
-    else if (tab === "salon") {
-        config.style.display = "none";
-        info.style.display = "none";
-        salon.style.display = "block";
-        buttons[2].classList.add("active");
-
-        carSearchWrapper.style.display = "none";
-        previewPanel.style.display = "none";
-		document.getElementById("demontaz").style.display = "none";
-
-		populateBrands();
-        renderSalon(); // załaduje listę aut
-    }
-		
-	else if (tab === "demontaz") {
-    config.style.display = "none";
-    info.style.display = "none";
-    salon.style.display = "none";
-    document.getElementById("demontaz").style.display = "block";
-
-    buttons.forEach(btn => btn.classList.remove("active"));
-    buttons[3].classList.add("active");
-
-    carSearchWrapper.style.display = "none";
-    previewPanel.style.display = "none";
-}
 }
 	let tftEnabled = false;
-function updateDemontaz() {
 
-let total = 0;
-let text = "";
-
-const checkboxes = document.querySelectorAll("#demontaz input[type=checkbox]");
-
-checkboxes.forEach(cb => {
-
-if(cb.checked){
-
-total += parseInt(cb.value);
-
-text += cb.parentElement.innerText + "\n";
-
-}
-
-});
-
-if(text === ""){
-text = "Brak wybranych części";
-}
-
-document.getElementById("demontazPreview").innerText = text;
-
-document.getElementById("demontazTotal").innerText =
-total.toLocaleString() + " PLN";
-
-}
 function toggleTFTPanel() {
     const tab = document.getElementById("tftTab");
 
@@ -904,7 +662,7 @@ function toggleTFTPanel() {
 
         parts.forEach(category => {
             category.items.forEach(part => {
-                const excluded = ["𝓝𝓲𝓽𝓻𝓸 10𝓛", "𝓝𝓲𝓽𝓻𝓸 5𝓛", "𝓝𝓲𝓽𝓻𝓸 15𝓛", "𝓥𝓸𝓹𝓲𝓼", "𝓢𝓲𝓵𝓷𝓲𝓴 𝓑𝓮𝓷𝔃𝔂𝓷𝓸𝔀𝔂", "𝓢𝓲𝓵𝓷𝓲𝓴 𝓔𝓵𝓮𝓴𝓽𝓻𝔂𝓬𝔃𝓷𝔂", "𝓤𝓷𝓲 𝓑𝓪𝓴"];
+                const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L", "Vopis", "Silnik Benzynowy", "Silnik Elektryczny", "Uni Bak"];
                 if (!excluded.includes(part.name)) {
                     selectedParts[part.name] = part.price;
                 }
@@ -971,7 +729,7 @@ function renderParts() {
 renderParts();
 const cars = [
     {name: "Audi RS2", price: 800000, variants:[{name:"Brak",price:0}]},
-    {name: "Audi RS5", price: 22500000, variants:[{name:"Brak",price:0},{name:"Zwykly",price:1000000},{name:"Bodykit",price:3000000}]},
+    {name: "Audi RS5", price: 22500000, variants:[{name:"Brak",price:0}]},
     {name: "Audi RS6", price: 8500000, variants:[{name:"Brak",price:0},{name:"Zwykly",price:1000000},{name:"Bodykit",price:6000000},{name:"Bagażnik na dachu",price:3000000},{name:"Bodykit + Bagażnik na dachu",price:8000000}]},
     {name: "Audi RS7", price: 32000000, variants:[{name:"Brak",price:0},{name:"Zwykly",price:1000000},{name:"Bodykit",price:6000000}]},
     {name: "Audi R8 II", price: 20000000, variants:[{name:"Brak",price:0},{name:"Zwykly",price:1000000},{name:"Bodykit",price:10000000},{name:"Cabrio",price:15000000},{name:"Cabrio + Bodykit",price:20000000}]},
@@ -1013,7 +771,7 @@ const cars = [
 
     {name: "Mazda RX 8", price: 18000000, variants:[{name:"Brak",price:0},{name:"Zwykly",price:1000000},{name:"Dodatki",price:3000000}]},
 
-    {name: "Volkswagen Golf R GTI", price: 4200000, variants:[{name:"Brak",price:0},{name:"Zwykly",price:1000000},{name:"Rocket Bunny",price:5000000}]},
+    {name: "Volkswagen Golf R GTI", price: 4200000, variants:[{name:"Brak",price:0}]},
     {name: "Volkswagen Golf R32", price: 9450000, variants:[{name:"Brak",price:0},{name:"Zwykly",price:1000000},{name:"Dodatki",price:3000000}]},
 
     {name: "Subaru WRX", price: 11000000, variants:[{name:"Brak",price:0},{name:"Zwykly",price:1000000},{name:"Halogeny",price:1500000},{name:"Klatka",price:1500000},{name:"Klatka + Halogeny",price:3500000},{name:"Bodykit",price:5500000},{name:"Bodykit + Klatka",price:6000000},{name:"Bodykit + Halogeny",price:6000000}]},
@@ -1090,35 +848,6 @@ function filterCars() {
             results.appendChild(div);
         }
     });
-}
-function renderSalon() {
-    const container = document.getElementById("salonList");
-    const search = document.getElementById("salonSearch").value.toLowerCase();
-    const brand = document.getElementById("brandFilter").value;
-
-    container.innerHTML = "";
-
-    cars
-        .filter(car => {
-            const carBrand = getBrand(car.name);
-
-            const matchSearch = car.name.toLowerCase().includes(search);
-            const matchBrand = (brand === "all" || carBrand === brand);
-
-            return matchSearch && matchBrand;
-        })
-        .sort((a, b) => a.price - b.price)
-        .forEach(car => {
-            const div = document.createElement("div");
-            div.className = "part";
-
-            div.innerHTML = `
-                <span class="part-name">${car.name}</span>
-                <span class="part-price">${car.price.toLocaleString()} PLN</span>
-            `;
-
-            container.appendChild(div);
-        });
 }
 	function renderVariants(car) {
     const wrapper = document.getElementById("variantWrapper");
@@ -1229,26 +958,6 @@ function removeFuel() {
         calculate();
     }
 }
-	function getBrand(carName) {
-    return carName.split(" ")[0];
-}
-	function populateBrands() {
-    const select = document.getElementById("brandFilter");
-    const brands = new Set();
-
-    cars.forEach(car => {
-        brands.add(getBrand(car.name));
-    });
-
-    const sortedBrands = Array.from(brands).sort();
-
-    sortedBrands.forEach(brand => {
-        const option = document.createElement("option");
-        option.value = brand;
-        option.textContent = brand;
-        select.appendChild(option);
-    });
-}
 function resetAll() {
     document.getElementById("carSelect").value = 0;
     selectedParts = {};
@@ -1256,58 +965,25 @@ function resetAll() {
     calculate();
 }
 function updatePreview() {
-
     // AUTO
     const carName = document.getElementById("carSearch").value || "Brak";
     document.getElementById("previewCar").innerText = carName;
 
-    // ===== CZĘŚCI PO KATEGORIACH =====
-    let visual = [];
-    let mechanical = [];
-    let suspension = [];
-    let service = [];
+    // CZĘŚCI
+    const partsDiv = document.getElementById("previewParts");
+    partsDiv.innerHTML = "";
 
     for (let name in selectedParts) {
-
-        // szukamy kategorii tej części
-        parts.forEach(category => {
-            category.items.forEach(item => {
-                if (item.name === name) {
-
-                    if (item.category === "Wizualne")
-                        visual.push("• " + name);
-
-                    if (item.category === "Silnik")
-                        mechanical.push("• " + name);
-
-                    if (item.category === "Regulacje")
-                        suspension.push("• " + name);
-
-                    if (item.category === "Pozostałe")
-                        service.push("• " + name);
-                }
-            });
-        });
-
+        const div = document.createElement("div");
+        div.innerText = "• " + name;
+        partsDiv.appendChild(div);
     }
 
-    let output = "";
+    if (partsDiv.innerHTML === "") {
+        partsDiv.innerText = "Brak";
+    }
 
-    if (visual.length)
-        output += "<span class='summary-category'>✨ Wizualne:</span><br>" + visual.join("<br>") + "<br><br>";
-
-    if (mechanical.length)
-        output += "<span class='summary-category'>⚙️ Silnik:</span><br>" + mechanical.join("<br>") + "<br><br>";
-
-    if (suspension.length)
-        output += "<span class='summary-category'>📏 Regulacje:</span><br>" + suspension.join("<br>") + "<br><br>";
-
-    if (service.length)
-        output += "<span class='summary-category'>🧰 Pozostałe:</span><br>" + service.join("<br>") + "<br><br>";
-
-    document.getElementById("previewParts").innerHTML = output || "Brak";
-
-    // ===== ULEPSZENIA =====
+    // ULEPSZENIA
     const cylText = document.getElementById("cyl").innerText;
     const engineText = document.getElementById("engine").innerText;
     const fuelText = document.getElementById("fuel").innerText;
@@ -1317,7 +993,7 @@ function updatePreview() {
         "Pojemność: " + engineText + "<br>" +
         "Zbiornik: " + fuelText;
 
-    // ===== CENA =====
+    // CENA
     document.getElementById("previewTotal").innerText =
         document.getElementById("total").innerText;
 }
@@ -1427,111 +1103,57 @@ fetch(webhookURL, {
 
 <div id="infoTab" style="display:none;">
 
-    <div class="info-grid">
+    <h2>Kalkulator Wycen pojazdów</h2>
+    <p>
+        Kalkulator został stworzony w celu ułatwienia sobie kalkulacji związanych z pojazdami na giełdach oraz salonach.
+        Zamieściłem tutaj wszelkie warianty pojazdów wraz z ich cenami jak i wszystkie pojazdy możliwe do kupienia!
 
-        <!-- O PROJEKCIE -->
-        <div class="info-card">
-            <h2>📊 O projekcie</h2>
-            <p>
-                Kalkulator został stworzony w celu ułatwienia obliczeń związanych z pojazdami
-                na giełdach oraz w salonach. Zawiera warianty pojazdów wraz z ich cenami
-                oraz wszystkie dostępne modele do zakupu.
-            </p>
-            <p>
-                Do Nitra doliczona została aktualna kwota montażu butli (55 000 000 PLN).
-                Kwestia Voipisu jest sporna — przyjęto uśrednioną wartość 8kk.
-            </p>
-        </div>
+		Do Nitra jest doliczona aktualna ostatnia kwota montażu butli (55 000 000 PLN).
+		Kwestia Vopisu jest sporna, uśredniłem ceny i tymczasowo zostało uwzględnione jako 8kk - Kwestia sporna. 
 
-        <!-- TWÓRCA -->
-<div class="info-card">
-    <h2>👤 Twórca</h2>
+		Chciałbym podziękować wszystkim, którzy dołożyli cegiełkę do tego projektu.
+    </p>
 
-    <a 
-        href="https://discord.com/users/290967936183697408"
-        target="_blank"
-        class="creator-card"
-    >
-        <div class="creator-left">
-            <img src="https://cdn.discordapp.com/avatars/290967936183697408/0888e8ad1f5cd2e0169e012e65cb1478.webp?size=28" class="creator-avatar">
-            <span class="creator-name">Grim</span>
-        </div>
-
-        <div class="creator-status online">
-            ● Online
-        </div>
-    </a>
-
-</div>
-
-        <!-- PODZIĘKOWANIA -->
-        <div class="info-card">
-            <h2>🙏 Podziękowania</h2>
-            <p>
-                Siewcyk4<br>
-                BlackShen<br>
-				RemikYT123<br>
-                Maciexxxx3<br>
-                Flipx<br>
-                Zi-Bi<br>
-                Vedixx<br>
-				ПΛVΛЯΛ
-            </p>
-        </div>
-
-        <!-- WERSJA -->
-        <div class="info-card">
-            <h2>⚙️ Wersja</h2>
-            <div class="info-highlight">
-                v1.0 • 24.02.2026
-            </div>
-        </div>
-
-    </div>
-
-</div>
-<div id="salonTab" style="display:none;">
-
-    <h2>🚗 Auta dostępne w salonie</h2>
-
-    <!-- WYSZUKIWARKA -->
-    <input 
-        type="text"
-        id="salonSearch"
-        class="top-input"
-        placeholder="Szukaj auta lub marki..."
-        onkeyup="renderSalon()"
-    >
-
-    <!-- FILTR MARKI -->
-    <select id="brandFilter" class="top-input" onchange="renderSalon()">
-        <option value="all">Wszystkie marki</option>
-    </select>
-
-    <!-- LISTA -->
-    <div id="salonList" class="parts" style="grid-template-columns: 1fr;"></div>
+    <h3>Twórca</h3>
+    <p>
+        Grim<br>
+    </p>
+	<h3> Szczególne podziękowania:</h3>
+	<p>Siewcyk4
+	BlackShen
+	Maciekxxx3
+	Flip;x
+	Zi-Bi
+	Vedixx_</p>
+	
+    <h3>Wersja</h3>
+    <p>v1.0
+	24.02.2026</p>
 
 </div>
 
 </div> <!-- KONIEC lewej strony -->
 
 <!-- PANEL PODGLĄDU -->
-<div id="previewPanel" style="flex:1; background:#0d0d0d; border:1px solid var(--primary); border-radius:10px; padding:15px;">
-    <h3 class="category-title">Podgląd:</h3>
+<div style="flex:1; background:#0d0d0d; border:1px solid var(--primary); border-radius:10px; padding:15px; max-height:80vh; overflow-y:auto;">
+    <h2>Podgląd</h2>
 
     <div>
-        <h3 class="category-title">Auto:</h3>
+        <b>Auto:</b>
         <div id="previewCar">Brak</div>
     </div>
 
     <hr style="margin:10px 0; border-color:#333;">
 
     <div>
-		    <div>
-        <b></b>
+        <b>Części:</b>
         <div id="previewParts"></div>
     </div>
-        <h3 class="category-title">Ulepszenia:</h3>
+
+    <hr style="margin:10px 0; border-color:#333;">
+
+    <div>
+        <b>Ulepszenia:</b>
         <div id="previewUpgrades"></div>
     </div>
 
@@ -1544,28 +1166,61 @@ fetch(webhookURL, {
 </div>
 
 </div> <!-- ZAMYKA container -->
-<audio id="bgMusic" autoplay loop>
-    <source src="muzyka.mp3" type="audio/mpeg">
-</audio>
 
-<script>
-const music = document.getElementById("bgMusic");
-
-// ustaw głośność
-music.volume = 0.02;
-
-// próba automatycznego startu
-window.addEventListener("load", () => {
-    music.play().catch(() => {
-        // jeśli przeglądarka zablokuje autoplay
-        document.addEventListener("click", () => {
-            music.play();
-        }, { once: true });
-    });
-});
-</script>
 
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
