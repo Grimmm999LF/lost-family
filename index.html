@@ -361,16 +361,16 @@ button:hover {
     gap: 8px;
 }
 #musicToggle {
-    position: fixed;    /* przykleja przycisk do okna */
-    bottom: 20px;       /* 20px od dołu */
-    right: 20px;        /* 20px od prawej */
-    z-index: 9999;      /* nad wszystkimi innymi elementami */
-    font-size: 24px;    /* większa ikonka, opcjonalnie */
-    background: rgba(255,255,255,0.8); /* lekko przezroczyste tło, opcjonalnie */
-    border: none;       /* usuwa domyślną ramkę */
-    border-radius: 8px; /* zaokrąglenie rogów */
-    padding: 8px 12px;  /* odstęp wewnętrzny */
-    cursor: pointer;    /* zmienia kursor na “rączkę” */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.8);
+    transition: transform 0.1s ease;
 }
 .part-name {
     font-weight: 500;
@@ -1650,11 +1650,34 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+	// --- PULSOWANIE W RYTM MUZYKI ---
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioCtx.createAnalyser();
+    const source = audioCtx.createMediaElementSource(music);
+
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 256;
+
+    const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+    function animateButton() {
+        analyser.getByteFrequencyData(dataArray);
+        const avg = dataArray.reduce((a,b) => a+b, 0) / dataArray.length;
+        const scale = 1 + avg / 500; // zmiana rozmiaru przycisku
+        musicBtn.style.transform = `scale(${scale})`;
+        requestAnimationFrame(animateButton);
+    }
+
+    animateButton();
+});
+
 });
 </script>
 </body>
 
 </html>
+
 
 
 
