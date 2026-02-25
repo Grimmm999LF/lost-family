@@ -1496,6 +1496,22 @@ fetch(webhookURL, {
 });
 }
 
+const music = document.getElementById("bgMusic");
+let musicPlaying = false;
+
+function toggleMusic() {
+
+    if (!musicPlaying) {
+        music.play();
+        document.getElementById("musicToggle").innerText = "🔈";
+        musicPlaying = true;
+    } else {
+        music.pause();
+        document.getElementById("musicToggle").innerText = "🔊";
+        musicPlaying = false;
+    }
+
+}
 </script>
 
 </div> <!-- zamyka configTab -->
@@ -1692,6 +1708,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
 
