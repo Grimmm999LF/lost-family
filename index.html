@@ -31,7 +31,22 @@ html, body {
     background-attachment: fixed;
     color: #e4e6eb;
 }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
 
+    border: 4px solid #00ffff;
+
+    box-shadow:
+        0 0 20px #00ffff,
+        0 0 40px #00ffff,
+        inset 0 0 20px #00ffff;
+
+    transition: box-shadow 0.1s linear, border-color 0.1s linear;
+}
 /* UKŁAD STRONY */
 .container {
     display: flex;
@@ -1705,21 +1720,46 @@ function animate(){
 
     const scale = 1 + avg / 400;
 
-    // Intensywność neonu
-    const glow = avg * 0.8;
+    const glow = avg * 1.2;
+    const hue = avg * 2;
 
-    // Dynamiczny kolor (HSL daje fajny efekt imprezowy)
-    const hue = avg * 2; // zmienia kolor wraz z muzyką
-
+    // Przyciski
     btn.style.transform = `scale(${scale})`;
-
     btn.style.boxShadow = `
         0 0 ${glow/4}px hsl(${hue}, 100%, 60%),
         0 0 ${glow/2}px hsl(${hue}, 100%, 60%),
         0 0 ${glow}px hsl(${hue}, 100%, 60%)
     `;
-
     btn.style.borderColor = `hsl(${hue}, 100%, 60%)`;
+
+    // RAMKA EKRANU RGB
+    const bodyGlow = glow * 1.5;
+
+    document.body.style.setProperty("--neon-color", `hsl(${hue}, 100%, 60%)`);
+
+    const before = window.getComputedStyle(document.body, "::before");
+
+    document.body.style.setProperty("--neon-shadow", `
+        0 0 ${bodyGlow/2}px hsl(${hue}, 100%, 60%),
+        0 0 ${bodyGlow}px hsl(${hue}, 100%, 60%),
+        inset 0 0 ${bodyGlow/2}px hsl(${hue}, 100%, 60%)
+    `);
+
+    document.body.style.borderColor = `hsl(${hue}, 100%, 60%)`;
+
+    document.body.style.setProperty("--dynamic-hue", hue);
+
+    document.body.style.setProperty("--dynamic-glow", bodyGlow + "px");
+
+    document.body.style.setProperty("--color", `hsl(${hue},100%,60%)`);
+
+    document.body.style.cssText += `
+        --neon-color: hsl(${hue},100%,60%);
+    `;
+
+    document.body.style.setProperty("box-shadow", `
+        0 0 ${bodyGlow}px hsl(${hue},100%,60%) inset
+    `);
 
     requestAnimationFrame(animate);
 
@@ -1766,6 +1806,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
