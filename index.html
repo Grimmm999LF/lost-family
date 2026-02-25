@@ -916,7 +916,21 @@ function switchMainTab(tab) {
     document.getElementById("cyl").innerText = values[cyl];
     calculate();
 }
+// ===== SORTOWANIE DEMONTAŻU =====
+function getSortedDemontaz() {
 
+    const paid = demontazParts
+        .filter(part => part.price > 0)
+        .sort((a, b) => a.price - b.price);
+
+    const free = demontazParts
+        .filter(part => part.price === 0);
+
+    return {
+        paid,
+        free
+    };
+}
 function maxEngine() {
     engine = 9; // 1.2 → 3.0
     let value = (1.2 + engine * 0.2).toFixed(1);
@@ -931,10 +945,21 @@ function maxFuel() {
     calculate();
 }
 function renderDemontaz() {
+
     const list = document.getElementById("demontazList");
     list.innerHTML = "";
 
-    demontazParts.forEach(part => {
+    // ===== PODZIAŁ =====
+    const paid = demontazParts
+        .filter(part => part.price > 0)
+        .sort((a, b) => a.price - b.price);
+
+    const free = demontazParts
+        .filter(part => part.price === 0);
+
+    // ===== FUNKCJA TWORZĄCA ELEMENT =====
+    function createPartElement(part) {
+
         const div = document.createElement("div");
         div.className = "part";
 
@@ -974,7 +999,21 @@ function renderDemontaz() {
         });
 
         list.appendChild(div);
-    });
+    }
+
+    // ===== NAJPIERW PŁATNE =====
+    paid.forEach(createPartElement);
+
+    // ===== SEKCJA DARMOWE =====
+    if (free.length > 0) {
+
+        const title = document.createElement("div");
+        title.className = "demontaz-separator";
+        title.innerText = "Darmowe części";
+        list.appendChild(title);
+
+        free.forEach(createPartElement);
+    }
 
     calculateDemontaz();
 }
@@ -1820,6 +1859,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
