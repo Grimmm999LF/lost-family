@@ -1505,10 +1505,25 @@ function filterCarsDemontaz() {
         }
     });
 }
-function wyczysc() {
-    selectedDemontaz = {};   // usuń wszystkie zaznaczenia
-    renderDemontaz();        // odśwież listę
-    calculateDemontaz();     // przelicz sumę
+function wyczyscDemontaz() {
+    // 1️⃣ usuń wszystkie zaznaczenia
+    selectedDemontaz = {};
+
+    // 2️⃣ zresetuj liczniki cylindrów, silnika, zbiornika jeśli są
+    cyl = 0;
+    engine = 0;
+    fuel = 0;
+
+    // 3️⃣ wyczyść pole wyszukiwarki auta w demontażu
+    document.getElementById("carSearchDemontaz").value = "";
+
+    // 4️⃣ zresetuj globalną cenę auta w demontażu
+    selectedCarPrice = 0;
+
+    // 5️⃣ odśwież listę części i przelicz sumę
+    renderDemontaz();
+    calculateDemontaz();
+}
 }
 	function demontujWszystko() {
     selectedDemontaz = {};
@@ -1912,6 +1927,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
