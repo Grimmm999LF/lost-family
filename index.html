@@ -543,10 +543,12 @@ button:hover {
     accent-color: var(--primary);
     cursor: pointer;
 }
-	/* ===== DEMONTAŻ – bez scrolla ===== */
 #demontazList {
     max-height: none !important;
     overflow: visible !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
 }
 .animated-price {
     position: relative;
@@ -1602,6 +1604,7 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
 
