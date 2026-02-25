@@ -1626,7 +1626,45 @@ fetch(webhookURL, {
 <audio id="bgMusic" autoplay loop>
     <source src="muzyka.mp3" type="audio/mpeg">
 </audio>
+<script>
 
+document.addEventListener("DOMContentLoaded", function() {
+
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicToggle");
+
+    if(!music || !btn){
+        console.log("Nie znaleziono elementów audio");
+        return;
+    }
+
+    music.volume = 0.05;
+
+    btn.addEventListener("click", function() {
+
+        if (music.paused) {
+
+            music.play()
+            .then(() => {
+                btn.textContent = "🔊";
+                console.log("Muzyka gra");
+            })
+            .catch(e => {
+                console.log("Błąd:", e);
+            });
+
+        } else {
+
+            music.pause();
+            btn.textContent = "🔇";
+
+        }
+
+    });
+
+});
+
+</script>
 <script>
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -1662,9 +1700,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 </script>
+	
 </body>
 
 </html>
+
 
 
 
