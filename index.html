@@ -360,7 +360,38 @@ button:hover {
     align-items: center;
     gap: 8px;
 }
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+
+    background: linear-gradient(145deg, #ff8a00, #ff5e00);
+    border: none;
+    color: white;
+    font-size: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
+    transition: all 0.2s ease;
+    z-index: 999;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 140, 0, 0.9);
+}
+
+.music-btn:active {
+    transform: scale(0.95);
+}
 .part-name {
     font-weight: 500;
 }
@@ -1642,10 +1673,10 @@ window.addEventListener("DOMContentLoaded", () => {
     window.toggleMusic = function() {
         if (music.paused) {
             music.play();
-            musicBtn.textContent = "🔊 Muzyka";
+            musicBtn.textContent = "🔊";
         } else {
             music.pause();
-            musicBtn.textContent = "🔇 Wyciszono";
+            musicBtn.textContent = "🔇";
         }
     };
 
@@ -1654,6 +1685,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
 
