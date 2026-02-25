@@ -635,7 +635,10 @@ button:hover {
 
 <h2>🔧 Demontaż pojazdu</h2>
 
-<div class="parts">
+<div style="display:flex; gap:20px;">
+
+<!-- LEWA STRONA -->
+<div class="parts" style="flex:2;">
 
 <div class="part">
 <label>
@@ -667,11 +670,18 @@ Turbo – 150 000 PLN
 
 </div>
 
+<!-- PRAWA STRONA -->
+<div class="card" style="flex:1; height:fit-content;">
+
 <h3>Podgląd:</h3>
 <p id="demontazPreview">Brak części</p>
 
 <h3>Kwota:</h3>
 <p id="demontazTotal">0 PLN</p>
+
+</div>
+
+</div>
 
 </div>
 </div>
@@ -877,7 +887,7 @@ function updateDemontaz() {
 let total = 0;
 let text = "";
 
-const checkboxes = document.querySelectorAll("#demontaz input[type=checkbox]");
+const checkboxes = document.querySelectorAll("#demontazTab input[type=checkbox]");demontaz input[type=checkbox]");
 
 checkboxes.forEach(cb => {
 
@@ -1554,7 +1564,18 @@ fetch(webhookURL, {
 <audio id="bgMusic" autoplay loop>
     <source src="muzyka.mp3" type="audio/mpeg">
 </audio>
+<div class="preview-panel card" id="previewPanel">
 
+<h3>Auto:</h3>
+<p id="previewCar">Brak</p>
+
+<h3>Podgląd:</h3>
+<pre id="preview"></pre>
+
+<h3>Cena końcowa:</h3>
+<div class="total-price" id="previewTotal">0 PLN</div>
+
+</div>
 <script>
 const music = document.getElementById("bgMusic");
 
@@ -1575,6 +1596,7 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
 
