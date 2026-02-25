@@ -637,7 +637,7 @@ button:hover {
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
-	<button id="musicToggle" onclick="toggleMusic()">🔊</button>
+	<button id="musicToggle">🔊</button>
 	<audio id="bgMusic" src="muzyka.mp3" loop></audio>
 </div>
 	<div id="configTab">
@@ -1496,22 +1496,6 @@ fetch(webhookURL, {
 });
 }
 
-const music = document.getElementById("bgMusic");
-let musicPlaying = false;
-
-function toggleMusic() {
-
-    if (!musicPlaying) {
-        music.play();
-        document.getElementById("musicToggle").innerText = "🔈";
-        musicPlaying = true;
-    } else {
-        music.pause();
-        document.getElementById("musicToggle").innerText = "🔊";
-        musicPlaying = false;
-    }
-
-}
 </script>
 
 </div> <!-- zamyka configTab -->
@@ -1703,11 +1687,25 @@ window.addEventListener("DOMContentLoaded", () => {
     animateButton();
 });
 
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicToggle");
+
+btn.addEventListener("click", function() {
+
+    if (music.paused) {
+        music.play();
+        btn.innerText = "🔈";
+    } else {
+        music.pause();
+        btn.innerText = "🔊";
+    }
+
 });
 </script>
 </body>
 
 </html>
+
 
 
 
