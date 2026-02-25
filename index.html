@@ -1367,20 +1367,7 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
-	const music = document.getElementById("bgMusic");
-let playing = false;
 
-function toggleMusic() {
-    if (!playing) {
-        music.play();
-        document.getElementById("musicToggle").innerText = "🔊";
-        playing = true;
-    } else {
-        music.pause();
-        document.getElementById("musicToggle").innerText = "🔈";
-        playing = false;
-    }
-}
 function wyczyscDemontaz() {
     selectedDemontaz = {};   // usuń wszystkie zaznaczenia
     renderDemontaz();        // odśwież listę
@@ -1685,21 +1672,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     animateButton();
-});
-
-const music = document.getElementById("bgMusic");
-const btn = document.getElementById("musicToggle");
-
-btn.addEventListener("click", function() {
-
-    if (music.paused) {
-        music.play();
-        btn.innerText = "🔈";
-    } else {
-        music.pause();
-        btn.innerText = "🔊";
-    }
-
 });
 </script>
 </body>
