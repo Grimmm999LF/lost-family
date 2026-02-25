@@ -201,6 +201,10 @@ button:hover {
     font-size: 16px;
     letter-spacing: 0.5px;
 }
+	.demontaz-parts {
+    max-height: none;
+    overflow-y: visible;
+}
 	/* ===== INFO TAB ===== */
 
 .info-grid {
@@ -1529,7 +1533,7 @@ fetch(webhookURL, {
 <div id="demontazTab" style="display:none;">
     <h2>🔧 Demontaż pojazdu</h2>
 
-    <div class="parts" id="demontazList"></div>
+    <div class="parts demontaz-parts" id="demontazList"></div>
 
     <div class="summary">
         <div>Wybrane części: <span id="demontazCount">0</span></div>
@@ -1593,5 +1597,6 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
