@@ -360,37 +360,17 @@ button:hover {
     align-items: center;
     gap: 8px;
 }
-.music-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-
-    background: linear-gradient(145deg, #ff8a00, #ff5e00);
-    border: none;
-    color: white;
-    font-size: 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-    box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
-    transition: all 0.2s ease;
-    z-index: 999;
-}
-
-.music-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(255, 140, 0, 0.9);
-}
-
-.music-btn:active {
-    transform: scale(0.95);
+#musicToggle {
+    position: fixed;    /* przykleja przycisk do okna */
+    bottom: 20px;       /* 20px od dołu */
+    right: 20px;        /* 20px od prawej */
+    z-index: 9999;      /* nad wszystkimi innymi elementami */
+    font-size: 24px;    /* większa ikonka, opcjonalnie */
+    background: rgba(255,255,255,0.8); /* lekko przezroczyste tło, opcjonalnie */
+    border: none;       /* usuwa domyślną ramkę */
+    border-radius: 8px; /* zaokrąglenie rogów */
+    padding: 8px 12px;  /* odstęp wewnętrzny */
+    cursor: pointer;    /* zmienia kursor na “rączkę” */
 }
 .part-name {
     font-weight: 500;
@@ -657,17 +637,7 @@ button:hover {
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
-	<button id="musicToggle" onclick="toggleMusic()" style="
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    z-index: 1000;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-">
-🔊 Muzyka
+	<button id="musicToggle" onclick="toggleMusic()">🔊</button> <audio id="bgMusic" src="twoja-muzyka.mp3" loop></audio>
 </button>
 </div>
 	<div id="configTab">
@@ -1685,6 +1655,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
 
