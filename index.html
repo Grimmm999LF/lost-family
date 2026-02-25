@@ -1022,17 +1022,16 @@ function renderDemontaz() {
 
     calculateDemontaz();
 }
-	function calculateDemontaz() {
+function calculateDemontaz() {
     let total = 0;
-    let count = 0;
 
-    for (let name in selectedDemontaz) {
-        total += selectedDemontaz[name];
-        count++;
+    for (let partName in selectedDemontaz) {
+        total += selectedDemontaz[partName];
     }
 
-    document.getElementById("demontazTotal").innerText = total.toLocaleString();
-    document.getElementById("demontazCount").innerText = count;
+    total += selectedCarPriceDemontaz; // dodajemy cenę auta
+
+    document.getElementById("demontazTotal").innerText = total.toLocaleString() + " PLN";
 }
 function toggleTFTPanel() {
     const tab = document.getElementById("tftTab");
@@ -1221,10 +1220,10 @@ function filterCars() {
             div.onclick = function() {
                 // 1️⃣ wpisujemy nazwę auta w input
                 document.getElementById("carSearch").value = car.name;
-
+				document.getElementById("carSelect").value = car.price; // opcjonalnie do inputa
                 // 2️⃣ zapisujemy cenę auta do zmiennej globalnej
                 selectedCarPrice = car.price;
-
+				
                 // 3️⃣ czyścimy listę wyników
                 results.innerHTML = "";
 
@@ -1475,8 +1474,35 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
+function filterCarsDemontaz() {
+    const input = document.getElementById("carSearchDemontaz").value.toLowerCase();
+    const results = document.getElementById("carResultsDemontaz");
+    results.innerHTML = "";
 
-function wyczyscDemontaz() {
+    if (input === "") return;
+
+    cars.forEach(car => {
+        if (car.name.toLowerCase().includes(input)) {
+            const div = document.createElement("div");
+            div.style.padding = "8px";
+            div.style.cursor = "pointer";
+            div.innerText = car.name + " – " + car.price.toLocaleString() + " PLN";
+
+            div.onclick = function() {
+                document.getElementById("carSearchDemontaz").value = car.name;
+                selectedCarPriceDemontaz = car.price; // zapis ceny auta w Demontażu
+                results.innerHTML = "";
+                renderDemontaz(); // odśwież listę części z nową ceną auta
+            };
+
+            div.onmouseover = () => div.style.background = "#333";
+            div.onmouseout = () => div.style.background = "transparent";
+
+            results.appendChild(div);
+        }
+    });
+}
+function wyczysc() {
     selectedDemontaz = {};   // usuń wszystkie zaznaczenia
     renderDemontaz();        // odśwież listę
     calculateDemontaz();     // przelicz sumę
@@ -1686,10 +1712,16 @@ fetch(webhookURL, {
 
     <button class="main-tab" onclick="demontujWszystko()" style="margin-bottom:10px;">
         Rozbierz całe auto
-	<button class="main-tab" onclick="wyczyscDemontaz()" style="margin-bottom:10px;">
-    Wyczyść
-</button>
+    </button>
+    <button class="main-tab" onclick="wyczyscDemontaz()" style="margin-bottom:10px;">
+        Wyczyść
+    </button>
 
+    <!-- 🟢 TU WLEPIAMY WYSZUKIWARKĘ DEMONTAŻU -->
+    <input type="text" id="carSearchDemontaz" placeholder="Wyszukaj auto..." onkeyup="filterCarsDemontaz()" style="margin:10px 0; width:100%; padding:5px;">
+    <div id="carResultsDemontaz" class="results" style="border:1px solid #ccc; max-height:150px; overflow-y:auto;"></div>
+
+    <!-- Lista części -->
     <div class="parts demontaz-parts" id="demontazList"></div>
 
     <div class="summary">
@@ -1877,6 +1909,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
