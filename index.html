@@ -637,7 +637,8 @@ button:hover {
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
-	<button id="musicToggle" onclick="toggleMusic()">🔊</button> <audio id="bgMusic" src="muzyka.mp3" loop></audio>
+	<button id="musicToggle" onclick="toggleMusic()">🔊</button>
+	<audio id="bgMusic" src="muzyka.mp3" loop></audio>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -1366,6 +1367,20 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
+	const music = document.getElementById("bgMusic");
+let playing = false;
+
+function toggleMusic() {
+    if (!playing) {
+        music.play();
+        document.getElementById("musicToggle").innerText = "🔊";
+        playing = true;
+    } else {
+        music.pause();
+        document.getElementById("musicToggle").innerText = "🔈";
+        playing = false;
+    }
+}
 function wyczyscDemontaz() {
     selectedDemontaz = {};   // usuń wszystkie zaznaczenia
     renderDemontaz();        // odśwież listę
@@ -1480,6 +1495,7 @@ fetch(webhookURL, {
     alert("Błąd wysyłania");
 });
 }
+
 </script>
 
 </div> <!-- zamyka configTab -->
@@ -1676,6 +1692,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
 
