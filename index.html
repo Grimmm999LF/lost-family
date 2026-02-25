@@ -766,6 +766,7 @@ const demontazParts = [
 
 let selectedDemontaz = {};
 let selectedCarPrice = 0;
+let selectedCarPriceDemontaz = 0;
 // Lista części tuningowych
 const parts = [
     {
@@ -1024,7 +1025,7 @@ function renderDemontaz() {
 }
 function calculateDemontaz() {
     // 🔹 START: suma = cena auta w demontażu
-    let total = selectedCarPrice || 0;
+    let total = selectedCarPriceDemontaz || 0;
     let count = 0;
 
     // 🔹 dodaj wszystkie zaznaczone części
@@ -1419,8 +1420,27 @@ function removeFuel() {
     });
 }
 function resetAll() {
+    // reset auta
+    selectedCarPrice = 0;
+    document.getElementById("carSearch").value = "";
     document.getElementById("carSelect").value = 0;
+
+    // reset wariantu
+    const variantSelect = document.getElementById("variantSelect");
+    if (variantSelect) variantSelect.selectedIndex = 0;
+
+    // reset części
     selectedParts = {};
+
+    // reset ulepszeń
+    cyl = 0;
+    engine = 0;
+    fuel = 0;
+
+    document.getElementById("cyl").innerText = "V4";
+    document.getElementById("engine").innerText = "1.2";
+    document.getElementById("fuel").innerText = "25L";
+
     renderParts();
     calculate();
 }
@@ -1506,10 +1526,11 @@ function filterCarsDemontaz() {
             div.innerText = car.name + " – " + car.price.toLocaleString() + " PLN";
 
             div.onclick = function() {
-                document.getElementById("carSearchDemontaz").value = car.name;
-                selectedCarPriceDemontaz = car.price; // zapis ceny auta w Demontażu
-                results.innerHTML = "";
-                renderDemontaz(); // odśwież listę części z nową ceną auta
+    		document.getElementById("carSearchDemontaz").value = car.name;
+    		selectedCarPriceDemontaz = car.price;
+    		results.innerHTML = "";
+    		renderDemontaz();
+    		calculateDemontaz(); // <-- TO DODAĆ
             };
 
             div.onmouseover = () => div.style.background = "#333";
@@ -1940,6 +1961,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
