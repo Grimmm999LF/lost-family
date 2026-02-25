@@ -1230,6 +1230,9 @@ function filterCars() {
                 // 4️⃣ renderujemy warianty (jeśli masz taką funkcję)
                 renderVariants(car);
 
+				    // przelicz wszystko od razu
+    			calculate();
+
                 // 5️⃣ przeliczamy Demontaż + cenę auta
                 calculateDemontaz();
             };
@@ -1299,7 +1302,7 @@ document.getElementById("carSelect").addEventListener("change", calculate);
 
 
 function calculate() {
-    let total = parseInt(document.getElementById("carSelect").value) || 0;
+    let total = selectedCarPrice || 0; // teraz zawsze bierze cenę auta z globalnej zmiennej
 
 // 🔥 DODAJ WARIANT
 const variantPrice = parseInt(document.getElementById("variantSelect")?.value) || 0;
@@ -1909,6 +1912,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
