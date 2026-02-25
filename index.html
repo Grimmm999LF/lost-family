@@ -765,6 +765,7 @@ const demontazParts = [
 ];
 
 let selectedDemontaz = {};
+let selectedCarPrice = 0;
 // Lista części tuningowych
 const parts = [
     {
@@ -1204,28 +1205,41 @@ const cars = [
 function filterCars() {
     const input = document.getElementById("carSearch").value.toLowerCase();
     const results = document.getElementById("carResults");
-    results.innerHTML = "";
+    results.innerHTML = ""; // czyścimy poprzednie wyniki
 
-    if (input === "") return;
+    if (input === "") return; // jeśli pusty input, nic nie pokazujemy
 
     cars.forEach(car => {
         if (car.name.toLowerCase().includes(input)) {
+            // Tworzymy div z nazwą i ceną auta
             const div = document.createElement("div");
             div.style.padding = "8px";
             div.style.cursor = "pointer";
             div.innerText = car.name + " – " + car.price.toLocaleString() + " PLN";
 
+            // 🔴 Kiedy klikamy na auto:
             div.onclick = function() {
+                // 1️⃣ wpisujemy nazwę auta w input
                 document.getElementById("carSearch").value = car.name;
-                document.getElementById("carSelect").value = car.price;
+
+                // 2️⃣ zapisujemy cenę auta do zmiennej globalnej
+                selectedCarPrice = car.price;
+
+                // 3️⃣ czyścimy listę wyników
                 results.innerHTML = "";
-				renderVariants(car);
-                calculate();
+
+                // 4️⃣ renderujemy warianty (jeśli masz taką funkcję)
+                renderVariants(car);
+
+                // 5️⃣ przeliczamy Demontaż + cenę auta
+                calculateDemontaz();
             };
 
+            // podświetlenie przy najechaniu myszką
             div.onmouseover = () => div.style.background = "#333";
             div.onmouseout = () => div.style.background = "transparent";
 
+            // dodajemy do listy wyników
             results.appendChild(div);
         }
     });
@@ -1863,6 +1877,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
