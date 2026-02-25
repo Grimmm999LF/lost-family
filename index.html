@@ -313,6 +313,7 @@ button:hover {
 .part:hover {
     border-color: var(--accent);
 }
+
 /* ===== CUSTOM CHECKBOX FIXED CENTER ===== */
 
 .custom-check {
@@ -395,6 +396,21 @@ button:hover {
         0 0 5px #00ffff,
         0 0 10px #00ffff,
         0 0 20px #00ffff;
+}
+	#rgb-border {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+
+    border: 4px solid #00ffff;
+
+    box-shadow:
+        0 0 20px #00ffff,
+        0 0 40px #00ffff,
+        inset 0 0 20px #00ffff;
+
+    transition: box-shadow 0.1s linear, border-color 0.1s linear;
 }
 .part-name {
     font-weight: 500;
@@ -608,7 +624,7 @@ button:hover {
 </style>
 </head>
 <body>
-
+<div id="rgb-border"></div>
 <div class="container">
 <div style="flex:2;">
 
@@ -1656,6 +1672,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const music = document.getElementById("bgMusic");
     const btn = document.getElementById("musicToggle");
+	const rgbBorder = document.getElementById("rgb-border");
 
     music.volume = 0.05;
 
@@ -1719,50 +1736,33 @@ function animate(){
     const avg = dataArray.reduce((a,b)=>a+b,0) / dataArray.length;
 
     const scale = 1 + avg / 400;
-
     const glow = avg * 1.2;
     const hue = avg * 2;
 
-    // Przyciski
+    // ===== PRZYCISK =====
     btn.style.transform = `scale(${scale})`;
+
     btn.style.boxShadow = `
         0 0 ${glow/4}px hsl(${hue}, 100%, 60%),
         0 0 ${glow/2}px hsl(${hue}, 100%, 60%),
         0 0 ${glow}px hsl(${hue}, 100%, 60%)
     `;
+
     btn.style.borderColor = `hsl(${hue}, 100%, 60%)`;
 
-    // RAMKA EKRANU RGB
+
+    // ===== RAMKA RGB EKRANU =====
     const bodyGlow = glow * 1.5;
 
-    document.body.style.setProperty("--neon-color", `hsl(${hue}, 100%, 60%)`);
+    rgbBorder.style.borderColor = `hsl(${hue}, 100%, 60%)`;
 
-    const before = window.getComputedStyle(document.body, "::before");
-
-    document.body.style.setProperty("--neon-shadow", `
+    rgbBorder.style.boxShadow = `
         0 0 ${bodyGlow/2}px hsl(${hue}, 100%, 60%),
         0 0 ${bodyGlow}px hsl(${hue}, 100%, 60%),
         inset 0 0 ${bodyGlow/2}px hsl(${hue}, 100%, 60%)
-    `);
-
-    document.body.style.borderColor = `hsl(${hue}, 100%, 60%)`;
-
-    document.body.style.setProperty("--dynamic-hue", hue);
-
-    document.body.style.setProperty("--dynamic-glow", bodyGlow + "px");
-
-    document.body.style.setProperty("--color", `hsl(${hue},100%,60%)`);
-
-    document.body.style.cssText += `
-        --neon-color: hsl(${hue},100%,60%);
     `;
 
-    document.body.style.setProperty("box-shadow", `
-        0 0 ${bodyGlow}px hsl(${hue},100%,60%) inset
-    `);
-
     requestAnimationFrame(animate);
-
 }
 });
 
@@ -1806,6 +1806,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
