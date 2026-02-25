@@ -614,6 +614,7 @@ button:hover {
     <button class="main-tab active" onclick="switchMainTab('config')">Konfigurator</button>
     <button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
+	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -663,6 +664,21 @@ button:hover {
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
 <script>
+	// ===== DEMONTAŻ =====
+const demontazParts = [
+    {name: "Silnik", price: 1500000},
+    {name: "Turbo", price: 400000},
+    {name: "Skrzynia biegów", price: 600000},
+    {name: "Zawieszenie", price: 300000},
+    {name: "Felgi", price: 200000},
+    {name: "Radio", price: 50000},
+    {name: "Akumulator", price: 80000},
+    {name: "Lampy", price: 120000},
+    {name: "Drzwi", price: 100000},
+    {name: "Maska", price: 90000}
+];
+
+let selectedDemontaz = {};
 // Lista części tuningowych
 const parts = [
     {
@@ -750,6 +766,7 @@ function switchMainTab(tab) {
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
+	const demontaz = document.getElementById("demontazTab");
 
     const buttons = document.querySelectorAll(".main-tab");
 
@@ -758,6 +775,7 @@ function switchMainTab(tab) {
 
     buttons.forEach(btn => btn.classList.remove("active"));
 
+	
     if (tab === "config") {
         config.style.display = "block";
         info.style.display = "none";
@@ -767,7 +785,20 @@ function switchMainTab(tab) {
         carSearchWrapper.style.display = "block";
         previewPanel.style.display = "block";
     }
+	else if (tab === "demontaz") {
+    config.style.display = "none";
+    info.style.display = "none";
+    salon.style.display = "none";
+    demontaz.style.display = "block";
 
+    buttons.forEach(btn => btn.classList.remove("active"));
+    buttons[3].classList.add("active");
+
+    carSearchWrapper.style.display = "none";
+    previewPanel.style.display = "none";
+
+    renderDemontaz();
+}
     else if (tab === "info") {
         config.style.display = "none";
         info.style.display = "block";
@@ -792,7 +823,66 @@ function switchMainTab(tab) {
     }
 }
 	let tftEnabled = false;
+function renderDemontaz() {
+    const list = document.getElementById("demontazList");
+    list.innerHTML = "";
 
+    demontazParts.forEach(part => {
+        const div = document.createElement("div");
+        div.className = "part";
+
+        const checked = selectedDemontaz[part.name] ? "checked" : "";
+
+        div.innerHTML = `
+            <div class="part-left">
+                <label class="custom-check">
+                    <input type="checkbox" ${checked}>
+                    <span class="checkmark"></span>
+                </label>
+                <span class="part-name">${part.name}</span>
+            </div>
+            <span class="part-price">${part.price.toLocaleString()} PLN</span>
+        `;
+
+        const checkbox = div.querySelector("input");
+
+        if (checked) div.classList.add("selected");
+
+        checkbox.addEventListener("change", function() {
+            if (this.checked) {
+                selectedDemontaz[part.name] = part.price;
+                div.classList.add("selected");
+            } else {
+                delete selectedDemontaz[part.name];
+                div.classList.remove("selected");
+            }
+            calculateDemontaz();
+        });
+
+        div.addEventListener("click", function(e) {
+            if (e.target.tagName !== "INPUT") {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event("change"));
+            }
+        });
+
+        list.appendChild(div);
+    });
+
+    calculateDemontaz();
+}
+	function calculateDemontaz() {
+    let total = 0;
+    let count = 0;
+
+    for (let name in selectedDemontaz) {
+        total += selectedDemontaz[name];
+        count++;
+    }
+
+    document.getElementById("demontazTotal").innerText = total.toLocaleString();
+    document.getElementById("demontazCount").innerText = count;
+}
 function toggleTFTPanel() {
     const tab = document.getElementById("tftTab");
 
@@ -1410,7 +1500,18 @@ fetch(webhookURL, {
     <div id="salonList" class="parts" style="grid-template-columns: 1fr;"></div>
 
 </div>
+<div id="demontazTab" style="display:none;">
+    <h2>🔧 Demontaż pojazdu</h2>
 
+    <div class="parts" id="demontazList"></div>
+
+    <div class="summary">
+        <div>Wybrane części: <span id="demontazCount">0</span></div>
+        <div class="total animated-price">
+            Otrzymasz: <span id="demontazTotal">0</span> PLN
+        </div>
+    </div>
+</div>
 </div> <!-- KONIEC lewej strony -->
 
 <!-- PANEL PODGLĄDU -->
@@ -1466,3 +1567,4 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
