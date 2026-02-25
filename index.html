@@ -1348,6 +1348,16 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
+	function demontujWszystko() {
+    selectedDemontaz = {};
+
+    demontazParts.forEach(part => {
+        selectedDemontaz[part.name] = part.price;
+    });
+
+    renderDemontaz();
+    calculateDemontaz();
+}
 	function sendToDiscord() {
 
 		// BLOKADA SPAMU
@@ -1540,7 +1550,11 @@ fetch(webhookURL, {
 <div id="demontazTab" style="display:none;">
     <h2>🔧 Demontaż pojazdu</h2>
 
-    <div class="parts demontaz-parts" id="demontazList"></div>
+    <button class="main-tab" onclick="demontujWszystko()" style="margin-bottom:10px;">
+        Rozbierz całe auto
+    </button>
+
+    <div class="parts demontaz-parts" id="demontazList"></div>></div>
 
     <div class="summary">
         <div>Wybrane części: <span id="demontazCount">0</span></div>
@@ -1604,6 +1618,7 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
 
