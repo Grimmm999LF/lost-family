@@ -1633,31 +1633,32 @@ document.addEventListener("DOMContentLoaded", function() {
     const music = document.getElementById("bgMusic");
     const btn = document.getElementById("musicToggle");
 
-    if(!music || !btn){
-        console.log("Nie znaleziono elementów audio");
-        return;
-    }
-
     music.volume = 0.05;
 
+    // PRÓBA AUTOSTARTU
+    music.play().catch(() => {
+
+        // jeśli przeglądarka zablokuje autoplay
+        document.addEventListener("click", function startMusic() {
+
+            music.play();
+            btn.textContent = "🔊";
+
+            document.removeEventListener("click", startMusic);
+
+        });
+
+    });
+
+    // Przycisk włącz/wyłącz
     btn.addEventListener("click", function() {
 
         if (music.paused) {
-
-            music.play()
-            .then(() => {
-                btn.textContent = "🔊";
-                console.log("Muzyka gra");
-            })
-            .catch(e => {
-                console.log("Błąd:", e);
-            });
-
+            music.play();
+            btn.textContent = "🔊";
         } else {
-
             music.pause();
             btn.textContent = "🔇";
-
         }
 
     });
@@ -1704,6 +1705,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
