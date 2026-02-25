@@ -1635,33 +1635,72 @@ document.addEventListener("DOMContentLoaded", function() {
 
     music.volume = 0.05;
 
-    // PRÓBA AUTOSTARTU
+    // Autostart (po pierwszym kliknięciu jeśli blokada)
     music.play().catch(() => {
-
-        // jeśli przeglądarka zablokuje autoplay
-        document.addEventListener("click", function startMusic() {
-
+        document.addEventListener("click", function startMusic(){
             music.play();
             btn.textContent = "🔊";
-
+            startAudioContext();
             document.removeEventListener("click", startMusic);
-
         });
-
     });
 
-    // Przycisk włącz/wyłącz
-    btn.addEventListener("click", function() {
+    // Klikanie przycisku
+    btn.addEventListener("click", function(){
 
-        if (music.paused) {
+        if(music.paused){
             music.play();
             btn.textContent = "🔊";
-        } else {
+            startAudioContext();
+        }else{
             music.pause();
             btn.textContent = "🔇";
         }
 
     });
+
+
+    // --------- PULSOWANIE ---------
+
+    let audioCtx;
+    let analyser;
+    let dataArray;
+
+    function startAudioContext(){
+
+        if(audioCtx) return;
+
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+
+        const source = audioCtx.createMediaElementSource(music);
+
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+
+        analyser.fftSize = 256;
+
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+        animate();
+
+    }
+
+    function animate(){
+
+        if(!analyser) return;
+
+        analyser.getByteFrequencyData(dataArray);
+
+        const avg = dataArray.reduce((a,b)=>a+b,0) / dataArray.length;
+
+        const scale = 1 + avg / 400;
+
+        btn.style.transform = `scale(${scale})`;
+
+        requestAnimationFrame(animate);
+
+    }
 
 });
 
@@ -1705,6 +1744,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
