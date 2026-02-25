@@ -1353,15 +1353,10 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
-	function demontujWszystko() {
-    selectedDemontaz = {};
-
-    demontazParts.forEach(part => {
-        selectedDemontaz[part.name] = part.price;
-    });
-
-    renderDemontaz();
-    calculateDemontaz();
+function wyczyscDemontaz() {
+    selectedDemontaz = {};   // usuń wszystkie zaznaczenia
+    renderDemontaz();        // odśwież listę
+    calculateDemontaz();     // przelicz sumę
 }
 	function demontujWszystko() {
     selectedDemontaz = {};
@@ -1635,6 +1630,7 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
 
 
 
