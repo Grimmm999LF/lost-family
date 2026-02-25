@@ -687,6 +687,7 @@ button:hover {
     <div>
         <button onclick="removeCyl()">-</button>
         <button onclick="addCyl()">+</button>
+		<button onclick="maxCyl()">MAX</button>
     </div>
 </div>
 
@@ -697,6 +698,7 @@ button:hover {
     <div>
         <button onclick="removeEngine()">-</button>
         <button onclick="addEngine()">+</button>
+		<button onclick="maxCyl()">MAX</button>
     </div>
 </div>
 
@@ -707,6 +709,7 @@ button:hover {
     <div>
         <button onclick="removeFuel()">-</button>
         <button onclick="addFuel()">+</button>
+		<button onclick="maxCyl()">MAX</button>
     </div>
 </div>
 <div class="summary">
@@ -907,6 +910,26 @@ function switchMainTab(tab) {
     }
 }
 	let tftEnabled = false;
+	function maxCyl() {
+    cyl = 2; // maks V8
+    const values = ["V4", "V6", "V8"];
+    document.getElementById("cyl").innerText = values[cyl];
+    calculate();
+}
+
+function maxEngine() {
+    engine = 9; // 1.2 → 3.0
+    let value = (1.2 + engine * 0.2).toFixed(1);
+    document.getElementById("engine").innerText = value;
+    calculate();
+}
+
+function maxFuel() {
+    fuel = 3; // 25 → 100L
+    let value = 25 + fuel * 25;
+    document.getElementById("fuel").innerText = value + "L";
+    calculate();
+}
 function renderDemontaz() {
     const list = document.getElementById("demontazList");
     list.innerHTML = "";
@@ -1797,6 +1820,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
