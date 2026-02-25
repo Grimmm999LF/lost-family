@@ -1674,9 +1674,43 @@ window.addEventListener("DOMContentLoaded", () => {
     animateButton();
 });
 </script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicToggle");
+
+    if(!music || !btn) {
+        console.log("Brak audio lub przycisku");
+        return;
+    }
+
+    music.volume = 0.05;
+
+    // Autoplay jeśli możliwe
+    music.play().catch(() => {
+        console.log("Autoplay zablokowany");
+    });
+
+    btn.addEventListener("click", function() {
+
+        if (music.paused) {
+            music.play();
+            btn.textContent = "🔊";
+        } else {
+            music.pause();
+            btn.textContent = "🔇";
+        }
+
+    });
+
+});
+</script>	
 </body>
 
 </html>
+
 
 
 
