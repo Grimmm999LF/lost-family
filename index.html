@@ -207,6 +207,39 @@ button:hover {
     max-height: none;
     overflow-y: visible;
 }
+
+	.reviews-section {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.review-form {
+    max-width: 500px;
+    background: #12161d;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #1f2633;
+}
+
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #0f1115;
+    border: 1px solid #1f2633;
+    color: white;
+    border-radius: 8px;
+}
+
+.review-form textarea {
+    min-height: 100px;
+    resize: none;
+}
+
+.review-form button {
+    margin-top: 12px;
+}
 	/* ===== INFO TAB ===== */
 
 .info-grid {
@@ -1760,28 +1793,30 @@ fetch(webhookURL, {
                 v1.0 • 24.02.2026
             </div>
         </div>
-		<h2>⭐ Oceń konfigurator</h2>
+<div class="reviews-section">
 
-<div class="card">
-    <input type="text" id="reviewNick" placeholder="Twój nick">
+    <h2>⭐ Oceń konfigurator</h2>
 
-    <div id="ratingStars" class="rating-stars">
-        <span data-value="1">☆</span>
-        <span data-value="2">☆</span>
-        <span data-value="3">☆</span>
-        <span data-value="4">☆</span>
-        <span data-value="5">☆</span>
+    <div class="review-form">
+        <input type="text" id="reviewNick" placeholder="Twój nick">
+
+        <div id="ratingStars" class="rating-stars">
+            <span data-value="1">☆</span>
+            <span data-value="2">☆</span>
+            <span data-value="3">☆</span>
+            <span data-value="4">☆</span>
+            <span data-value="5">☆</span>
+        </div>
+
+        <textarea id="reviewText" placeholder="Twoja opinia..."></textarea>
+
+        <button onclick="addReview()">Dodaj opinię</button>
     </div>
 
-    <textarea id="reviewText" placeholder="Twoja opinia..." style="width:100%; padding:10px; border-radius:8px; background:#0f1115; color:white; border:none; margin-top:10px;"></textarea>
+    <h3 style="margin-top:30px;">📋 Opinie użytkowników</h3>
+    <div id="reviewsList"></div>
 
-    <button onclick="addReview()" style="margin-top:10px;">Dodaj opinię</button>
 </div>
-
-<h3 style="margin-top:20px;">📋 Opinie użytkowników</h3>
-<div id="reviewsList"></div>
-
-    </div>
 
 </div>
 <div id="salonTab" style="display:none;">
@@ -2083,6 +2118,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
