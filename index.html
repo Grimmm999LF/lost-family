@@ -469,6 +469,22 @@ button:hover {
     color: black;
     font-weight: 600;
 }
+	.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+	#infoTab {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.reviews-section {
+    grid-column: 1 / -1;
+}
 	/* LOGO LOST FAMILY */
 .logo {
     font-size: 60px;
@@ -1733,7 +1749,7 @@ fetch(webhookURL, {
 
 </div> <!-- zamyka configTab -->
 
-<div id="infoTab" style="display:none;">
+<div id="infoTab" class="tab">
 
     <div class="info-grid">
 
@@ -2118,6 +2134,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
