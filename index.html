@@ -207,39 +207,6 @@ button:hover {
     max-height: none;
     overflow-y: visible;
 }
-
-	.reviews-section {
-    width: 100%;
-    margin-top: 40px;
-}
-
-.review-form {
-    max-width: 500px;
-    background: #12161d;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #1f2633;
-}
-
-.review-form input,
-.review-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background: #0f1115;
-    border: 1px solid #1f2633;
-    color: white;
-    border-radius: 8px;
-}
-
-.review-form textarea {
-    min-height: 100px;
-    resize: none;
-}
-
-.review-form button {
-    margin-top: 12px;
-}
 	/* ===== INFO TAB ===== */
 
 .info-grid {
@@ -469,22 +436,6 @@ button:hover {
     color: black;
     font-weight: 600;
 }
-	.tab {
-    display: none;
-}
-
-.tab.active {
-    display: block;
-}
-	#infoTab {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.reviews-section {
-    grid-column: 1 / -1;
-}
 	/* LOGO LOST FAMILY */
 .logo {
     font-size: 60px;
@@ -553,33 +504,6 @@ button:hover {
     background: rgba(0,255,255,0.18);
     box-shadow: 0 0 15px rgba(0,255,255,0.4);
     transform: scale(1.03);
-}
-	.rating-stars {
-    display: flex;
-    gap: 8px;
-    font-size: 28px;
-    cursor: pointer;
-    margin: 10px 0;
-}
-
-.rating-stars span.active {
-    color: gold;
-    text-shadow: 0 0 10px gold;
-}
-
-.review-card {
-    background: #12161d;
-    border: 1px solid #1f2633;
-    border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 10px;
-}
-
-.review-header {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    margin-bottom: 6px;
 }
 /* ===== NOWY TFT SWITCH ===== */
 
@@ -1749,7 +1673,7 @@ fetch(webhookURL, {
 
 </div> <!-- zamyka configTab -->
 
-<div id="infoTab" class="tab">
+<div id="infoTab" style="display:none;">
 
     <div class="info-grid">
 
@@ -1809,30 +1733,8 @@ fetch(webhookURL, {
                 v1.0 • 24.02.2026
             </div>
         </div>
-<div class="reviews-section">
 
-    <h2>⭐ Oceń konfigurator</h2>
-
-    <div class="review-form">
-        <input type="text" id="reviewNick" placeholder="Twój nick">
-
-        <div id="ratingStars" class="rating-stars">
-            <span data-value="1">☆</span>
-            <span data-value="2">☆</span>
-            <span data-value="3">☆</span>
-            <span data-value="4">☆</span>
-            <span data-value="5">☆</span>
-        </div>
-
-        <textarea id="reviewText" placeholder="Twoja opinia..."></textarea>
-
-        <button onclick="addReview()">Dodaj opinię</button>
     </div>
-
-    <h3 style="margin-top:30px;">📋 Opinie użytkowników</h3>
-    <div id="reviewsList"></div>
-
-</div>
 
 </div>
 <div id="salonTab" style="display:none;">
@@ -1950,82 +1852,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     });
 
-// ===== SYSTEM OCEN =====
 
-let currentRating = 0;
-
-document.querySelectorAll("#ratingStars span").forEach(star => {
-    star.addEventListener("click", function () {
-        currentRating = parseInt(this.dataset.value);
-        updateStars();
-    });
-});
-
-function updateStars() {
-    document.querySelectorAll("#ratingStars span").forEach(star => {
-        if (parseInt(star.dataset.value) <= currentRating) {
-            star.classList.add("active");
-            star.innerText = "★";
-        } else {
-            star.classList.remove("active");
-            star.innerText = "☆";
-        }
-    });
-}
-
-function addReview() {
-    const nick = document.getElementById("reviewNick").value.trim();
-    const text = document.getElementById("reviewText").value.trim();
-
-    if (!nick || !text || currentRating === 0) {
-        alert("Uzupełnij wszystko!");
-        return;
-    }
-
-    const review = {
-        nick,
-        text,
-        rating: currentRating,
-        date: new Date().toLocaleString()
-    };
-
-    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-    reviews.unshift(review);
-
-    localStorage.setItem("reviews", JSON.stringify(reviews));
-
-    document.getElementById("reviewNick").value = "";
-    document.getElementById("reviewText").value = "";
-    currentRating = 0;
-    updateStars();
-
-    renderReviews();
-}
-
-function renderReviews() {
-    const container = document.getElementById("reviewsList");
-    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-    container.innerHTML = "";
-
-    reviews.forEach(review => {
-        const div = document.createElement("div");
-        div.className = "review-card";
-
-        div.innerHTML = `
-            <div class="review-header">
-                <span>${review.nick}</span>
-                <span>${"★".repeat(review.rating)}</span>
-            </div>
-            <div style="font-size:12px; color:#aaa;">${review.date}</div>
-            <div style="margin-top:5px;">${review.text}</div>
-        `;
-
-        container.appendChild(div);
-    });
-}
-
-document.addEventListener("DOMContentLoaded", renderReviews);
     // --------- PULSOWANIE ---------
 
     let audioCtx;
@@ -2134,10 +1961,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
-
-
-
-
 
 
 
