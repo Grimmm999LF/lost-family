@@ -505,6 +505,33 @@ button:hover {
     box-shadow: 0 0 15px rgba(0,255,255,0.4);
     transform: scale(1.03);
 }
+	.rating-stars {
+    display: flex;
+    gap: 8px;
+    font-size: 28px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.rating-stars span.active {
+    color: gold;
+    text-shadow: 0 0 10px gold;
+}
+
+.review-card {
+    background: #12161d;
+    border: 1px solid #1f2633;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
 /* ===== NOWY TFT SWITCH ===== */
 
 .tft-wrapper {
@@ -1733,6 +1760,26 @@ fetch(webhookURL, {
                 v1.0 • 24.02.2026
             </div>
         </div>
+		<h2>⭐ Oceń konfigurator</h2>
+
+<div class="card">
+    <input type="text" id="reviewNick" placeholder="Twój nick">
+
+    <div id="ratingStars" class="rating-stars">
+        <span data-value="1">☆</span>
+        <span data-value="2">☆</span>
+        <span data-value="3">☆</span>
+        <span data-value="4">☆</span>
+        <span data-value="5">☆</span>
+    </div>
+
+    <textarea id="reviewText" placeholder="Twoja opinia..." style="width:100%; padding:10px; border-radius:8px; background:#0f1115; color:white; border:none; margin-top:10px;"></textarea>
+
+    <button onclick="addReview()" style="margin-top:10px;">Dodaj opinię</button>
+</div>
+
+<h3 style="margin-top:20px;">📋 Opinie użytkowników</h3>
+<div id="reviewsList"></div>
 
     </div>
 
@@ -1852,7 +1899,82 @@ document.addEventListener("DOMContentLoaded", function() {
 
     });
 
+// ===== SYSTEM OCEN =====
 
+let currentRating = 0;
+
+document.querySelectorAll("#ratingStars span").forEach(star => {
+    star.addEventListener("click", function () {
+        currentRating = parseInt(this.dataset.value);
+        updateStars();
+    });
+});
+
+function updateStars() {
+    document.querySelectorAll("#ratingStars span").forEach(star => {
+        if (parseInt(star.dataset.value) <= currentRating) {
+            star.classList.add("active");
+            star.innerText = "★";
+        } else {
+            star.classList.remove("active");
+            star.innerText = "☆";
+        }
+    });
+}
+
+function addReview() {
+    const nick = document.getElementById("reviewNick").value.trim();
+    const text = document.getElementById("reviewText").value.trim();
+
+    if (!nick || !text || currentRating === 0) {
+        alert("Uzupełnij wszystko!");
+        return;
+    }
+
+    const review = {
+        nick,
+        text,
+        rating: currentRating,
+        date: new Date().toLocaleString()
+    };
+
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    reviews.unshift(review);
+
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+
+    document.getElementById("reviewNick").value = "";
+    document.getElementById("reviewText").value = "";
+    currentRating = 0;
+    updateStars();
+
+    renderReviews();
+}
+
+function renderReviews() {
+    const container = document.getElementById("reviewsList");
+    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+    container.innerHTML = "";
+
+    reviews.forEach(review => {
+        const div = document.createElement("div");
+        div.className = "review-card";
+
+        div.innerHTML = `
+            <div class="review-header">
+                <span>${review.nick}</span>
+                <span>${"★".repeat(review.rating)}</span>
+            </div>
+            <div style="font-size:12px; color:#aaa;">${review.date}</div>
+            <div style="margin-top:5px;">${review.text}</div>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", renderReviews);
     // --------- PULSOWANIE ---------
 
     let audioCtx;
@@ -1961,6 +2083,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
