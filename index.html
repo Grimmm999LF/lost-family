@@ -1957,10 +1957,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 </script>
-	
+<script>	
+<div style="text-align:center; margin-top:20px; color:#aaa;">
+👥 Odwiedzin: <span id="visitCount">...</span>
+</div>
+
+<script>
+fetch("https://api.countapi.xyz/hit/lostfamily/kalkulator")
+.then(res => res.json())
+.then(res => {
+  document.getElementById("visitCount").innerText = res.value;
+});
+</script>
 </body>
 
 </html>
+
 
 
 
