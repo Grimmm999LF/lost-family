@@ -1672,6 +1672,9 @@ fetch(webhookURL, {
 </script>
 
 </div> <!-- zamyka configTab -->
+<div style="text-align:center; margin-top:20px; color:#aaa;">
+👥 Odwiedzin: <span id="visitCount">...</span>
+</div>
 
 <div id="infoTab" style="display:none;">
 
@@ -1957,20 +1960,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 </script>
-<div style="text-align:center; margin-top:20px; color:#aaa;">
-👥 Odwiedzin: <span id="visitCount">...</span>
-</div>
-
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+
 fetch("https://api.countapi.xyz/hit/lostfamily/kalkulator")
-.then(res => res.json())
-.then(res => {
-  document.getElementById("visitCount").innerText = res.value;
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("visitCount").textContent = data.value;
+  })
+  .catch(() => {
+    document.getElementById("visitCount").textContent = "błąd";
+  });
+
 });
 </script>
 </body>
 
 </html>
+
 
 
 
