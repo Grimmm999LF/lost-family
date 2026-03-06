@@ -1773,21 +1773,22 @@ function searchCarGielda() {
 }
 function selectCarGielda(car){
 
-selectedCar = car;
+    selectedCar = car;
 
-let variantSelect = document.getElementById("gieldaVariant");
+    let variantSelect = document.getElementById("gieldaVariant");
 
-variantSelect.innerHTML = "";
+    variantSelect.innerHTML = "";
 
-car.variants.forEach(v => {
+    car.variants.forEach(v => {
 
-let option = document.createElement("option");
+        let option = document.createElement("option");
 
-option.text = v.name;
+        option.value = v.name;
+        option.textContent = v.name + " (+" + v.price + ")";
 
-variantSelect.add(option);
+        variantSelect.appendChild(option);
 
-});
+    });
 
 }
 function loadParts(){
@@ -2209,6 +2210,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
