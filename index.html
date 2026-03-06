@@ -1743,7 +1743,7 @@ function selectCarGielda(car){
 
 selectedCar = car;
 
-let variantSelect = document.getElementById("variantSelect");
+let variantSelect = document.getElementById("gieldaVariant");
 
 variantSelect.innerHTML = "";
 
@@ -1801,7 +1801,7 @@ content:
 "🚗 Nowe ogłoszenie\n\n" +
 "Auto: " + selectedCar.name + "\n" +
 "Wariant: " + document.getElementById("variantSelect").value + "\n" +
-"Części: " + selectedParts.join(", ") + "\n" +
+"Części: " + Object.keys(selectedParts).join(", ") + "\n" +
 "Cena: " + price
 };
 
@@ -1814,6 +1814,7 @@ body:JSON.stringify(message)
 alert("Ogłoszenie wysłane!");
 
 }
+	loadParts();
 </script>
 
 </div> <!-- zamyka configTab -->
@@ -1914,7 +1915,7 @@ alert("Ogłoszenie wysłane!");
 <br>
 
 <label>Wariant:</label>
-<select id="variantSelect"></select>
+<select id="gieldaVariant"></select>
 
 <br><br>
 
@@ -2133,6 +2134,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
