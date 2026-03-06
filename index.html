@@ -856,6 +856,7 @@ function switchMainTab(tab) {
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
 	const demontaz = document.getElementById("demontazTab");
+	const gielda = document.getElementById("gieldaTab");
 	const gielda = document.getElementById("");
     const buttons = document.querySelectorAll(".main-tab");
     const carSearchWrapper = document.getElementById("carSearchWrapper");
@@ -1836,7 +1837,7 @@ fetch(webhookURL, {
     id="carSearchGielda" 
     class="top-input"
     placeholder="Szukaj auta..." 
-    onkeyup="filterCars()"
+    onkeyup="filterCarsGielda()"
 >
 
 <div id="carResultsGielda"></div>
@@ -2039,6 +2040,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
