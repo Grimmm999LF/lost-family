@@ -919,7 +919,7 @@ else if (tab === "gielda") {
     carSearchWrapper.style.display = "block";
     previewPanel.style.display = "none";
 
-    renderParts(); // DODAJ TĘ LINIĘ
+    renderGieldaParts(); // TO DODAJ
 }
     else if (tab === "salon") {
         config.style.display = "none";
@@ -1856,9 +1856,6 @@ fetch(webhookURL, {
 
 <h3>Wybierz części</h3>
 
-<div class="tabs" id="categoryTabs"></div>
-<div class="parts" id="partsList"></div>
-
 <h3>Cena sprzedaży</h3>
 
 <input type="number" id="gieldaPrice" placeholder="Cena auta">
@@ -2066,6 +2063,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
