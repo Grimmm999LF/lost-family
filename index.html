@@ -772,7 +772,6 @@ let selectedCarPriceDemontaz = 0;
 /* ===== GIEŁDA ===== */
 
 let selectedCar = null;
-let selectedParts = [];
 // Lista części tuningowych
 const parts = [
     {
@@ -1251,32 +1250,37 @@ function filterCars() {
             div.innerText = car.name + " – " + car.price.toLocaleString() + " PLN";
 
             // 🔴 Kiedy klikamy na auto:
-            div.onclick = function() {
-                // 1️⃣ wpisujemy nazwę auta w input
-                document.getElementById("carSearch").value = car.name;
-				document.getElementById("carSelect").value = car.price; // opcjonalnie do inputa
-                // 2️⃣ zapisujemy cenę auta do zmiennej globalnej
-                selectedCarPrice = car.price;
-				
-                // 3️⃣ czyścimy listę wyników
-                results.innerHTML = "";
+div.onclick = function() {
 
-                // 4️⃣ renderujemy warianty (jeśli masz taką funkcję)
-                renderVariants(car);
+    // wpisujemy nazwę auta
+    document.getElementById("carSearch").value = car.name;
 
-				    // przelicz wszystko od razu
-    			calculate();
+    // zapis ceny auta
+    selectedCar = car;
+    selectedCarPrice = car.price;
 
-                // 5️⃣ przeliczamy Demontaż + cenę auta
-                calculateDemontaz();
-            };
+    // pokaż warianty
+    const variantWrapper = document.getElementById("variantWrapper");
+    const variantSelect = document.getElementById("variantSelect");
 
-            // podświetlenie przy najechaniu myszką
-            div.onmouseover = () => div.style.background = "#333";
-            div.onmouseout = () => div.style.background = "transparent";
+    variantSelect.innerHTML = "";
 
-            // dodajemy do listy wyników
-            results.appendChild(div);
+    car.variants.forEach(v => {
+        const opt = document.createElement("option");
+        opt.value = v.price;
+        opt.textContent = v.name + " + " + v.price.toLocaleString() + " PLN";
+        variantSelect.appendChild(opt);
+    });
+
+    variantWrapper.style.display = "block";
+
+    // ukryj wyniki wyszukiwania
+    results.innerHTML = "";
+
+    calculate();
+};
+
+results.appendChild(div);
         }
     });
 }
@@ -2134,6 +2138,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
