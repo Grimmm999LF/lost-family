@@ -1758,22 +1758,25 @@ variantSelect.add(option);
 });
 
 }
-	function loadParts(){
+function loadParts(){
 
-let list = document.getElementById("partsList");
+let list = document.getElementById("gieldaParts");
 
-parts.forEach(part => {
+list.innerHTML = "";
+
+parts.forEach(category => {
+
+category.items.forEach(part => {
 
 let checkbox = document.createElement("input");
 checkbox.type = "checkbox";
-checkbox.value = part.name;
 
 checkbox.onchange = function(){
 
 if(this.checked){
-selectedParts.push(part.name);
+selectedParts[part.name] = part.price;
 }else{
-selectedParts = selectedParts.filter(p => p !== part.name);
+delete selectedParts[part.name];
 }
 
 };
@@ -1781,6 +1784,8 @@ selectedParts = selectedParts.filter(p => p !== part.name);
 list.appendChild(checkbox);
 list.append(" " + part.name);
 list.appendChild(document.createElement("br"));
+
+});
 
 });
 
@@ -1914,7 +1919,7 @@ alert("Ogłoszenie wysłane!");
 <br><br>
 
 <label>Części tuningowe:</label>
-<div id="partsList"></div>
+<div id="gieldaParts"></div>
 
 <br>
 
@@ -1923,7 +1928,7 @@ alert("Ogłoszenie wysłane!");
 
 <br><br>
 
-<button onclick="sendToDiscord()">Wystaw</button>
+<button onclick="sendToDiscord2()">Wystaw</button>
 
 </div>
 <div id="demontazTab" style="display:none;">
@@ -2128,6 +2133,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
