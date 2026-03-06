@@ -768,6 +768,11 @@ const demontazParts = [
 let selectedDemontaz = {};
 let selectedCarPrice = 0;
 let selectedCarPriceDemontaz = 0;
+
+/* ===== GIEŁDA ===== */
+
+let selectedCar = null;
+let selectedParts = [];
 // Lista części tuningowych
 const parts = [
     {
@@ -1707,7 +1712,103 @@ fetch(webhookURL, {
     alert("Błąd wysyłania");
 });
 }
+function searchCar(){
 
+let input = document.getElementById("carSearch").value.toLowerCase();
+
+let results = document.getElementById("carResults");
+
+results.innerHTML = "";
+
+cars.forEach(car => {
+
+if(car.name.toLowerCase().includes(input)){
+
+let div = document.createElement("div");
+
+div.innerText = car.name;
+
+div.onclick = function(){
+selectCar(car);
+};
+
+results.appendChild(div);
+
+}
+
+});
+
+}
+	function selectCar(car){
+
+selectedCar = car;
+
+let variantSelect = document.getElementById("variantSelect");
+
+variantSelect.innerHTML = "";
+
+car.variants.forEach(v => {
+
+let option = document.createElement("option");
+
+option.text = v.name;
+
+variantSelect.add(option);
+
+});
+
+}
+	function loadParts(){
+
+let list = document.getElementById("partsList");
+
+parts.forEach(part => {
+
+let checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+checkbox.value = part.name;
+
+checkbox.onchange = function(){
+
+if(this.checked){
+selectedParts.push(part.name);
+}else{
+selectedParts = selectedParts.filter(p => p !== part.name);
+}
+
+};
+
+list.appendChild(checkbox);
+list.append(" " + part.name);
+list.appendChild(document.createElement("br"));
+
+});
+
+}
+	function sendToDiscord2(){
+
+let price = document.getElementById("sellPrice").value;
+
+let webhook = "https://discord.com/api/webhooks/1479571466662973440/8efiAZLS0s4VVSAjgSUuTIO0854gV8xkJLy2GMLNxje5yBMQL5GT1m8xtIOsaIwprNYA";
+
+let message = {
+content:
+"🚗 Nowe ogłoszenie\n\n" +
+"Auto: " + selectedCar.name + "\n" +
+"Wariant: " + document.getElementById("variantSelect").value + "\n" +
+"Części: " + selectedParts.join(", ") + "\n" +
+"Cena: " + price
+};
+
+fetch(webhook,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(message)
+});
+
+alert("Ogłoszenie wysłane!");
+
+}
 </script>
 
 </div> <!-- zamyka configTab -->
@@ -1799,21 +1900,30 @@ fetch(webhookURL, {
 </div>
 <div id="gieldaTab" style="display:none;">
 
-<h2>Giełda pojazdów</h2>
+<h2>Wystaw pojazd</h2>
 
-<input 
-    type="text"
-    id="gieldaSearch"
-    class="top-input"
-    placeholder="Szukaj pojazdu..."
-    onkeyup="searchGielda()"
->
+<input type="text" id="carSearch" placeholder="Szukaj auta..." onkeyup="searchCar()">
 
-<div id="gieldaList" class="parts"></div>
+<div id="carResults"></div>
 
-<div class="card">
-    <p>Tutaj pojawi się giełda aut.</p>
-</div>
+<br>
+
+<label>Wariant:</label>
+<select id="variantSelect"></select>
+
+<br><br>
+
+<label>Części tuningowe:</label>
+<div id="partsList"></div>
+
+<br>
+
+<label>Cena sprzedaży:</label>
+<input type="number" id="sellPrice">
+
+<br><br>
+
+<button onclick="sendToDiscord()">Wystaw</button>
 
 </div>
 <div id="demontazTab" style="display:none;">
@@ -2018,6 +2128,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
