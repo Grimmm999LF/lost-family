@@ -1712,11 +1712,11 @@ fetch(webhookURL, {
     alert("Błąd wysyłania");
 });
 }
-function searchCar(){
+function searchCarGielda(){
 
-let input = document.getElementById("carSearch").value.toLowerCase();
+let input = document.getElementById("gieldaCarSearch").value.toLowerCase();
 
-let results = document.getElementById("carResults");
+let results = document.getElementById("gieldaCarResults");
 
 results.innerHTML = "";
 
@@ -1729,7 +1729,7 @@ let div = document.createElement("div");
 div.innerText = car.name;
 
 div.onclick = function(){
-selectCar(car);
+selectCarGielda(car);
 };
 
 results.appendChild(div);
@@ -1739,7 +1739,7 @@ results.appendChild(div);
 });
 
 }
-	function selectCar(car){
+function selectCarGielda(car){
 
 selectedCar = car;
 
@@ -1902,9 +1902,9 @@ alert("Ogłoszenie wysłane!");
 
 <h2>Wystaw pojazd</h2>
 
-<input type="text" id="carSearch" placeholder="Szukaj auta..." onkeyup="searchCar()">
+<input type="text" id="gieldaCarSearch" placeholder="Szukaj auta." onkeyup="searchCarGielda()">
 
-<div id="carResults"></div>
+<div id="gieldaCarResults"></div>
 
 <br>
 
@@ -2128,6 +2128,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
