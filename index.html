@@ -1057,9 +1057,11 @@ div.innerText = car.name;
 
 div.onclick = function(){
 
-document.getElementById("carSearchGielda").value = car.name;
+document.getElementById("carSearch").value = car.name;
 
 results.innerHTML = "";
+
+loadVariants(car);
 
 };
 
@@ -1268,8 +1270,9 @@ function filterCars() {
     const results = document.getElementById("carResults");
     results.innerHTML = ""; // czyścimy poprzednie wyniki
 
+	
     if (input === "") return; // jeśli pusty input, nic nie pokazujemy
-
+	
     cars.forEach(car => {
         if (car.name.toLowerCase().includes(input)) {
             // Tworzymy div z nazwą i ceną auta
@@ -2029,6 +2032,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
