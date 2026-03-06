@@ -1592,7 +1592,7 @@ function wyczyscDemontaz() {
     renderDemontaz();
     calculateDemontaz();
 }
-	function searchGielda() {
+function searchGielda() {
 
     const input = document.getElementById("gieldaSearch").value.toLowerCase();
     const list = document.getElementById("gieldaList");
@@ -1604,15 +1604,35 @@ function wyczyscDemontaz() {
         .sort((a,b)=>a.price-b.price)
         .forEach(car => {
 
-            const div = document.createElement("div");
-            div.className = "part";
+            const carDiv = document.createElement("div");
+            carDiv.className = "part";
 
-            div.innerHTML = `
+            carDiv.innerHTML = `
                 <span class="part-name">${car.name}</span>
                 <span class="part-price">${car.price.toLocaleString()} PLN</span>
             `;
 
-            list.appendChild(div);
+            list.appendChild(carDiv);
+
+            // 🔧 CZĘŚCI TUNINGOWE
+            parts.forEach(category => {
+
+                category.items.forEach(part => {
+
+                    const partDiv = document.createElement("div");
+                    partDiv.className = "part";
+                    partDiv.style.marginLeft = "20px";
+
+                    partDiv.innerHTML = `
+                        <span class="part-name">└ ${part.name}</span>
+                        <span class="part-price">${part.price.toLocaleString()} PLN</span>
+                    `;
+
+                    list.appendChild(partDiv);
+
+                });
+
+            });
 
         });
 
@@ -1923,8 +1943,8 @@ alert("Ogłoszenie wysłane!");
 
 <br><br>
 
-<label>Części tuningowe:</label>
-<div id="gieldaParts"></div>
+<h2>Części tuningowe</h2>
+<div class="parts" id="gieldaParts"></div>
 
 <br>
 
@@ -2138,6 +2158,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
