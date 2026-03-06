@@ -856,7 +856,7 @@ function switchMainTab(tab) {
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
 	const demontaz = document.getElementById("demontazTab");
-	const gielda = document.getElementById("gieldaTab");
+	const gielda = document.getElementById("");
     const buttons = document.querySelectorAll(".main-tab");
     const carSearchWrapper = document.getElementById("carSearchWrapper");
     const previewPanel = document.getElementById("previewPanel");
@@ -1830,6 +1830,25 @@ fetch(webhookURL, {
     </div>
 </div>
 	<div id="gieldaTab" style="display:none;">
+		<div id="carSearchWrapper">
+<input 
+    type="text" 
+    id="carSearchGielda" 
+    class="top-input"
+    placeholder="Szukaj auta..." 
+    onkeyup="filterCars()"
+>
+
+<div id="carResultsGielda"></div>
+
+<div id="variantWrapperGielda" style="display:none;">
+<select 
+    id="variantSelectGielda" 
+    class="top-input"
+    onchange="calculate()">
+</select>
+</div>
+</div> <!-- carSearchWrapper -->
 
 <h2>🚗 Giełda</h2>
 
@@ -2020,6 +2039,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
