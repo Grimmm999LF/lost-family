@@ -917,7 +917,7 @@ function switchMainTab(tab) {
     buttons[4].classList.add("active");
 
     carSearchWrapper.style.display = "block";
-    previewPanel.style.display = "block";
+    previewPanel.style.display = "none";
 }
     else if (tab === "salon") {
         config.style.display = "none";
@@ -1852,6 +1852,23 @@ fetch(webhookURL, {
 
 <h2>🚗 Wystaw pojazd na giełdę</h2>
 
+<h3>Wybierz części</h3>
+
+<div class="tabs" id="categoryTabs"></div>
+<div class="parts" id="partsList"></div>
+
+<h3>Cena sprzedaży</h3>
+
+<input type="number" id="gieldaPrice" placeholder="Cena auta">
+
+<br><br>
+
+<button onclick="sendCarToDiscord()">Wyślij na Discord</button>
+
+</div>
+
+<h2>🚗 Wystaw pojazd na giełdę</h2>
+
 <h3>Wybrane części</h3>
 <div id="gieldaParts"></div>
 
@@ -2047,6 +2064,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
