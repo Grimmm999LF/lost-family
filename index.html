@@ -679,6 +679,27 @@ button:hover {
         ⚡ Tryb TFT
     </div>
 </div>
+<div id="gieldaTab" style="display:none;">
+
+<h2>🚗 Wystaw pojazd na giełdę</h2>
+
+<h3>Wybrane części</h3>
+<div id="gieldaParts"></div>
+
+<h3>Podaj cenę sprzedaży</h3>
+
+<input 
+type="number"
+id="sellPrice"
+placeholder="Cena auta">
+
+<br><br>
+
+<button onclick="sendCarToDiscord()">
+Wyślij na Discord
+</button>
+
+</div>
 <div class="tabs" id="categoryTabs"></div>
 <div class="parts" id="partsList"></div>
 	
@@ -1817,6 +1838,27 @@ fetch(webhookURL, {
     <div id="salonList" class="parts" style="grid-template-columns: 1fr;"></div>
 
 </div>
+	<div id="gieldaTab" style="display:none;">
+
+<h2>🚗 Wystaw pojazd na giełdę</h2>
+
+<h3>Wybrane części</h3>
+<div id="gieldaParts"></div>
+
+<h3>Podaj cenę sprzedaży</h3>
+
+<input 
+type="number"
+id="sellPrice"
+placeholder="Cena auta">
+
+<br><br>
+
+<button onclick="sendCarToDiscord()">
+Wyślij na Discord
+</button>
+
+</div>
 <div id="demontazTab" style="display:none;">
     <h2>🔧 Demontaż pojazdu</h2>
 
@@ -1840,6 +1882,27 @@ fetch(webhookURL, {
             Otrzymasz: <span id="demontazTotal">0</span> PLN
         </div>
     </div>
+</div>
+	<div id="gieldaTab" style="display:none;">
+
+<h2>🚗 Wystaw pojazd na giełdę</h2>
+
+<h3>Wybrane części</h3>
+<div id="gieldaParts"></div>
+
+<h3>Podaj cenę sprzedaży</h3>
+
+<input 
+type="number"
+id="sellPrice"
+placeholder="Cena auta">
+
+<br><br>
+
+<button onclick="sendCarToDiscord()">
+Wyślij na Discord
+</button>
+
 </div>
 </div> <!-- KONIEC lewej strony -->
 
@@ -2019,6 +2082,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
