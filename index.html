@@ -1736,31 +1736,39 @@ fetch(webhookURL, {
     alert("Błąd wysyłania");
 });
 }
-function searchCarGielda(){
+function searchCarGielda() {
 
-let input = document.getElementById("gieldaCarSearch").value.toLowerCase();
+    const input = document.getElementById("gieldaCarSearch").value.toLowerCase();
+    const results = document.getElementById("gieldaCarResults");
 
-let results = document.getElementById("gieldaCarResults");
+    results.innerHTML = "";
 
-results.innerHTML = "";
+    cars
+    .filter(car => car.name.toLowerCase().includes(input))
+    .forEach(car => {
 
-cars.forEach(car => {
+        const div = document.createElement("div");
+        div.className = "part";
 
-if(car.name.toLowerCase().includes(input)){
+        div.innerHTML = `
+            <span class="part-name">${car.name}</span>
+            <span class="part-price">${car.price.toLocaleString()} PLN</span>
+        `;
 
-let div = document.createElement("div");
+        div.onclick = function() {
 
-div.innerText = car.name;
+            document.getElementById("gieldaCarSearch").value = car.name;
 
-div.onclick = function(){
-selectCarGielda(car);
-};
+            selectedCar = car;
 
-results.appendChild(div);
+            renderGieldaParts();
 
-}
+            results.innerHTML = "";
+        };
 
-});
+        results.appendChild(div);
+
+    });
 
 }
 function selectCarGielda(car){
@@ -1812,6 +1820,31 @@ list.appendChild(document.createElement("br"));
 });
 
 });
+
+}
+	function renderGieldaParts() {
+
+    const list = document.getElementById("gieldaParts");
+
+    list.innerHTML = "";
+
+    parts.forEach(category => {
+
+        category.items.forEach(part => {
+
+            const div = document.createElement("div");
+            div.className = "part";
+
+            div.innerHTML = `
+                <span class="part-name">${part.name}</span>
+                <span class="part-price">${part.price.toLocaleString()} PLN</span>
+            `;
+
+            list.appendChild(div);
+
+        });
+
+    });
 
 }
 	function sendToDiscord2(){
@@ -2158,6 +2191,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
