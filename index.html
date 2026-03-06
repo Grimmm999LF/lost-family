@@ -1040,6 +1040,24 @@ function renderDemontaz() {
 
     calculateDemontaz();
 }
+	function renderGieldaParts(){
+
+const list = document.getElementById("gieldaParts");
+list.innerHTML = "";
+
+for (let name in selectedParts){
+
+    const div = document.createElement("div");
+    div.className = "part";
+
+    div.innerHTML = `
+    <span class="part-name">${name}</span>
+    `;
+
+    list.appendChild(div);
+}
+
+}
 function calculateDemontaz() {
     // 🔹 START: suma = cena auta w demontażu
     let total = selectedCarPriceDemontaz || 0;
@@ -2029,6 +2047,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
