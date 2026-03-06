@@ -668,7 +668,6 @@ button:hover {
 	<button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
-	<button class="main-tab" onclick="switchMainTab('gielda')">Wystaw na giełdę</button>
 	<button id="musicToggle">🔊</button>
 	<audio id="bgMusic" src="muzyka.mp3" loop></audio>
 </div>
@@ -679,7 +678,6 @@ button:hover {
         ⚡ Tryb TFT
     </div>
 </div>
-
 <div class="tabs" id="categoryTabs"></div>
 <div class="parts" id="partsList"></div>
 	
@@ -853,7 +851,6 @@ parts.forEach((category, index) => {
     categoryTabs.appendChild(tab);
 });
 function switchMainTab(tab) {
-	const gielda = document.getElementById("gieldaTab");
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
@@ -867,7 +864,6 @@ function switchMainTab(tab) {
     info.style.display = "none";
     salon.style.display = "none";
     demontaz.style.display = "none";
-	gielda.style.display = "none";
 	
 	// Reset Aktywnych Przycisków
     buttons.forEach(btn => btn.classList.remove("active"));
@@ -905,22 +901,7 @@ function switchMainTab(tab) {
         carSearchWrapper.style.display = "none";
         previewPanel.style.display = "none";
     }
-else if (tab === "gielda") {
 
-    config.style.display = "none";
-    info.style.display = "none";
-    salon.style.display = "none";
-    demontaz.style.display = "none";
-    gielda.style.display = "block";
-
-    buttons.forEach(btn => btn.classList.remove("active"));
-    buttons[4].classList.add("active");
-
-    carSearchWrapper.style.display = "block";
-    previewPanel.style.display = "none";
-
-    renderGieldaParts(); // TO DODAJ
-}
     else if (tab === "salon") {
         config.style.display = "none";
         info.style.display = "none";
@@ -1042,24 +1023,6 @@ function renderDemontaz() {
 
     calculateDemontaz();
 }
-	function renderGieldaParts(){
-
-const list = document.getElementById("gieldaParts");
-list.innerHTML = "";
-
-for (let name in selectedParts){
-
-    const div = document.createElement("div");
-    div.className = "part";
-
-    div.innerHTML = `
-    <span class="part-name">${name}</span>
-    `;
-
-    list.appendChild(div);
-}
-
-}
 function calculateDemontaz() {
     // 🔹 START: suma = cena auta w demontażu
     let total = selectedCarPriceDemontaz || 0;
@@ -1109,37 +1072,6 @@ function toggleTFTPanel() {
 
     renderParts();
     calculate();
-}
-	function sendCarToDiscord() {
-
-    const webhook = "https://discord.com/api/webhooks/1479571466662973440/8efiAZLS0s4VVSAjgSUuTIO0854gV8xkJLy2GMLNxje5yBMQL5GT1m8xtIOsaIwprNYA";
-
-    const carName = document.getElementById("carSearch").value;
-    const variant = document.getElementById("variantSelect").value;
-    const price = document.getElementById("gieldaPrice").value;
-
-    let partsListText = "";
-
-    for (let part in selectedParts) {
-        partsListText += part + "\n";
-    }
-
-    const data = {
-        content:
-        "🚗 **Nowa oferta na giełdzie**\n\n" +
-        "Auto: **" + carName + "**\n" +
-        "Wariant: **" + variant + "**\n\n" +
-        "Części:\n" + partsListText +
-        "\n💰 Cena: **" + price + " PLN**"
-    };
-
-    fetch(webhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    });
-
-    alert("Oferta wysłana!");
 }
 // Funkcja renderująca części
 function renderParts() {
@@ -1850,41 +1782,6 @@ fetch(webhookURL, {
         </div>
     </div>
 </div>
-	<div id="gieldaTab" style="display:none;">
-
-<h2>🚗 Wystaw pojazd na giełdę</h2>
-
-<h3>Wybierz części</h3>
-
-<h3>Cena sprzedaży</h3>
-
-<input type="number" id="gieldaPrice" placeholder="Cena auta">
-
-<br><br>
-
-<button onclick="sendCarToDiscord()">Wyślij na Discord</button>
-
-</div>
-
-<h2>🚗 Wystaw pojazd na giełdę</h2>
-
-<h3>Wybrane części</h3>
-<div id="gieldaParts"></div>
-
-<h3>Podaj cenę sprzedaży</h3>
-
-<input 
-type="number"
-id="sellPrice"
-placeholder="Cena auta">
-
-<br><br>
-
-<button onclick="sendCarToDiscord()">
-Wyślij na Discord
-</button>
-
-</div>
 </div> <!-- KONIEC lewej strony -->
 
 <!-- PANEL PODGLĄDU -->
@@ -2063,14 +1960,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
-
-
-
-
-
-
-
-
 
 
 
