@@ -1822,10 +1822,9 @@ list.appendChild(document.createElement("br"));
 });
 
 }
-	function renderGieldaParts() {
+function renderGieldaParts() {
 
     const list = document.getElementById("gieldaParts");
-
     list.innerHTML = "";
 
     parts.forEach(category => {
@@ -1835,10 +1834,29 @@ list.appendChild(document.createElement("br"));
             const div = document.createElement("div");
             div.className = "part";
 
+            const checked = selectedParts[part.name] ? "checked" : "";
+
             div.innerHTML = `
-                <span class="part-name">${part.name}</span>
-                <span class="part-price">${part.price.toLocaleString()} PLN</span>
+                <label style="display:flex;justify-content:space-between;width:100%;cursor:pointer;">
+                    <span>
+                        <input type="checkbox" ${checked}>
+                        ${part.name}
+                    </span>
+                    <span class="part-price">${part.price.toLocaleString()} PLN</span>
+                </label>
             `;
+
+            const checkbox = div.querySelector("input");
+
+            checkbox.onchange = function(){
+
+                if(this.checked){
+                    selectedParts[part.name] = part.price;
+                }else{
+                    delete selectedParts[part.name];
+                }
+
+            };
 
             list.appendChild(div);
 
@@ -2191,6 +2209,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
