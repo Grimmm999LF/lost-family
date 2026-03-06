@@ -768,6 +768,7 @@ const demontazParts = [
 let selectedDemontaz = {};
 let selectedCarPrice = 0;
 let selectedCarPriceDemontaz = 0;
+let currentMode = "config";
 // Lista części tuningowych
 const parts = [
     {
@@ -852,6 +853,8 @@ parts.forEach((category, index) => {
     categoryTabs.appendChild(tab);
 });
 function switchMainTab(tab) {
+	currentMode = tab;   // ← DODAJ TĘ LINIJKĘ
+	
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
@@ -919,7 +922,7 @@ function switchMainTab(tab) {
     }
 	else if (tab === "gielda") {
 
-    config.style.display = "none";
+    config.style.display = "block";
     info.style.display = "none";
     salon.style.display = "none";
     demontaz.style.display = "none";
@@ -2032,6 +2035,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
