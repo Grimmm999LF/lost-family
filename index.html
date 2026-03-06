@@ -668,6 +668,7 @@ button:hover {
 	<button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
+	<button class="main-tab" onclick="switchMainTab('gielda')">Giełda</button>
 	<button id="musicToggle">🔊</button>
 	<audio id="bgMusic" src="muzyka.mp3" loop></audio>
 </div>
@@ -855,6 +856,7 @@ function switchMainTab(tab) {
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
 	const demontaz = document.getElementById("demontazTab");
+	const gielda = document.getElementById("gieldaTab");
     const buttons = document.querySelectorAll(".main-tab");
     const carSearchWrapper = document.getElementById("carSearchWrapper");
     const previewPanel = document.getElementById("previewPanel");
@@ -864,6 +866,7 @@ function switchMainTab(tab) {
     info.style.display = "none";
     salon.style.display = "none";
     demontaz.style.display = "none";
+	gielda.style.display = "none";
 	
 	// Reset Aktywnych Przycisków
     buttons.forEach(btn => btn.classList.remove("active"));
@@ -914,6 +917,20 @@ function switchMainTab(tab) {
 		populateBrands();
         renderSalon(); // załaduje listę aut
     }
+	else if (tab === "gielda") {
+
+    config.style.display = "none";
+    info.style.display = "none";
+    salon.style.display = "none";
+    demontaz.style.display = "none";
+    gielda.style.display = "block";
+
+    buttons.forEach(btn => btn.classList.remove("active"));
+    buttons[4].classList.add("active");
+
+    carSearchWrapper.style.display = "none";
+    previewPanel.style.display = "none";
+}
 }
 	let tftEnabled = false;
 	function maxCyl() {
@@ -1782,6 +1799,13 @@ fetch(webhookURL, {
         </div>
     </div>
 </div>
+	<div id="gieldaTab" style="display:none;">
+
+<h2>Giełda samochodowa</h2>
+
+<p>Tutaj będzie lista aut z giełdy.</p>
+
+</div>
 </div> <!-- KONIEC lewej strony -->
 
 <!-- PANEL PODGLĄDU -->
@@ -1960,6 +1984,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
