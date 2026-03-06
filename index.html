@@ -668,6 +668,7 @@ button:hover {
 	<button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
+	<button class="main-tab" onclick="switchMainTab('gielda')">Giełda</button>
 	<button id="musicToggle">🔊</button>
 	<audio id="bgMusic" src="muzyka.mp3" loop></audio>
 </div>
@@ -851,6 +852,7 @@ parts.forEach((category, index) => {
     categoryTabs.appendChild(tab);
 });
 function switchMainTab(tab) {
+	const gielda = document.getElementById("gieldaTab");
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
@@ -864,6 +866,7 @@ function switchMainTab(tab) {
     info.style.display = "none";
     salon.style.display = "none";
     demontaz.style.display = "none";
+	gielda.style.display = "none";
 	
 	// Reset Aktywnych Przycisków
     buttons.forEach(btn => btn.classList.remove("active"));
@@ -914,6 +917,15 @@ function switchMainTab(tab) {
 		populateBrands();
         renderSalon(); // załaduje listę aut
     }
+	else if (tab === "gielda") {
+    gielda.style.display = "block";
+
+    buttons.forEach(btn => btn.classList.remove("active"));
+    buttons[4].classList.add("active");
+
+    carSearchWrapper.style.display = "none";
+    previewPanel.style.display = "none";
+}
 }
 	let tftEnabled = false;
 	function maxCyl() {
@@ -1758,6 +1770,15 @@ fetch(webhookURL, {
     <div id="salonList" class="parts" style="grid-template-columns: 1fr;"></div>
 
 </div>
+<div id="gieldaTab" style="display:none;">
+
+<h2>Giełda pojazdów</h2>
+
+<div class="card">
+    <p>Tutaj pojawi się giełda aut.</p>
+</div>
+
+</div>
 <div id="demontazTab" style="display:none;">
     <h2>🔧 Demontaż pojazdu</h2>
 
@@ -1960,6 +1981,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
