@@ -905,7 +905,7 @@ function switchMainTab(tab) {
         carSearchWrapper.style.display = "none";
         previewPanel.style.display = "none";
     }
-	else if (tab === "gielda") {
+else if (tab === "gielda") {
 
     config.style.display = "none";
     info.style.display = "none";
@@ -918,6 +918,8 @@ function switchMainTab(tab) {
 
     carSearchWrapper.style.display = "block";
     previewPanel.style.display = "none";
+
+    renderParts(); // DODAJ TĘ LINIĘ
 }
     else if (tab === "salon") {
         config.style.display = "none";
@@ -2064,6 +2066,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
