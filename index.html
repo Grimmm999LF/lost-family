@@ -1958,7 +1958,7 @@ const pozostaleText = pozostale.length ? sortParts(pozostale).join("\n") : "Brak
 						{name: "⚙️ Silnik", value: silnikText, inline: true},
 						{name: "🔧 Regulacje", value: regulacjeText, inline: true},
 						{name: "📦 Pozostałe", value: pozostaleText, inline: false},
-    					{name: "💰 Cena", value: price + " PLN", inline: true},
+    					{name: "💰 Cena", value: Number(price).toLocaleString('pl-PL') + " PLN", inline: true},
     					{name: "📞 Kontakt", value: contact, inline: true}
 ],
 
@@ -2746,6 +2746,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
