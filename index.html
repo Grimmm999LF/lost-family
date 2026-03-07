@@ -1303,6 +1303,7 @@ function renderSalon() {
 
             div.innerHTML = `
                 <span class="part-name">${car.name}</span>
+				<span class="part-price">${car.price.toLocaleString()} PLN</span>
             `;
 
             container.appendChild(div);
@@ -1551,7 +1552,6 @@ function renderGielda() {
 
             div.innerHTML = `
                 <span class="part-name">${car.name}</span>
-                <span class="part-price">${car.price.toLocaleString()} PLN</span>
             `;
 
             container.appendChild(div);
@@ -2021,6 +2021,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
