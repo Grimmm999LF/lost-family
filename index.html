@@ -1759,7 +1759,7 @@ function searchCarGielda() {
 
             document.getElementById("gieldaCarSearch").value = car.name;
 
-            selectedCar = car;
+            selectCarGielda(car); // ← TO BYŁO BRAKUJĄCE
 
             renderGieldaParts();
 
@@ -2210,6 +2210,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
