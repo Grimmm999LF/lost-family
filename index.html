@@ -1530,12 +1530,17 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
-	function renderGielda() {
+function renderGielda() {
 
     const container = document.getElementById("gieldaList");
-    const search = document.getElementById("gieldaSearch").value.toLowerCase();
+    const search = document.getElementById("gieldaSearch").value.toLowerCase().trim();
 
     container.innerHTML = "";
+
+    // jeśli nic nie wpisano – nic nie pokazuj
+    if (search === "") {
+        return;
+    }
 
     cars
         .filter(car => car.name.toLowerCase().includes(search))
@@ -2017,6 +2022,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
