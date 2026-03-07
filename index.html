@@ -1747,10 +1747,24 @@ function showVariants(car){
         const el = document.createElement("div");
         el.className = "variant-card";
 
-        el.innerHTML = `
-            <b>${v.name}</b><br>
-            ${v.price.toLocaleString()} $
-        `;
+        // TYLKO NAZWA
+        el.innerHTML = `<b>${v.name}</b>`;
+
+        el.onclick = () => {
+
+            // ustaw wybrany wariant
+            selectedCarPrice = car.price + v.price;
+
+            // wpisz wybrany wariant w wyszukiwarkę
+            document.getElementById("gieldaSearch").value =
+                car.name + " - " + v.name;
+
+            // ukryj listę wariantów
+            list.innerHTML = "";
+
+            calculate();
+
+        };
 
         list.appendChild(el);
 
@@ -2344,6 +2358,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
