@@ -1886,7 +1886,7 @@ function renderGieldaParts() {
 }
 const selectedParts = {};
 
-	function showPartsCategory(category){
+function showPartsCategory(category){
 
 const list = document.getElementById("gieldaPartsList");
 
@@ -1900,19 +1900,20 @@ const div = document.createElement("div");
 
 div.className = "part";
 
-div.innerHTML = 
+div.innerHTML = `
 <label>
 <input type="checkbox" class="gielda-part" value="${part.name}">
 <span class="part-name">${part.name}</span>
 <span class="part-price">${part.price.toLocaleString()} PLN</span>
 </label>
-;
+`;
 
 list.appendChild(div);
 
 });
 
 }
+	
 function sendToDiscord2(){
 
 let price = document.getElementById("sellPrice").value;
@@ -2269,6 +2270,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
