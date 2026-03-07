@@ -923,6 +923,7 @@ function switchMainTab(tab) {
 
     carSearchWrapper.style.display = "none";
     previewPanel.style.display = "none";
+		renderGieldaCars();
 }
     else if (tab === "salon") {
         config.style.display = "none";
@@ -1551,7 +1552,7 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
-	function filterCarsGielda() {
+function filterCarsGielda(){
 
 const search = document
 .getElementById("carSearchGielda")
@@ -1562,17 +1563,34 @@ const results = document.getElementById("carResultsGielda");
 
 results.innerHTML = "";
 
-carsList.forEach(car => {
+carsListGielda.forEach(car => {
 
-if (car.toLowerCase().includes(search)) {
+if(car.toLowerCase().includes(search)){
 
 const div = document.createElement("div");
-div.className = "result-item";
 div.textContent = car;
+div.style.padding = "5px";
 
 results.appendChild(div);
 
 }
+
+});
+
+}
+	function renderGieldaCars(){
+
+const results = document.getElementById("carResultsGielda");
+
+results.innerHTML = "";
+
+carsListGielda.forEach(car => {
+
+const div = document.createElement("div");
+div.textContent = car;
+div.style.padding = "5px";
+
+results.appendChild(div);
 
 });
 
@@ -2054,6 +2072,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
