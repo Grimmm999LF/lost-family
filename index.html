@@ -2689,6 +2689,22 @@ rgbBorder.style.background = `
     requestAnimationFrame(animate);
 }
 });
+	const priceInput = document.getElementById("offerPrice");
+
+priceInput.addEventListener("change", function () {
+
+    let value = priceInput.value.toLowerCase();
+
+    if (value.includes("kk")) {
+        value = parseFloat(value) * 1000000;
+    }
+    else if (value.includes("k")) {
+        value = parseFloat(value) * 1000;
+    }
+
+    priceInput.value = value;
+
+});
 
 </script>
 <script>
@@ -2730,6 +2746,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
