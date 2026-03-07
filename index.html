@@ -1734,16 +1734,36 @@ function filterCarsDemontaz() {
         }
     });
 }
+let lastMarketSend = 0;
+const marketCooldown = 60000; // 60 sekund
 function sendMarketOffer(){
 
-    const webhookURL = "https://discord.com/api/webhooks/1479571466662973440/8efiAZLS0s4VVSAjgSUuTIO0854gV8xkJLy2GMLNxje5yBMQL5GT1m8xtIOsaIwprNYA";
+    const now = Date.now();
+
+    // 🔹 COOLDOWN
+    if (now - lastMarketSend < marketCooldown) {
+
+        const secondsLeft = Math.ceil((marketCooldown - (now - lastMarketSend)) / 1000);
+        alert("Możesz wysłać kolejną ofertę za " + secondsLeft + " sek.");
+
+        return;
+    }
+
+    const webhookURL = "TU_WSTAW_WEBHOOK";
 
     const price = document.getElementById("offerPrice").value;
-    const contact = document.getElementById("offerContact").value || "Brak";
+    const contact = document.getElementById("offerContact").value.trim();
     const car = document.getElementById("gieldaSearch").value || "Brak";
 
+    // 🔹 SPRAWDZENIE CENY
     if(!price){
         alert("Wpisz cenę oferty!");
+        return;
+    }
+
+    // 🔹 WYMUSZENIE KONTAKTU
+    if(!contact){
+        alert("Podaj kontakt (nick w grze lub Discord)!");
         return;
     }
 
@@ -1760,32 +1780,13 @@ function sendMarketOffer(){
                 color: 16753920,
 
                 fields: [
-                    {
-                        name: "🚘 Auto",
-                        value: car,
-                        inline: false
-                    },
-                    {
-                        name: "🔧 Części",
-                        value: partsText,
-                        inline: false
-                    },
-                    {
-                        name: "💰 Cena",
-                        value: price + " PLN",
-                        inline: false
-                    },
-                    {
-                        name: "📞 Kontakt",
-                        value: contact,
-                        inline: false
-                    }
+                    {name: "🚘 Auto", value: car, inline: false},
+                    {name: "🔧 Części", value: partsText, inline: false},
+                    {name: "💰 Cena", value: price + " PLN", inline: false},
+                    {name: "📞 Kontakt", value: contact, inline: false}
                 ],
 
-                footer: {
-                    text: "Lost Family • Giełda"
-                },
-
+                footer: { text: "Lost Family • Giełda" },
                 timestamp: new Date()
             }
         ]
@@ -1799,12 +1800,14 @@ function sendMarketOffer(){
         body: JSON.stringify(message)
     })
     .then(()=>{
+
         alert("Oferta wysłana!");
 
-		resetMarketForm();
-		
-		document.getElementById("offerPrice").value = "";
-		document.getElementById("offerContact").value = "";
+        // zapis czasu wysłania
+        lastMarketSend = Date.now();
+
+        resetMarketForm();
+
     })
     .catch(()=>{
         alert("Błąd wysyłania!");
@@ -2470,6 +2473,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
