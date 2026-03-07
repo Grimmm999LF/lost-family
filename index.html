@@ -1591,10 +1591,15 @@ function filterCarsDemontaz() {
 function showVariants(car) {
 
     const container = document.getElementById("gieldaVariants");
-    container.innerHTML = "";
+    const list = document.getElementById("gieldaList");
+
+    // chowamy listę wyszukiwania
+    list.style.display = "none";
+
+    container.innerHTML = `<h3>${car.name}</h3>`;
 
     if (!car.variants) {
-        container.innerHTML = "<p>Brak wariantów</p>";
+        container.innerHTML += "<p>Brak wariantów</p>";
         return;
     }
 
@@ -2048,6 +2053,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
