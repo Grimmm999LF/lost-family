@@ -355,7 +355,38 @@ button:hover {
 .part:hover {
     border-color: var(--accent);
 }
+.car-grid, .variant-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:10px;
+    margin-top:15px;
+}
 
+.car-card{
+    padding:12px;
+    border-radius:8px;
+    background:#0b1220;
+    border:1px solid #1f2937;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.car-card:hover{
+    border-color:#00d9ff;
+    box-shadow:0 0 8px rgba(0,217,255,0.3);
+}
+
+.variant-card{
+    padding:10px;
+    border-radius:8px;
+    background:#0b1220;
+    border:1px solid #1f2937;
+    cursor:pointer;
+}
+
+.variant-card:hover{
+    border-color:#00d9ff;
+}
 /* ===== CUSTOM CHECKBOX FIXED CENTER ===== */
 
 .custom-check {
@@ -396,7 +427,27 @@ button:hover {
     transform: rotate(45deg);
     opacity: 0;
 }
+.car-search-box{
+    margin:20px 0;
+    max-width:500px;
+}
 
+#carSearch{
+    width:100%;
+    padding:12px 15px;
+    border-radius:10px;
+    border:1px solid #1f2937;
+    background:#0b1220;
+    color:white;
+    font-size:15px;
+    transition:0.2s;
+}
+
+#carSearch:focus{
+    outline:none;
+    border-color:#00d9ff;
+    box-shadow:0 0 10px rgba(0,217,255,0.5);
+}
 /* AKTYWNY */
 .custom-check input:checked + .checkmark {
     background: var(--primary);
@@ -1301,6 +1352,32 @@ const cars = [
     {name: "Patriot", price: 8500000, variants:[{name:"Domyślny",price:0},{name:"Zapasowe Koło",price:2000000},{name:"Halogeny",price:2000000},{name:"Odkryta Paka",price:2000000},{name:"Halogeny + Odkryta paka",price:2500000},{name:"Odkryta Paka + Koło zapasowe",price:2750000},{name:"Halogeny + Odkryta Paka + Koło zapasowe",price:3250000}]},
     {name: "Declase Burito", price: 2000000, variants:[{name:"Domyślny",price:0}]}
 ];
+	function renderCars(){
+
+    const search = document.getElementById("carSearch").value.toLowerCase();
+    const list = document.getElementById("carList");
+
+    list.innerHTML = "";
+
+    cars
+    .filter(car => car.name.toLowerCase().includes(search))
+    .forEach(car => {
+
+        const el = document.createElement("div");
+        el.className = "car-card";
+
+        el.innerHTML = `
+            <b>${car.name}</b><br>
+            ${car.price.toLocaleString()} $
+        `;
+
+        el.onclick = () => showVariants(car);
+
+        list.appendChild(el);
+
+    });
+
+}
 function filterCars() {
     const input = document.getElementById("carSearch").value.toLowerCase();
     const results = document.getElementById("carResults");
@@ -1654,35 +1731,26 @@ function filterCarsDemontaz() {
     });
 }
 	// Gielda Warianty 
-function showVariants(car) {
+function showVariants(car){
 
-    const container = document.getElementById("gieldaVariants");
-    const list = document.getElementById("gieldaList");
+    document.getElementById("variantTitle").innerText = car.name + " - warianty";
 
-    // chowamy listę wyszukiwania
-    list.style.display = "none";
+    const list = document.getElementById("variantList");
+    list.innerHTML = "";
 
-    container.innerHTML = `<h3>${car.name}</h3>`;
+    car.variants.forEach(v => {
 
-    if (!car.variants) {
-        container.innerHTML += "<p>Brak wariantów</p>";
-        return;
-    }
+        const el = document.createElement("div");
+        el.className = "variant-card";
 
-	car.variants.forEach(variant => {
+        el.innerHTML = `
+            <b>${v.name}</b><br>
+            ${v.price.toLocaleString()} $
+        `;
 
-    const div = document.createElement("div");
-    div.className = "part";
+        list.appendChild(el);
 
-    div.innerHTML = `
-        <span class="part-name">${variant.name}</span>
-    `;
-
-    div.onclick = () => selectVariant(car, variant);
-
-    container.appendChild(div);
-
-});
+    });
 
 }
 	// Wybór wariantów - JEBAC GPT
@@ -2028,42 +2096,38 @@ fetch(webhookURL, {
 </div>
 <div id="gieldaTab" style="display:none;">
 
+<!-- WYSZUKIWARKA AUT -->
+
+<div class="car-search-box">
 <input 
-    type="text"
-    id="gieldaSearch"
-    placeholder="Szukaj auta..."
-    onkeyup="renderGielda()"
->
-
-<div id="gieldaList"></div>
-
-<div class="variant-search">
-
-    <div class="variant-header" onclick="toggleVariants()">
-        🔎 Wyszukaj wariant auta
-        <span id="variantArrow">▼</span>
-    </div>
-
-    <div id="variantContent" class="variant-content">
-        <input type="text" placeholder="np. bmw..." class="variant-input">
-
-        <div class="variant-list">
-            <div class="variant-item">Domyślny</div>
-            <div class="variant-item">Zwykły</div>
-            <div class="variant-item">Bodykit</div>
-            <div class="variant-item">Bodykit + CS</div>
-            <div class="variant-item">Adro</div>
-            <div class="variant-item">Adro + CS</div>
-        </div>
-    </div>
-
+type="text" 
+id="carSearch" 
+placeholder="🔎 Wyszukaj auto..."
+oninput="renderCars()">
 </div>
-	
+
+
+<!-- LISTA AUT -->
+
+<div id="carList" class="car-grid"></div>
+
+
+<!-- LISTA WARIANTÓW -->
+
+<h3 id="variantTitle"></h3>
+<div id="variantList" class="variant-grid"></div>
+
+
+<!-- KATEGORIE CZĘŚCI -->
+
 <button onclick="changeMarketCategory('✨ Wizualne')">✨ Wizualne</button>
 <button onclick="changeMarketCategory('⚙️ Silnik')">⚙️ Silnik</button>
 <button onclick="changeMarketCategory('📏 Regulacje')">📏 Regulacje</button>
 <button onclick="changeMarketCategory('🧰 Pozostałe')">🧰 Pozostałe</button>
-	
+
+
+<!-- CZĘŚCI -->
+
 <div id="gieldaParts"></div>
 
 </div>
@@ -2245,6 +2309,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
