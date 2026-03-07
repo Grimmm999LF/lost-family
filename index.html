@@ -1734,6 +1734,73 @@ function filterCarsDemontaz() {
         }
     });
 }
+	function sendMarketOffer(){
+
+    const webhookURL = "https://discord.com/api/webhooks/1479571466662973440/8efiAZLS0s4VVSAjgSUuTIO0854gV8xkJLy2GMLNxje5yBMQL5GT1m8xtIOsaIwprNYA";
+
+    const price = document.getElementById("offerPrice").value;
+    const car = document.getElementById("gieldaSearch").value || "Brak";
+
+    if(!price){
+        alert("Wpisz cenę oferty!");
+        return;
+    }
+
+    // lista części
+    let partsText = "Brak";
+
+    if(marketSelectedParts.length > 0){
+        partsText = marketSelectedParts.map(p => "• " + p.name).join("\n");
+    }
+
+    const message = {
+        embeds: [
+            {
+                title: "🚗 Oferta sprzedaży",
+                color: 16753920,
+
+                fields: [
+                    {
+                        name: "Auto",
+                        value: car,
+                        inline: false
+                    },
+                    {
+                        name: "Części",
+                        value: partsText,
+                        inline: false
+                    },
+                    {
+                        name: "Cena",
+                        value: price + " PLN",
+                        inline: false
+                    }
+                ],
+
+                footer: {
+                    text: "Lost Family • Giełda"
+                },
+
+                timestamp: new Date()
+            }
+        ]
+    };
+
+    fetch(webhookURL,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(message)
+    })
+    .then(()=>{
+        alert("Oferta wysłana!");
+    })
+    .catch(()=>{
+        alert("Błąd wysyłania!");
+    });
+
+}
 	// Gielda Warianty 
 function showVariants(car){
 
@@ -2172,7 +2239,20 @@ fetch(webhookURL, {
 
     <!-- Części -->
     <div id="gieldaParts"></div>
+	<div class="market-offer">
 
+    <input 
+        type="number"
+        id="offerPrice"
+        placeholder="Wpisz cenę oferty..."
+        class="top-input"
+    >
+
+    <button onclick="sendMarketOffer()" class="main-tab">
+        📤 Wyślij ofertę
+    </button>
+
+</div>
 </div>
 </div> <!-- KONIEC lewej strony -->
 
@@ -2352,6 +2432,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
