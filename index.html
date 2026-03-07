@@ -1774,15 +1774,14 @@ function selectVariant(car, variant) {
 function renderGielda() {
 
     const container = document.getElementById("gieldaList");
-    const searchInput = document.getElementById("gieldaSearch");
+    const input = document.getElementById("gieldaSearch");
 
-    if (!container || !searchInput) return;
+    if (!container || !input) return;
 
-    const search = searchInput.value.toLowerCase().trim();
+    const search = input.value.toLowerCase().trim();
 
     container.innerHTML = "";
 
-    // jeśli pole puste → nic nie pokazuj
     if (search === "") return;
 
     cars
@@ -1794,45 +1793,53 @@ function renderGielda() {
             div.className = "part";
             div.innerHTML = `<span class="part-name">${car.name}</span>`;
 
-            div.onclick = () => showVariants(car);
+            div.onclick = () => {
+
+                document.getElementById("gieldaSearch").value = car.name;
+
+                container.innerHTML = "";
+
+                showVariants(car);
+
+            };
 
             container.appendChild(div);
-
         });
 }
-function renderGieldaParts() {
+function renderGielda() {
 
-    const container = document.getElementById("gieldaParts");
-    if (!container) return;
+    const container = document.getElementById("gieldaList");
+    const input = document.getElementById("gieldaSearch");
+
+    if (!container || !input) return;
+
+    const search = input.value.toLowerCase().trim();
 
     container.innerHTML = "";
 
-    parts.forEach(category => {
+    if (search === "") return;
 
-        if (category.category !== activeMarketCategory) return;
+    cars
+        .filter(car => car.name.toLowerCase().includes(search))
+        .sort((a,b) => a.price - b.price)
+        .forEach(car => {
 
-        category.items.forEach(part => {
+            const div = document.createElement("div");
+            div.className = "part";
+            div.innerHTML = `<span class="part-name">${car.name}</span>`;
 
-            const partDiv = document.createElement("div");
-            partDiv.className = "part";
+            div.onclick = () => {
 
-            partDiv.innerHTML =
-                `<span class="part-name">${part.name}</span>`;
+                document.getElementById("gieldaSearch").value = car.name;
 
-            // 🔹 sprawdzamy czy część była wcześniej wybrana
-            const selected = marketSelectedParts.find(p => p.name === part.name);
-            if (selected) {
-                partDiv.classList.add("selected");
-            }
+                container.innerHTML = "";
 
-            partDiv.onclick = () => toggleMarketPart(part, partDiv);
+                showVariants(car);
 
-            container.appendChild(partDiv);
+            };
 
+            container.appendChild(div);
         });
-
-    });
-
 }
 function changeMarketCategory(category) {
 
@@ -2337,6 +2344,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
