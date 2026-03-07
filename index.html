@@ -1676,7 +1676,11 @@ updatePreview();
 function renderGielda() {
 
     const container = document.getElementById("gieldaList");
-    const search = document.getElementById("gieldaSearch").value.toLowerCase().trim();
+    const searchInput = document.getElementById("carSearch");
+
+    if (!container || !searchInput) return;
+
+    const search = searchInput.value.toLowerCase().trim();
 
     container.innerHTML = "";
 
@@ -1696,7 +1700,8 @@ function renderGielda() {
             div.innerHTML = `
                 <span class="part-name">${car.name}</span>
             `;
-			div.onclick = () => showVariants(car);
+
+            div.onclick = () => showVariants(car);
 
             container.appendChild(div);
         });
@@ -2100,10 +2105,10 @@ fetch(webhookURL, {
 
 <div class="car-search-box">
 <input 
-type="text" 
-id="carSearch" 
+type="text"
+id="carSearch"
 placeholder="🔎 Wyszukaj auto..."
-oninput="renderCars()">
+oninput="renderGielda()"
 </div>
 
 
@@ -2309,6 +2314,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
