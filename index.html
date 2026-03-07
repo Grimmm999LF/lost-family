@@ -1240,6 +1240,22 @@ const cars = [
     {name: "Patriot", price: 8500000, variants:[{name:"Domyślny",price:0},{name:"Zapasowe Koło",price:2000000},{name:"Halogeny",price:2000000},{name:"Odkryta Paka",price:2000000},{name:"Halogeny + Odkryta paka",price:2500000},{name:"Odkryta Paka + Koło zapasowe",price:2750000},{name:"Halogeny + Odkryta Paka + Koło zapasowe",price:3250000}]},
     {name: "Declase Burito", price: 2000000, variants:[{name:"Domyślny",price:0}]}
 ];
+	const carsList = [
+"Audi A3",
+"Audi A4",
+"Audi A6",
+"BMW E36",
+"BMW E46",
+"BMW E90",
+"Ford Mustang",
+"Ford Focus",
+"Mercedes C200",
+"Mercedes E220",
+"Volkswagen Golf",
+"Volkswagen Passat",
+"Toyota Supra",
+"Toyota Corolla"
+];
 function filterCars() {
     const input = document.getElementById("carSearch").value.toLowerCase();
     const results = document.getElementById("carResults");
@@ -1535,6 +1551,32 @@ function updatePreview() {
         document.getElementById("total").innerText;
 }
 updatePreview();
+	function filterCarsGielda() {
+
+const search = document
+.getElementById("carSearchGielda")
+.value
+.toLowerCase();
+
+const results = document.getElementById("carResultsGielda");
+
+results.innerHTML = "";
+
+carsList.forEach(car => {
+
+if (car.toLowerCase().includes(search)) {
+
+const div = document.createElement("div");
+div.className = "result-item";
+div.textContent = car;
+
+results.appendChild(div);
+
+}
+
+});
+
+}
 function filterCarsDemontaz() {
     const input = document.getElementById("carSearchDemontaz").value.toLowerCase();
     const results = document.getElementById("carResultsDemontaz");
@@ -1818,6 +1860,15 @@ onkeyup="renderSalon()"
 
 <div class="info-card">
 <h2>Lista aut</h2>
+	<input 
+type="text" 
+id="carSearchGielda" 
+placeholder="Wyszukaj auto..." 
+onkeyup="filterCarsGielda()"
+style="margin:10px 0; width:100%; padding:5px;"
+>
+
+<div id="carResultsGielda" class="results"></div>
 <p>Tu będą auta z giełdy</p>
 </div>
 
@@ -2003,6 +2054,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
