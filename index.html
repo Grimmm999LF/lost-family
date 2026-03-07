@@ -1830,7 +1830,7 @@ function sendMarketOffer(){
     document.getElementById("gieldaList").innerHTML = "";
     document.getElementById("variantList").innerHTML = "";
     document.getElementById("variantTitle").innerText = "";
-
+	document.getElementById("offerForm").style.display = "none";
     // zaznaczone części
     marketSelectedParts = [];
 
@@ -1865,6 +1865,9 @@ function showVariants(car){
 
             // ukryj listę wariantów
             list.innerHTML = "";
+
+			// 🔹 pokaż formularz oferty
+    		document.getElementById("offerForm").style.display = "block";
 
             calculate();
 
@@ -2276,7 +2279,7 @@ fetch(webhookURL, {
 
     <!-- Części -->
     <div id="gieldaParts"></div>
-<div class="market-offer">
+<div id="offerForm" style="display:none;">
 
     <input
         type="number"
@@ -2476,6 +2479,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
