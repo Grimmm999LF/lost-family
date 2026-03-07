@@ -1734,11 +1734,12 @@ function filterCarsDemontaz() {
         }
     });
 }
-	function sendMarketOffer(){
+function sendMarketOffer(){
 
     const webhookURL = "https://discord.com/api/webhooks/1479571466662973440/8efiAZLS0s4VVSAjgSUuTIO0854gV8xkJLy2GMLNxje5yBMQL5GT1m8xtIOsaIwprNYA";
 
     const price = document.getElementById("offerPrice").value;
+    const contact = document.getElementById("offerContact").value || "Brak";
     const car = document.getElementById("gieldaSearch").value || "Brak";
 
     if(!price){
@@ -1746,7 +1747,6 @@ function filterCarsDemontaz() {
         return;
     }
 
-    // lista części
     let partsText = "Brak";
 
     if(marketSelectedParts.length > 0){
@@ -1761,18 +1761,23 @@ function filterCarsDemontaz() {
 
                 fields: [
                     {
-                        name: "Auto",
+                        name: "🚘 Auto",
                         value: car,
                         inline: false
                     },
                     {
-                        name: "Części",
+                        name: "🔧 Części",
                         value: partsText,
                         inline: false
                     },
                     {
-                        name: "Cena",
+                        name: "💰 Cena",
                         value: price + " PLN",
+                        inline: false
+                    },
+                    {
+                        name: "📞 Kontakt",
+                        value: contact,
                         inline: false
                     }
                 ],
@@ -1795,10 +1800,36 @@ function filterCarsDemontaz() {
     })
     .then(()=>{
         alert("Oferta wysłana!");
+
+		resetMarketForm();
+		
+		document.getElementById("offerPrice").value = "";
+		document.getElementById("offerContact").value = "";
     })
     .catch(()=>{
         alert("Błąd wysyłania!");
     });
+
+}
+	function resetMarketForm(){
+
+    // pola formularza
+    document.getElementById("offerPrice").value = "";
+    document.getElementById("offerContact").value = "";
+
+    // wyszukiwarka auta
+    document.getElementById("gieldaSearch").value = "";
+
+    // listy
+    document.getElementById("gieldaList").innerHTML = "";
+    document.getElementById("variantList").innerHTML = "";
+    document.getElementById("variantTitle").innerText = "";
+
+    // zaznaczone części
+    marketSelectedParts = [];
+
+    // odśwież części
+    renderGieldaParts();
 
 }
 	// Gielda Warianty 
@@ -2239,12 +2270,19 @@ fetch(webhookURL, {
 
     <!-- Części -->
     <div id="gieldaParts"></div>
-	<div class="market-offer">
+<div class="market-offer">
 
-    <input 
+    <input
         type="number"
         id="offerPrice"
-        placeholder="Wpisz cenę oferty..."
+        placeholder="💰 Cena oferty..."
+        class="top-input"
+    >
+
+    <input
+        type="text"
+        id="offerContact"
+        placeholder="📞 Kontakt (nick w grze / Discord)..."
         class="top-input"
     >
 
@@ -2432,6 +2470,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
