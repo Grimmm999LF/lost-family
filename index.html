@@ -1632,6 +1632,39 @@ function selectVariant(car, variant) {
         </div>
     `;
 
+    renderGieldaParts();
+
+}
+	function renderGieldaParts() {
+
+    const container = document.getElementById("partsList");
+    container.innerHTML = "";
+
+    parts.forEach(category => {
+
+        const catDiv = document.createElement("div");
+        catDiv.className = "parts-category";
+
+        catDiv.innerHTML = `<h3>${category.category}</h3>`;
+
+        category.items.forEach(part => {
+
+            const partDiv = document.createElement("div");
+            partDiv.className = "part";
+
+            partDiv.innerHTML = `
+                <span class="part-name">${part.name}</span>
+                <span class="part-price">${part.price.toLocaleString()} PLN</span>
+            `;
+
+            catDiv.appendChild(partDiv);
+
+        });
+
+        container.appendChild(catDiv);
+
+    });
+
 }
 function wyczyscDemontaz() {
     // 1️⃣ usuń wszystkie zaznaczenia
@@ -1889,7 +1922,7 @@ fetch(webhookURL, {
 
 <div id="gieldaList" class="parts"></div>
 <div id="gieldaVariants"></div>
-
+<div id="partsList"></div>
 </div>
 </div> <!-- KONIEC lewej strony -->
 
@@ -2069,6 +2102,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
