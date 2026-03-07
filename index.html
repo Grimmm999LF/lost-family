@@ -740,19 +740,6 @@ background:#333;
     <button onclick="resetAll()">Wyczyść wszystko</button>
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
-	<div class="gielda-tabs">
-
-<button onclick="showPartsCategory('visual')" class="tab-btn">✨ Wizualne</button>
-
-<button onclick="showPartsCategory('engine')" class="tab-btn">⚙️ Silnik</button>
-
-<button onclick="showPartsCategory('tuning')" class="tab-btn">📏 Regulacje</button>
-
-<button onclick="showPartsCategory('other')" class="tab-btn">🧰 Pozostałe</button>
-
-</div>
-
-<div id="gieldaPartsList"></div>
 <script>
 
 	// ===== DEMONTAŻ =====
@@ -2052,7 +2039,19 @@ alert("Ogłoszenie wysłane!");
 <select id="gieldaVariant"></select>
 
 <br><br>
+<div class="gielda-tabs">
 
+<button onclick="showPartsCategory('visual')" class="tab-btn">✨ Wizualne</button>
+
+<button onclick="showPartsCategory('engine')" class="tab-btn">⚙️ Silnik</button>
+
+<button onclick="showPartsCategory('tuning')" class="tab-btn">📏 Regulacje</button>
+
+<button onclick="showPartsCategory('other')" class="tab-btn">🧰 Pozostałe</button>
+
+</div>
+
+<div id="gieldaPartsList"></div>
 <h2>Części tuningowe</h2>
 <div class="parts" id="gieldaParts"></div>
 
@@ -2268,6 +2267,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
