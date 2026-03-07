@@ -874,6 +874,9 @@ function switchMainTab(tab) {
 	
 	// Reset Aktywnych Przycisków
     buttons.forEach(btn => btn.classList.remove("active"));
+	// Ukryj elementy konfiguratora
+	carSearchWrapper.style.display = "none";
+	previewPanel.style.display = "none";
 
 	
     if (tab === "config") {
@@ -2000,6 +2003,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
