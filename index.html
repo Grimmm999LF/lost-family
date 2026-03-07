@@ -2094,37 +2094,13 @@ fetch(webhookURL, {
 </div>
 <div id="gieldaTab" style="display:none;">
 
-<div class="car-search-box">
+<input type="text" id="carSearch" placeholder="🔎 Wyszukaj auto..." oninput="renderCars()">
 
-    <input 
-        type="text" 
-        id="carSearch" 
-        placeholder="🔎 Wyszukaj auto..."
-        onkeyup="filterCars()"
-    >
+<div id="carList" class="car-grid"></div>
 
-</div>
+<h2 id="variantTitle"></h2>
+<div id="variantList" class="variant-grid"></div>
 
-<div id="gieldaList"></div>
-
-<div class="variant-search">
-
-    <div class="variant-header" onclick="toggleVariants()">
-        🔎 Wyszukaj wariant auta
-        <span id="variantArrow">▼</span>
-    </div>
-
-    <div id="variantContent" class="variant-content">
-        <input type="text" placeholder="np. bmw..." class="variant-input">
-
-        <div class="variant-list">
-            <div class="variant-item">Domyślny</div>
-            <div class="variant-item">Zwykły</div>
-            <div class="variant-item">Bodykit</div>
-            <div class="variant-item">Bodykit + CS</div>
-            <div class="variant-item">Adro</div>
-            <div class="variant-item">Adro + CS</div>
-        </div>
     </div>
 
 </div>
@@ -2315,6 +2291,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
