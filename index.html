@@ -119,6 +119,61 @@ button {
     font-weight: 600;
     cursor: pointer;
 }
+.variant-search{
+    margin-top:20px;
+    max-width:900px;
+}
+
+.variant-header{
+    background:#111827;
+    border:1px solid #1f2937;
+    padding:12px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-weight:600;
+    transition:0.2s;
+}
+
+.variant-header:hover{
+    border-color:#00d9ff;
+    box-shadow:0 0 8px rgba(0,217,255,0.4);
+}
+
+.variant-content{
+    display:none;
+    margin-top:10px;
+}
+
+.variant-input{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:6px;
+    border:1px solid #1f2937;
+    background:#0b1220;
+    color:white;
+}
+
+.variant-list{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+}
+
+.variant-item{
+    padding:10px;
+    border-radius:6px;
+    background:#0b1220;
+    border:1px solid #1f2937;
+    cursor:pointer;
+}
+
+.variant-item:hover{
+    border-color:#00d9ff;
+}
 /* ===== CREATOR CARD ===== */
 
 .creator-card {
@@ -1968,7 +2023,27 @@ fetch(webhookURL, {
 
 <div id="gieldaList"></div>
 
-<div id="gieldaVariants"></div>
+<div class="variant-search">
+
+    <div class="variant-header" onclick="toggleVariants()">
+        🔎 Wyszukaj wariant auta
+        <span id="variantArrow">▼</span>
+    </div>
+
+    <div id="variantContent" class="variant-content">
+        <input type="text" placeholder="np. bmw..." class="variant-input">
+
+        <div class="variant-list">
+            <div class="variant-item">Domyślny</div>
+            <div class="variant-item">Zwykły</div>
+            <div class="variant-item">Bodykit</div>
+            <div class="variant-item">Bodykit + CS</div>
+            <div class="variant-item">Adro</div>
+            <div class="variant-item">Adro + CS</div>
+        </div>
+    </div>
+
+</div>
 	
 <button onclick="changeMarketCategory('✨ Wizualne')">✨ Wizualne</button>
 <button onclick="changeMarketCategory('⚙️ Silnik')">⚙️ Silnik</button>
@@ -2156,6 +2231,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
