@@ -860,6 +860,8 @@ function switchMainTab(tab) {
     const buttons = document.querySelectorAll(".main-tab");
     const carSearchWrapper = document.getElementById("carSearchWrapper");
     const previewPanel = document.getElementById("previewPanel");
+	const salonSearch = document.getElementById("salonSearch");
+	const brandFilter = document.getElementById("brandFilter");
 
 	// Ukryj wszystkie zakładki
     config.style.display = "none";
@@ -867,6 +869,8 @@ function switchMainTab(tab) {
     salon.style.display = "none";
     demontaz.style.display = "none";
 	gielda.style.display = "none";
+	salonSearch.style.display = "none";
+	brandFilter.style.display = "none";
 	
 	// Reset Aktywnych Przycisków
     buttons.forEach(btn => btn.classList.remove("active"));
@@ -922,6 +926,8 @@ function switchMainTab(tab) {
         info.style.display = "none";
         salon.style.display = "block";
         buttons[2].classList.add("active");
+		salonSearch.style.display = "block";
+		brandFilter.style.display = "block";
 
         carSearchWrapper.style.display = "none";
         previewPanel.style.display = "none";
@@ -1994,6 +2000,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
