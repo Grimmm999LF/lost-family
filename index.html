@@ -451,6 +451,30 @@ button:hover {
     border-color:#00d9ff;
     box-shadow:0 0 10px rgba(0,217,255,0.5);
 }
+	.market-category{
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #ddd;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-right: 8px;
+}
+
+.market-category:hover{
+    background: rgba(0,255,255,0.08);
+    border-color: rgba(0,255,255,0.4);
+    color: #00ffff;
+}
+
+/* aktywna kategoria */
+.market-category.active{
+    background: rgba(0,255,255,0.15);
+    border-color: #00ffff;
+    color: #00ffff;
+    box-shadow: 0 0 8px rgba(0,255,255,0.4);
+}
 /* AKTYWNY */
 .custom-check input:checked + .checkmark {
     background: var(--primary);
@@ -1961,12 +1985,19 @@ function renderGielda() {
         });
 }
 
-function changeMarketCategory(category) {
+function changeMarketCategory(category, button){
 
     activeMarketCategory = category;
 
-    renderGieldaParts();
+    // usuń active z wszystkich
+    document.querySelectorAll(".market-category").forEach(btn=>{
+        btn.classList.remove("active");
+    });
 
+    // dodaj active do klikniętego
+    button.classList.add("active");
+
+    renderGieldaParts();
 }
 	function toggleMarketPart(part, element) {
 
@@ -2276,10 +2307,10 @@ fetch(webhookURL, {
 
     <!-- Kategorie części -->
     <div class="market-categories">
-        <button onclick="changeMarketCategory('✨ Wizualne')">✨ Wizualne</button>
-        <button onclick="changeMarketCategory('⚙️ Silnik')">⚙️ Silnik</button>
-        <button onclick="changeMarketCategory('📏 Regulacje')">📏 Regulacje</button>
-        <button onclick="changeMarketCategory('🧰 Pozostałe')">🧰 Pozostałe</button>
+        <button class="market-category" onclick="changeMarketCategory('✨ Wizualne', this)">✨ Wizualne</button>
+		<button class="market-category" onclick="changeMarketCategory('⚙️ Silnik', this)">⚙️ Silnik</button>
+		<button class="market-category" onclick="changeMarketCategory('📏 Regulacje', this)">📏 Regulacje</button>
+		<button class="market-category" onclick="changeMarketCategory('🧰 Pozostałe', this)">🧰 Pozostałe</button>
     </div>
 
     <!-- Części -->
@@ -2484,6 +2515,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
