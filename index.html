@@ -1865,7 +1865,22 @@ function filterCarsDemontaz() {
         }
     });
 }
-		
+	function sortParts(arr){
+
+    return arr.sort((a,b) => {
+
+        const numA = a.match(/\d+/);
+        const numB = b.match(/\d+/);
+
+        if(numA && numB){
+            return Number(numA[0]) - Number(numB[0]);
+        }
+
+        return a.localeCompare(b);
+
+    });
+
+}	
 function sendMarketOffer(){
 	console.log(marketSelectedParts);
     const now = Date.now();
@@ -1923,10 +1938,10 @@ marketSelectedParts.forEach(p => {
 
 });
 
-const wizualneText = wizualne.length ? wizualne.join("\n") : "Brak";
-const silnikText = silnikParts.length ? silnikParts.join("\n") : "Brak";
-const regulacjeText = regulacje.length ? regulacje.join("\n") : "Brak";
-const pozostaleText = pozostale.length ? pozostale.join("\n") : "Brak";
+const wizualneText = wizualne.length ? sortParts(wizualne).join("\n") : "Brak";
+const silnikText = silnikParts.length ? sortParts(silnikParts).join("\n") : "Brak";
+const regulacjeText = regulacje.length ? sortParts(regulacje).join("\n") : "Brak";
+const pozostaleText = pozostale.length ? sortParts(pozostale).join("\n") : "Brak";
     const message = {
         embeds: [
             {
@@ -2715,6 +2730,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
