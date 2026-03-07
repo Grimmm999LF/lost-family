@@ -1873,16 +1873,20 @@ function sendMarketOffer(){
 
 	function changeEngine(step){
 
+    engineSize = Number(engineSize); // upewnij się że to liczba
+
     let newValue = engineSize + step;
 
     if(newValue < 1.2 || newValue > 3.0) return;
 
     engineSize = parseFloat(newValue.toFixed(1));
 
-    document.getElementById("engineValue").innerText = engineSize;
+    document.getElementById("engineValue").innerText = engineSize.toFixed(1);
 
 }
 	function changeCylinders(step){
+
+    cylinders = Number(cylinders);
 
     let newValue = cylinders + step;
 
@@ -1894,6 +1898,8 @@ function sendMarketOffer(){
 
 }
 	function changeFuel(step){
+
+    fuelTank = Number(fuelTank);
 
     let newValue = fuelTank + step;
 
@@ -2576,6 +2582,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
