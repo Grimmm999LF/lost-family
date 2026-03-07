@@ -2094,24 +2094,33 @@ fetch(webhookURL, {
 </div>
 <div id="gieldaTab" style="display:none;">
 
-<input type="text" id="carSearch" placeholder="🔎 Wyszukaj auto..." oninput="renderCars()">
-
-<div id="carList" class="car-grid"></div>
-
-<h2 id="variantTitle"></h2>
-<div id="variantList" class="variant-grid"></div>
-
+    <!-- Wyszukiwarka aut -->
+    <div class="car-search-box">
+        <input
+            type="text"
+            id="carSearch"
+            placeholder="🔎 Wyszukaj auto..."
+            oninput="renderGielda()"
+        >
     </div>
-</div>
 
-</div>
-	
-<button onclick="changeMarketCategory('✨ Wizualne')">✨ Wizualne</button>
-<button onclick="changeMarketCategory('⚙️ Silnik')">⚙️ Silnik</button>
-<button onclick="changeMarketCategory('📏 Regulacje')">📏 Regulacje</button>
-<button onclick="changeMarketCategory('🧰 Pozostałe')">🧰 Pozostałe</button>
-	
-<div id="gieldaParts"></div>
+    <!-- Lista aut -->
+    <div id="gieldaList"></div>
+
+    <!-- Lista wariantów wybranego auta -->
+    <h3 id="variantTitle"></h3>
+    <div id="variantList"></div>
+
+    <!-- Kategorie części -->
+    <div class="market-categories">
+        <button onclick="changeMarketCategory('✨ Wizualne')">✨ Wizualne</button>
+        <button onclick="changeMarketCategory('⚙️ Silnik')">⚙️ Silnik</button>
+        <button onclick="changeMarketCategory('📏 Regulacje')">📏 Regulacje</button>
+        <button onclick="changeMarketCategory('🧰 Pozostałe')">🧰 Pozostałe</button>
+    </div>
+
+    <!-- Części -->
+    <div id="gieldaParts"></div>
 
 </div>
 </div> <!-- KONIEC lewej strony -->
@@ -2292,6 +2301,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
