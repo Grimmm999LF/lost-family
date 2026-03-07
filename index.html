@@ -852,7 +852,7 @@ parts.forEach((category, index) => {
     categoryTabs.appendChild(tab);
 });
 function switchMainTab(tab) {
-	const gielda = document.getElementById("gieldaTab");
+	const gielda = document.getElementById("");
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
@@ -1635,9 +1635,9 @@ function selectVariant(car, variant) {
     renderGieldaParts();
 
 }
-	function renderGieldaParts() {
+function renderGieldaParts() {
 
-    const container = document.getElementById("partsList");
+    const container = document.getElementById("gieldaParts");
     container.innerHTML = "";
 
     parts.forEach(category => {
@@ -2102,6 +2102,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
