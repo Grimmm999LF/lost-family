@@ -832,7 +832,7 @@ const categoryTabs = document.getElementById("categoryTabs");
 let activeCategory = 0;
 let selectedParts = {};
 let marketSelectedParts = [];
-let activeMarketCategory = "Wizualne";
+let activeMarketCategory = "✨ Wizualne";
 
 	let lastSendTime = 0;
 const sendCooldown = 600000; // 15 sekund (zmień jeśli chcesz)
@@ -1956,10 +1956,10 @@ fetch(webhookURL, {
 
 <div id="gieldaVariants"></div>
 	
-<button onclick="changeMarketCategory('Wizualne')">✨ Wizualne</button>
-<button onclick="changeMarketCategory('Silnik')">⚙️ Silnik</button>
-<button onclick="changeMarketCategory('Regulacje')">🔧 Regulacje</button>
-<button onclick="changeMarketCategory('Pozostałe')">📦 Pozostałe</button>
+<button onclick="changeMarketCategory('✨ Wizualne')">✨ Wizualne</button>
+<button onclick="changeMarketCategory('⚙️ Silnik')">⚙️ Silnik</button>
+<button onclick="changeMarketCategory('🔧 Regulacje<')">🔧 Regulacje</button>
+<button onclick="changeMarketCategory('📦 Pozostałe')">📦 Pozostałe</button>
 	
 <div id="gieldaParts"></div>
 
@@ -2142,6 +2142,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
