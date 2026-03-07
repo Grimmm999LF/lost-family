@@ -668,6 +668,7 @@ button:hover {
 	<button class="main-tab" onclick="switchMainTab('info')">Informacje</button>
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
+	<button class="main-tab" onclick="switchMainTab('Gielda')">Giełda</button>
 	<button id="musicToggle">🔊</button>
 	<audio id="bgMusic" src="muzyka.mp3" loop></audio>
 </div>
@@ -851,6 +852,7 @@ parts.forEach((category, index) => {
     categoryTabs.appendChild(tab);
 });
 function switchMainTab(tab) {
+	const gielda = document.getElementById("gieldaTab");
     const config = document.getElementById("configTab");
     const info = document.getElementById("infoTab");
     const salon = document.getElementById("salonTab");
@@ -1811,7 +1813,27 @@ fetch(webhookURL, {
         <span id="previewTotal">0</span> PLN
     </div>
 </div>
+<div id="gieldaTab" style="display:none;">
 
+<h2>🚗 Giełda samochodowa</h2>
+
+<div class="info-grid">
+
+<div class="info-card">
+<h2>Wystaw auto</h2>
+<input type="text" placeholder="Nazwa auta">
+<input type="number" placeholder="Cena">
+<button>Dodaj ogłoszenie</button>
+</div>
+
+<div class="info-card">
+<h2>Lista aut</h2>
+<p>Tu będą auta z giełdy</p>
+</div>
+
+</div>
+
+</div>
 </div> <!-- ZAMYKA container -->
 
 <audio id="bgMusic" autoplay loop>
@@ -1960,6 +1982,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
