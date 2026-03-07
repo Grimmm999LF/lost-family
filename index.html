@@ -1753,24 +1753,21 @@ fetch(webhookURL, {
 </div>
 <div id="salonTab" style="display:none;">
 
-    <h2>🚗 Auta dostępne w salonie</h2>
+<h2>🚗 Auta dostępne w salonie</h2>
 
-    <!-- WYSZUKIWARKA -->
-    <input 
-        type="text"
-        id="salonSearch"
-        class="top-input"
-        placeholder="Szukaj auta lub marki..."
-        onkeyup="renderSalon()"
-    >
+<input 
+type="text"
+id="salonSearch"
+class="top-input"
+placeholder="Szukaj auta lub marki..."
+onkeyup="renderSalon()"
+>
 
-    <!-- FILTR MARKI -->
-    <select id="brandFilter" class="top-input" onchange="renderSalon()">
-        <option value="all">Wszystkie marki</option>
-    </select>
+<select id="brandFilter" class="top-input" onchange="renderSalon()">
+<option value="all">Wszystkie marki</option>
+</select>
 
-    <!-- LISTA -->
-    <div id="salonList" class="parts" style="grid-template-columns: 1fr;"></div>
+<div id="salonList" class="parts"></div>
 
 </div>
 <div id="demontazTab" style="display:none;">
@@ -1997,6 +1994,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
