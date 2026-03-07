@@ -1906,10 +1906,20 @@ let pozostale = [];
 
 marketSelectedParts.forEach(p => {
 
-    if(p.category === "✨ Wizualne") wizualne.push("• " + p.name);
-    else if(p.category === "⚙️ Silnik") silnikParts.push("• " + p.name);
-    else if(p.category === "📏 Regulacje") regulacje.push("• " + p.name);
-    else if(p.category === "🧰 Pozostałe") pozostale.push("• " + p.name);
+    const cat = (p.category || "").toLowerCase();
+
+    if(cat === "wizualne") {
+        wizualne.push("• " + p.name);
+    }
+    else if(cat === "silnik") {
+        silnikParts.push("• " + p.name);
+    }
+    else if(cat === "regulacje") {
+        regulacje.push("• " + p.name);
+    }
+    else if(cat === "pozostałe") {
+        pozostale.push("• " + p.name);
+    }
 
 });
 
@@ -2705,6 +2715,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
