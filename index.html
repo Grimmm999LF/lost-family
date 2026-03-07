@@ -866,6 +866,7 @@ function switchMainTab(tab) {
     info.style.display = "none";
     salon.style.display = "none";
     demontaz.style.display = "none";
+	gielda.style.display = "none";
 	
 	// Reset Aktywnych Przycisków
     buttons.forEach(btn => btn.classList.remove("active"));
@@ -903,7 +904,19 @@ function switchMainTab(tab) {
         carSearchWrapper.style.display = "none";
         previewPanel.style.display = "none";
     }
+	else if (tab === "gielda") {
+    config.style.display = "none";
+    info.style.display = "none";
+    salon.style.display = "none";
+    demontaz.style.display = "none";
+    gielda.style.display = "block";
 
+    buttons.forEach(btn => btn.classList.remove("active"));
+    buttons[4].classList.add("active");
+
+    carSearchWrapper.style.display = "none";
+    previewPanel.style.display = "none";
+}
     else if (tab === "salon") {
         config.style.display = "none";
         info.style.display = "none";
@@ -1984,6 +1997,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
