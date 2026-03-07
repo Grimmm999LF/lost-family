@@ -1637,29 +1637,34 @@ function selectVariant(car, variant) {
 }
 function renderGieldaParts() {
 
-	console.log(activeMarketCategory);
-    console.log(parts);
-
     const container = document.getElementById("gieldaParts");
     if (!container) return;
 
     container.innerHTML = "";
 
-    const category = parts.find(c => c.category === activeMarketCategory);
-    if (!category) return;
+    parts.forEach(category => {
 
-    category.items.forEach(part => {
+        if (category.category !== activeMarketCategory) return;
 
-        const partDiv = document.createElement("div");
-        partDiv.className = "part";
+        category.items.forEach(part => {
 
-        partDiv.innerHTML = `
-            <span class="part-name">${part.name}</span>
-        `;
+            const partDiv = document.createElement("div");
+            partDiv.className = "part";
 
-        partDiv.onclick = () => toggleMarketPart(part, partDiv);
+            partDiv.innerHTML =
+                `<span class="part-name">${part.name}</span>`;
 
-        container.appendChild(partDiv);
+            // 🔹 sprawdzamy czy część była wcześniej wybrana
+            const selected = marketSelectedParts.find(p => p.name === part.name);
+            if (selected) {
+                partDiv.classList.add("selected");
+            }
+
+            partDiv.onclick = () => toggleMarketPart(part, partDiv);
+
+            container.appendChild(partDiv);
+
+        });
 
     });
 
@@ -2142,6 +2147,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
