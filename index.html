@@ -841,6 +841,10 @@ button:hover {
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
 <script>
+	// ===== GIEŁDA GLOBAL =====
+
+var lastMarketSend = 0;
+var marketCooldown = 60000;
 
 	// ===== DEMONTAŻ =====
 const demontazParts = [
@@ -1734,10 +1738,7 @@ function filterCarsDemontaz() {
         }
     });
 }
-	
-let lastMarketSend = 0;
-const marketCooldown = 60000; // 60 sekund
-	
+		
 function sendMarketOffer(){
 
     const now = Date.now();
@@ -2475,6 +2476,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
