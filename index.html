@@ -830,7 +830,8 @@ const partsList = document.getElementById("partsList");
 const categoryTabs = document.getElementById("categoryTabs");
 
 let activeCategory = 0;
-let selectedParts = [];
+let selectedParts = {};
+let marketSelectedParts = {};
 
 	let lastSendTime = 0;
 const sendCooldown = 600000; // 15 sekund (zmień jeśli chcesz)
@@ -1655,8 +1656,9 @@ function renderGieldaParts() {
             partDiv.innerHTML = `
                 <span class="part-name">${part.name}</span>
             `;
-			partDiv.onclick = () => togglePart(part, partDiv);
-			
+
+            partDiv.onclick = () => toggleMarketPart(part, partDiv);
+
             catDiv.appendChild(partDiv);
 
         });
@@ -1664,6 +1666,19 @@ function renderGieldaParts() {
         container.appendChild(catDiv);
 
     });
+
+}
+	function toggleMarketPart(part, element) {
+
+    const index = marketSelectedParts.findIndex(p => p.name === part.name);
+
+    if (index > -1) {
+        marketSelectedParts.splice(index, 1);
+        element.classList.remove("selected");
+    } else {
+        marketSelectedParts.push(part);
+        element.classList.add("selected");
+    }
 
 }
 	function togglePart(part, element) {
@@ -2119,6 +2134,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
