@@ -831,6 +831,7 @@ const categoryTabs = document.getElementById("categoryTabs");
 
 let activeCategory = 0;
 let selectedParts = {};
+let selectedParts = [];
 
 	let lastSendTime = 0;
 const sendCooldown = 600000; // 15 sekund (zmień jeśli chcesz)
@@ -1654,9 +1655,9 @@ function renderGieldaParts() {
 
             partDiv.innerHTML = `
                 <span class="part-name">${part.name}</span>
-                <span class="part-price">${part.price.toLocaleString()} PLN</span>
             `;
-
+			partDiv.onclick = () => togglePart(part, partDiv);
+			
             catDiv.appendChild(partDiv);
 
         });
@@ -1664,6 +1665,23 @@ function renderGieldaParts() {
         container.appendChild(catDiv);
 
     });
+
+}
+	function togglePart(part, element) {
+
+    const index = selectedParts.findIndex(p => p.name === part.name);
+
+    if (index === -1) {
+
+        selectedParts.push(part);
+        element.classList.add("selected");
+
+    } else {
+
+        selectedParts.splice(index, 1);
+        element.classList.remove("selected");
+
+    }
 
 }
 function wyczyscDemontaz() {
@@ -2102,6 +2120,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
