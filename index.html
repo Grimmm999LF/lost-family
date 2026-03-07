@@ -56,14 +56,18 @@ html, body {
     outline: none;
     box-shadow: 0 0 10px rgba(255,140,0,0.5);
 }
-	.engine-panel{
-background:#0f1724;
-margin-top:20px;
-padding:20px;
+.engine-panel{
+background:linear-gradient(145deg,#0f1724,#0b1320);
+padding:22px;
 border-radius:12px;
 border:1px solid rgba(255,255,255,0.08);
 width:420px;
-box-shadow:0 0 20px rgba(0,0,0,0.4);
+
+margin-bottom:25px; /* TO NAPRAWIA PROBLEM */
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.5),
+inset 0 0 10px rgba(255,255,255,0.03);
 }
 	.car-stat{
 display:grid;
@@ -2680,6 +2684,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
