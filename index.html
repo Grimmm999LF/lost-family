@@ -870,6 +870,10 @@ button:hover {
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
 <script>
+
+	var engineSize = 1.2;
+	var cylinders = 4;
+	var fuelTank = 25;
 	// ===== GIEŁDA GLOBAL =====
 
 var lastMarketSend = 0;
@@ -1867,47 +1871,45 @@ function sendMarketOffer(){
     renderGieldaParts();
 
 }
-	var engineSize = 1.2;
-	var cylinders = 4;
-	var fuelTank = 25;
+	function updateStats(){
 
-	function changeEngine(step){
+document.getElementById("engineValue").innerText = engineSize.toFixed(1) + " L";
+document.getElementById("cylinderValue").innerText = "V" + cylinders;
+document.getElementById("fuelValue").innerText = fuelTank + " L";
 
-    engineSize = Number(engineSize); // upewnij się że to liczba
+}
+	
+function changeEngine(step){
 
-    let newValue = engineSize + step;
+let newValue = engineSize + step;
 
-    if(newValue < 1.2 || newValue > 3.0) return;
+if(newValue >= 1.2 && newValue <= 3.0){
+engineSize = parseFloat(newValue.toFixed(1));
+}
 
-    engineSize = parseFloat(newValue.toFixed(1));
-
-    document.getElementById("engineValue").innerText = engineSize.toFixed(1);
+updateStats();
 
 }
 	function changeCylinders(step){
 
-    cylinders = Number(cylinders);
+let newValue = cylinders + step;
 
-    let newValue = cylinders + step;
+if(newValue >= 4 && newValue <= 8){
+cylinders = newValue;
+}
 
-    if(newValue < 4 || newValue > 8) return;
-
-    cylinders = newValue;
-
-    document.getElementById("cylinderValue").innerText = "V" + cylinders;
+updateStats();
 
 }
 	function changeFuel(step){
 
-    fuelTank = Number(fuelTank);
+let newValue = fuelTank + step;
 
-    let newValue = fuelTank + step;
+if(newValue >= 25 && newValue <= 100){
+fuelTank = newValue;
+}
 
-    if(newValue < 25 || newValue > 100) return;
-
-    fuelTank = newValue;
-
-    document.getElementById("fuelValue").innerText = fuelTank + " L";
+updateStats();
 
 }
 	// Gielda Warianty 
@@ -2582,6 +2584,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
