@@ -1770,6 +1770,20 @@ function changeMarketCategory(category) {
     }
 
 }
+	function toggleVariants(){
+
+    const content = document.getElementById("variantContent");
+    const arrow = document.getElementById("variantArrow");
+
+    if(content.style.display === "block"){
+        content.style.display = "none";
+        arrow.innerText = "▼";
+    }else{
+        content.style.display = "block";
+        arrow.innerText = "▲";
+    }
+
+}
 function wyczyscDemontaz() {
     // 1️⃣ usuń wszystkie zaznaczenia
     selectedDemontaz = {};
@@ -2231,6 +2245,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
