@@ -1622,11 +1622,9 @@ function showVariants(car) {
 	// Wybór wariantów - JEBAC GPT
 function selectVariant(car, variant) {
 
-    const container = document.getElementById("gieldaVariants");
+    const variants = document.getElementById("gieldaVariants");
 
-    container.innerHTML = `
-        <button onclick="backToSearch()" class="back-btn">⬅ Powrót</button>
-
+    variants.innerHTML = `
         <div class="part">
             <span class="part-name">${car.name} - ${variant.name}</span>
         </div>
@@ -1638,12 +1636,14 @@ function selectVariant(car, variant) {
 function renderGieldaParts() {
 
     const container = document.getElementById("gieldaParts");
+
+    if (!container) return;
+
     container.innerHTML = "";
 
     parts.forEach(category => {
 
         const catDiv = document.createElement("div");
-        catDiv.className = "parts-category";
 
         catDiv.innerHTML = `<h3>${category.category}</h3>`;
 
@@ -1908,21 +1908,21 @@ fetch(webhookURL, {
         </div>
     </div>
 </div>
-	<div id="gieldaTab" style="display:none;">
-
-<h2>🚗 Giełda pojazdów</h2>
+<div id="gieldaTab" style="display:none;">
 
 <input 
     type="text"
     id="gieldaSearch"
-    class="top-input"
-    placeholder="Szukaj auta na giełdzie..."
+    placeholder="Szukaj auta..."
     onkeyup="renderGielda()"
 >
 
-<div id="gieldaList" class="parts"></div>
+<div id="gieldaList"></div>
+
 <div id="gieldaVariants"></div>
-<div id="partsList"></div>
+
+<div id="gieldaParts"></div>
+
 </div>
 </div> <!-- KONIEC lewej strony -->
 
@@ -2102,6 +2102,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
