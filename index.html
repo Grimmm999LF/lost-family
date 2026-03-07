@@ -265,6 +265,47 @@ button:hover {
     max-height: none;
     overflow-y: visible;
 }
+	.car-stat{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:12px;
+max-width:420px;
+}
+
+.stat-label{
+color:white;
+font-size:16px;
+}
+
+.stat-controls{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.stat-controls span{
+min-width:60px;
+text-align:center;
+font-weight:bold;
+}
+
+.stat-controls button{
+width:32px;
+height:32px;
+border:none;
+border-radius:8px;
+background:#ff8800;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.2s;
+}
+
+.stat-controls button:hover{
+background:#ff9d2e;
+transform:scale(1.05);
+}
 	/* ===== INFO TAB ===== */
 
 .info-grid {
@@ -2350,29 +2391,34 @@ fetch(webhookURL, {
     <h3 id="variantTitle"></h3>
     <div id="variantList"></div>
 
-	<div id="engineConfig" class="engine-config">
+<div class="car-stat">
+    <span class="stat-label">🔧 Pojemność silnika</span>
 
-    <div class="engine-row">
-        <span>🔧 Pojemność silnika</span>
+    <div class="stat-controls">
         <button onclick="changeEngine(-0.2)">−</button>
-        <span id="engineValue">1.2</span>
+        <span id="engineValue">1.2 L</span>
         <button onclick="changeEngine(0.2)">+</button>
     </div>
+</div>
 
-    <div class="engine-row">
-        <span>⚙️ Cylindry</span>
+<div class="car-stat">
+    <span class="stat-label">⚙️ Cylindry</span>
+
+    <div class="stat-controls">
         <button onclick="changeCylinders(-2)">−</button>
         <span id="cylinderValue">V4</span>
         <button onclick="changeCylinders(2)">+</button>
     </div>
+</div>
 
-    <div class="engine-row">
-        <span>⛽ Pojemność baku</span>
+<div class="car-stat">
+    <span class="stat-label">⛽ Pojemność baku</span>
+
+    <div class="stat-controls">
         <button onclick="changeFuel(-25)">−</button>
         <span id="fuelValue">25 L</span>
         <button onclick="changeFuel(25)">+</button>
     </div>
-
 </div>
     <!-- Kategorie części -->
     <div class="market-categories">
@@ -2584,6 +2630,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
