@@ -1897,12 +1897,26 @@ function sendMarketOffer(){
         return;
     }
 
-    let partsText = "Brak";
+    // podział części na kategorie
 
-    if(marketSelectedParts.length > 0){
-        partsText = marketSelectedParts.map(p => "• " + p.name).join("\n");
-    }
+let wizualne = [];
+let silnikParts = [];
+let regulacje = [];
+let pozostale = [];
 
+marketSelectedParts.forEach(p => {
+
+    if(p.category === "wizualne") wizualne.push("• " + p.name);
+    if(p.category === "silnik") silnikParts.push("• " + p.name);
+    if(p.category === "regulacje") regulacje.push("• " + p.name);
+    if(p.category === "pozostale") pozostale.push("• " + p.name);
+
+});
+
+const wizualneText = wizualne.length ? wizualne.join("\n") : "Brak";
+const silnikText = silnikParts.length ? silnikParts.join("\n") : "Brak";
+const regulacjeText = regulacje.length ? regulacje.join("\n") : "Brak";
+const pozostaleText = pozostale.length ? pozostale.join("\n") : "Brak";
     const message = {
         embeds: [
             {
@@ -1915,7 +1929,10 @@ function sendMarketOffer(){
     					{name: "⚙️ Cylindry", value: "V" + cylinders, inline: true},
     					{name: "⛽ Bak", value: fuelTank + " L", inline: true},
 
-    					{name: "🔧 Części", value: partsText, inline: false},
+    					{name: "🎨 Wizualne", value: wizualneText, inline: true},
+						{name: "⚙️ Silnik", value: silnikText, inline: true},
+						{name: "🔧 Regulacje", value: regulacjeText, inline: true},
+						{name: "📦 Pozostałe", value: pozostaleText, inline: false},
     					{name: "💰 Cena", value: price + " PLN", inline: true},
     					{name: "📞 Kontakt", value: contact, inline: true}
 ],
@@ -2688,6 +2705,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
