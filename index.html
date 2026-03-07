@@ -1774,18 +1774,20 @@ function showVariants(car){
 	function renderGieldaParts() {
 
     const container = document.getElementById("gieldaParts");
-
-    if (!container) return;
-
     container.innerHTML = "";
 
-    const filtered = marketParts.filter(p => p.category === activeMarketCategory);
+    const category = parts.find(p => p.category === activeMarketCategory);
 
-    filtered.forEach(part => {
+    if (!category) return;
+
+    category.items.forEach(part => {
 
         const div = document.createElement("div");
         div.className = "part";
-        div.innerHTML = `<span class="part-name">${part.name}</span>`;
+
+        div.innerHTML = `
+            <span class="part-name">${part.name}</span>
+        `;
 
         div.onclick = () => toggleMarketPart(part, div);
 
@@ -2347,6 +2349,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
