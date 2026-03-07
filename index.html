@@ -1603,18 +1603,34 @@ function showVariants(car) {
         return;
     }
 
-    car.variants.forEach(variant => {
+	car.variants.forEach(variant => {
 
-        const div = document.createElement("div");
-        div.className = "part";
+    const div = document.createElement("div");
+    div.className = "part";
 
-        div.innerHTML = `
-            <span class="part-name">${variant.name}</span>
-        `;
+    div.innerHTML = `
+        <span class="part-name">${variant.name}</span>
+    `;
 
-        container.appendChild(div);
+    div.onclick = () => selectVariant(car, variant);
 
-    });
+    container.appendChild(div);
+
+});
+
+}
+	// Wybór wariantów - JEBAC GPT
+function selectVariant(car, variant) {
+
+    const container = document.getElementById("gieldaVariants");
+
+    container.innerHTML = `
+        <button onclick="backToSearch()" class="back-btn">⬅ Powrót</button>
+
+        <div class="part">
+            <span class="part-name">${car.name} - ${variant.name}</span>
+        </div>
+    `;
 
 }
 function wyczyscDemontaz() {
@@ -2053,6 +2069,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
