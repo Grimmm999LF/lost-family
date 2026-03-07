@@ -1910,11 +1910,15 @@ function sendMarketOffer(){
                 color: 16753920,
 
                 fields: [
-                    {name: "🚘 Auto", value: car, inline: false},
-                    {name: "🔧 Części", value: partsText, inline: false},
-                    {name: "💰 Cena", value: price + " PLN", inline: false},
-                    {name: "📞 Kontakt", value: contact, inline: false}
-                ],
+    					{name: "🚘 Auto", value: car, inline: false},
+    					{name: "🔧 Silnik", value: engineSize + " L", inline: true},
+    					{name: "⚙️ Cylindry", value: "V" + cylinders, inline: true},
+    					{name: "⛽ Bak", value: fuelTank + " L", inline: true},
+
+    					{name: "🔧 Części", value: partsText, inline: false},
+    					{name: "💰 Cena", value: price + " PLN", inline: true},
+    					{name: "📞 Kontakt", value: contact, inline: true}
+],
 
                 footer: { text: "Lost Family • Giełda" },
                 timestamp: new Date()
@@ -2684,6 +2688,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
