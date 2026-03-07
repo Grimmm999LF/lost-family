@@ -885,6 +885,12 @@ function switchMainTab(tab) {
     const carSearchWrapper = document.getElementById("carSearchWrapper");
     const previewPanel = document.getElementById("previewPanel");
 
+    if(config) config.style.display = "none";
+    if(info) info.style.display = "none";
+    if(salon) salon.style.display = "none";
+    if(demontaz) demontaz.style.display = "none";
+    if(gielda) gielda.style.display = "none";
+	
     config.style.display = "none";
     info.style.display = "none";
     salon.style.display = "none";
@@ -2275,6 +2281,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
