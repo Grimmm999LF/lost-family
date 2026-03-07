@@ -488,6 +488,24 @@ button:hover {
     transform: scale(1.2);
     text-shadow: 0 0 25px var(--primary);
 }
+	.gielda-tabs{
+display:flex;
+gap:8px;
+margin-bottom:10px;
+}
+
+.tab-btn{
+background:#1e1e1e;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
+color:white;
+}
+
+.tab-btn:hover{
+background:#333;
+}
 	/* TFT */
 .tft-wrapper {
     display: flex;
@@ -722,6 +740,19 @@ button:hover {
     <button onclick="resetAll()">Wyczyść wszystko</button>
 	<button onclick="sendToDiscord()">Wyślij na Discord</button>
 </div>
+	<div class="gielda-tabs">
+
+<button onclick="showPartsCategory('visual')" class="tab-btn">✨ Wizualne</button>
+
+<button onclick="showPartsCategory('engine')" class="tab-btn">⚙️ Silnik</button>
+
+<button onclick="showPartsCategory('tuning')" class="tab-btn">📏 Regulacje</button>
+
+<button onclick="showPartsCategory('other')" class="tab-btn">🧰 Pozostałe</button>
+
+</div>
+
+<div id="gieldaPartsList"></div>
 <script>
 
 	// ===== DEMONTAŻ =====
@@ -1866,6 +1897,33 @@ function renderGieldaParts() {
     });
 
 }
+	function showPartsCategory(category){
+
+const list = document.getElementById("gieldaPartsList");
+
+list.innerHTML = "";
+
+gieldaParts
+.filter(part => part.category === category)
+.forEach(part => {
+
+const div = document.createElement("div");
+
+div.className = "part";
+
+div.innerHTML = `
+<label>
+<input type="checkbox" class="gielda-part" value="${part.name}">
+<span class="part-name">${part.name}</span>
+<span class="part-price">${part.price.toLocaleString()} PLN</span>
+</label>
+`;
+
+list.appendChild(div);
+
+});
+
+}
 	function sendToDiscord2(){
 
 let price = document.getElementById("sellPrice").value;
@@ -2210,6 +2268,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
