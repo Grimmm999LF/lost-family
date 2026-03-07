@@ -1867,6 +1867,43 @@ function sendMarketOffer(){
     renderGieldaParts();
 
 }
+	let engineSize = 1.2;
+	let cylinders = 4;
+	let fuelTank = 25;
+
+	function changeEngine(step){
+
+    let newValue = engineSize + step;
+
+    if(newValue < 1.2 || newValue > 3.0) return;
+
+    engineSize = parseFloat(newValue.toFixed(1));
+
+    document.getElementById("engineValue").innerText = engineSize;
+
+}
+	function changeCylinders(step){
+
+    let newValue = cylinders + step;
+
+    if(newValue < 4 || newValue > 8) return;
+
+    cylinders = newValue;
+
+    document.getElementById("cylinderValue").innerText = "V" + cylinders;
+
+}
+	function changeFuel(step){
+
+    let newValue = fuelTank + step;
+
+    if(newValue < 25 || newValue > 100) return;
+
+    fuelTank = newValue;
+
+    document.getElementById("fuelValue").innerText = fuelTank + " L";
+
+}
 	// Gielda Warianty 
 function showVariants(car){
 
@@ -2305,6 +2342,30 @@ fetch(webhookURL, {
     <h3 id="variantTitle"></h3>
     <div id="variantList"></div>
 
+	<div id="engineConfig" class="engine-config">
+
+    <div class="engine-row">
+        <span>🔧 Pojemność silnika</span>
+        <button onclick="changeEngine(-0.2)">−</button>
+        <span id="engineValue">1.2</span>
+        <button onclick="changeEngine(0.2)">+</button>
+    </div>
+
+    <div class="engine-row">
+        <span>⚙️ Cylindry</span>
+        <button onclick="changeCylinders(-2)">−</button>
+        <span id="cylinderValue">V4</span>
+        <button onclick="changeCylinders(2)">+</button>
+    </div>
+
+    <div class="engine-row">
+        <span>⛽ Pojemność baku</span>
+        <button onclick="changeFuel(-25)">−</button>
+        <span id="fuelValue">25 L</span>
+        <button onclick="changeFuel(25)">+</button>
+    </div>
+
+</div>
     <!-- Kategorie części -->
     <div class="market-categories">
         <button class="market-category" onclick="changeMarketCategory('✨ Wizualne', this)">✨ Wizualne</button>
@@ -2515,6 +2576,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
