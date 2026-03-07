@@ -1771,7 +1771,7 @@ function showVariants(car){
     });
 
 }
-	function renderGieldaParts() {
+function renderGieldaParts() {
 
     const container = document.getElementById("gieldaParts");
     container.innerHTML = "";
@@ -1785,9 +1785,12 @@ function showVariants(car){
         const div = document.createElement("div");
         div.className = "part";
 
-        div.innerHTML = `
-            <span class="part-name">${part.name}</span>
-        `;
+        div.innerHTML = `<span class="part-name">${part.name}</span>`;
+
+        // 🔹 SPRAWDZENIE CZY JUŻ WYBRANA
+        if (marketSelectedParts.some(p => p.name === part.name)) {
+            div.classList.add("selected");
+        }
 
         div.onclick = () => toggleMarketPart(part, div);
 
@@ -2349,6 +2352,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
