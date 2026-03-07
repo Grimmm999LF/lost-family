@@ -56,6 +56,54 @@ html, body {
     outline: none;
     box-shadow: 0 0 10px rgba(255,140,0,0.5);
 }
+	.engine-panel{
+background:#0f1724;
+padding:20px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+width:420px;
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+	.car-stat{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.stat-label{
+color:white;
+font-size:15px;
+}
+
+.stat-controls{
+display:flex;
+align-items:center;
+gap:10px;
+}
+	.stat-controls button{
+width:34px;
+height:34px;
+border:none;
+border-radius:8px;
+background:#ff8800;
+color:white;
+font-size:18px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.stat-controls button:hover{
+background:#ffa23a;
+transform:scale(1.05);
+}
+
+.stat-controls span{
+min-width:70px;
+text-align:center;
+color:white;
+font-weight:bold;
+}
 #carResults {
     background:#1b1b1b;
     border:1px solid var(--primary);
@@ -2391,34 +2439,35 @@ fetch(webhookURL, {
     <h3 id="variantTitle"></h3>
     <div id="variantList"></div>
 
-<div class="car-stat">
-    <span class="stat-label">🔧 Pojemność silnika</span>
+<div class="engine-panel">
 
-    <div class="stat-controls">
-        <button onclick="changeEngine(-0.2)">−</button>
-        <span id="engineValue">1.2 L</span>
-        <button onclick="changeEngine(0.2)">+</button>
+    <div class="car-stat">
+        <span class="stat-label">🔧 Pojemność silnika</span>
+        <div class="stat-controls">
+            <button onclick="changeEngine(-0.2)">−</button>
+            <span id="engineValue">1.2 L</span>
+            <button onclick="changeEngine(0.2)">+</button>
+        </div>
     </div>
-</div>
 
-<div class="car-stat">
-    <span class="stat-label">⚙️ Cylindry</span>
-
-    <div class="stat-controls">
-        <button onclick="changeCylinders(-2)">−</button>
-        <span id="cylinderValue">V4</span>
-        <button onclick="changeCylinders(2)">+</button>
+    <div class="car-stat">
+        <span class="stat-label">⚙️ Cylindry</span>
+        <div class="stat-controls">
+            <button onclick="changeCylinders(-2)">−</button>
+            <span id="cylinderValue">V4</span>
+            <button onclick="changeCylinders(2)">+</button>
+        </div>
     </div>
-</div>
 
-<div class="car-stat">
-    <span class="stat-label">⛽ Pojemność baku</span>
-
-    <div class="stat-controls">
-        <button onclick="changeFuel(-25)">−</button>
-        <span id="fuelValue">25 L</span>
-        <button onclick="changeFuel(25)">+</button>
+    <div class="car-stat">
+        <span class="stat-label">⛽ Pojemność baku</span>
+        <div class="stat-controls">
+            <button onclick="changeFuel(-25)">−</button>
+            <span id="fuelValue">25 L</span>
+            <button onclick="changeFuel(25)">+</button>
+        </div>
     </div>
+
 </div>
     <!-- Kategorie części -->
     <div class="market-categories">
@@ -2630,6 +2679,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
