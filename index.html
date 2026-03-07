@@ -1886,48 +1886,32 @@ function renderGieldaParts() {
 }
 const selectedParts = {};
 
-function showPartsCategory(category) {
-    const list = document.getElementById("gieldaPartsList");
-    list.innerHTML = "";
+	function showPartsCategory(category){
 
-    gieldaParts
-        .filter(part => part.category === category)
-        .forEach(part => {
-            const div = document.createElement("div");
-            div.className = "part";
+const list = document.getElementById("gieldaPartsList");
 
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.id = "part-" + part.name;
-            checkbox.checked = selectedParts[part.name] ? true : false;
+list.innerHTML = "";
 
-            checkbox.onchange = function() {
-                if (this.checked) {
-                    selectedParts[part.name] = part.price;
-                } else {
-                    delete selectedParts[part.name];
-                }
-                updatePreview();
-            };
+gieldaParts
+.filter(part => part.category === category)
+.forEach(part => {
 
-            const label = document.createElement("label");
-            label.htmlFor = checkbox.id;
-            label.innerHTML = `${part.name} - ${part.price.toLocaleString()} PLN`;
+const div = document.createElement("div");
 
-            div.appendChild(checkbox);
-            div.appendChild(label);
+div.className = "part";
 
-            list.appendChild(div);
-        });
-}
+div.innerHTML = `
+<label>
+<input type="checkbox" class="gielda-part" value="${part.name}">
+<span class="part-name">${part.name}</span>
+<span class="part-price">${part.price.toLocaleString()} PLN</span>
+</label>
+`;
 
-// Funkcja do odświeżania podglądu (opcjonalnie)
-function updatePreview() {
-    const preview = document.getElementById("previewParts");
-    preview.innerHTML = Object.keys(selectedParts).join(", ") || "Brak";
+list.appendChild(div);
 
-    const total = Object.values(selectedParts).reduce((a,b)=>a+b,0);
-    document.getElementById("previewTotal").innerText = total.toLocaleString();
+});
+
 }
 	function sendToDiscord2(){
 
@@ -2285,6 +2269,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
