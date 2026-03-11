@@ -2328,146 +2328,98 @@ function wyczyscDemontaz() {
     renderDemontaz();
     calculateDemontaz();
 }
-	function sendToDiscord() {
+function sendToDiscord() {
 
-		// BLOKADA SPAMU
-const now = Date.now();
-if (now - lastSendTime < sendCooldown) {
+  // BLOKADA SPAMU
+  const now = Date.now();
+  if (now - lastSendTime < sendCooldown) {
     const secondsLeft = Math.ceil((sendCooldown - (now - lastSendTime)) / 1000);
     alert("Możesz wysłać ponownie za " + secondsLeft + " sek.");
     return;
-}
-    // SPRAWDZENIE CZY COŚ WYBRANO
-	const carValue = document.getElementById("carSelect").value;
-	const partsCount = Object.keys(selectedParts).length;
-	const upgradesCount = cyl + engine + fuel;
+  }
 
-	if (carValue == 0) {
+  // SPRAWDZENIE CZY COŚ WYBRANO
+  const carValue = document.getElementById("carSelect").value;
+  const partsCount = Object.keys(selectedParts).length;
+  const upgradesCount = cyl + engine + fuel;
+
+  if (carValue == 0) {
     alert("Najpierw wybierz auto!");
     return;
-}	
-	if (carValue == 0 && partsCount === 0 && upgradesCount === 0) {
+  }
+
+  if (carValue == 0 && partsCount === 0 && upgradesCount === 0) {
     alert("Nie wybrano żadnego auta ani ulepszeń!");
     return;
-		
-}
+  }
 
+  const car = document.getElementById("carSearch").value || "Brak";
+  const variantName =
+    document.getElementById("variantSelect")?.selectedOptions[0]?.textContent || "Brak";
+  const total = document.getElementById("total").innerText;
 
-    const car = document.getElementById("carSearch").value || "Brak";
-	const variantName = document.getElementById("variantSelect")?.selectedOptions[0]?.textContent || "Brak";
-    const total = document.getElementById("total").innerText;
+  let partsText = "";
+  for (let name in selectedParts) {
+    partsText += "• " + name + "\n";
+  }
 
-let wizualne = [];
-let silnikParts = [];
-let regulacje = [];
-let pozostale = [];
+  if (partsText === "") partsText = "Brak";
 
-Object.values(selectedParts).forEach(p => {
+  const cylText = document.getElementById("cyl").innerText;
+  const engineText = document.getElementById("engine").innerText;
+  const fuelText = document.getElementById("fuel").innerText;
 
-    const cat = (p.category || "").toLowerCase();
-
-    if(cat === "wizualne"){
-        wizualne.push("• " + p.name);
-    }
-    else if(cat === "silnik"){
-        silnikParts.push("• " + p.name);
-    }
-    else if(cat === "regulacje"){
-        regulacje.push("• " + p.name);
-    }
-    else{
-        pozostale.push("• " + p.name);
-    }
-
-});
-
-const wizualneText = wizualne.length ? wizualne.join("\n") : "Brak";
-const silnikText = silnikParts.length ? silnikParts.join("\n") : "Brak";
-const regulacjeText = regulacje.length ? regulacje.join("\n") : "Brak";
-const pozostaleText = pozostale.length ? pozostale.join("\n") : "Brak";
-
-    const cylText = document.getElementById("cyl").innerText;
-    const engineText = document.getElementById("engine").innerText;
-    const fuelText = document.getElementById("fuel").innerText;
-	
-    // EMBED
-    const message = {
+  // EMBED
+  const message = {
     embeds: [
-        {
-            title: "📋 Kosztorys pojazdu",
-            color: 16753920, // pomarańczowy
+      {
+        title: "📋 Kosztorys pojazdu",
+        color: 16753920, // pomarańczowy
+        fields: [
+          { name: "🚗 Auto", value: car, inline: false },
+          { name: "🎨 Wariant", value: variantName, inline: false },
+          { name: "🔧 Części", value: partsText, inline: false },
+          {
+            name: "⚙️ Ulepszenia",
+            value:
+              "Cylindry: " +
+              cylText +
+              "\n" +
+              "Pojemność: " +
+              engineText +
+              "\n" +
+              "Zbiornik: " +
+              fuelText,
+            inline: false,
+          },
+          { name: "💰 Cena końcowa", value: total + " PLN", inline: false },
+        ],
+        footer: {
+          text: "Lost Family • Kalkulator",
+        },
+        timestamp: new Date(),
+      },
+    ],
+  };
 
-            fields: [
-                {
-                    name: "🚗 Auto",
-                    value: car,
-                    inline: false
-                },
-				{
-    name: "🎨 Wariant",
-    value: variantName,
-    inline: false
-},
-               {
-    name: "✨ Wizualne",
-    value: wizualneText,
-    inline: true
-},
-{
-    name: "⚙️ Silnik",
-    value: silnikText,
-    inline: true
-},
-{
-    name: "📏 Regulacje",
-    value: regulacjeText,
-    inline: true
-},
-{
-    name: "🧰 Pozostałe",
-    value: pozostaleText,
-    inline: false
-},
-                {
-                    name: "⚙️ Ulepszenia",
-                    value:
-                        "Cylindry: " + cylText + "\n" +
-                        "Pojemność: " + engineText + "\n" +
-                        "Zbiornik: " + fuelText,
-                    inline: false
-                },
-                {
-                    name: "💰 Cena końcowa",
-                    value: total + " PLN",
-                    inline: false
-                }
-            ],
-
-            footer: {
-                text: "Lost Family • Kalkulator"
-            },
-
-            timestamp: new Date()
-        }
-    ]
-};
-
-fetch("https://kalkulator.grimmm999.workers.dev", {
+  fetch("https://kalkulator.grimmm999.workers.dev", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
-        key: "lostfamily123",
-        type: "gielda",
-        message: message
+      key: "lostfamily123",
+      type: "gielda",
+      message: message,
+    }),
+  })
+    .then(() => {
+      lastSendTime = Date.now();
+      alert("Wysłano na Discord!");
     })
-})
-.then(() => {
-    lastSendTime = Date.now();
-    alert("Wysłano na Discord!");
-})
-.catch(() => {
-    alert("Błąd wysyłania");
-});
+    .catch(() => {
+      alert("Błąd wysyłania");
+    });
 }
 
 </script>
@@ -2876,6 +2828,7 @@ updateClock();
 </body>
 
 </html>
+
 
 
 
