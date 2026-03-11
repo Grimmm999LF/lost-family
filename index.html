@@ -63,45 +63,42 @@ html, body {
     box-shadow: 0 0 10px rgba(255,140,0,0.5);
 }
 .engine-panel{
-background:linear-gradient(145deg,#0f1724,#0b1320);
-padding:22px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,0.08);
-width:420px;
-
-margin-bottom:25px; /* TO NAPRAWIA PROBLEM */
-
-box-shadow:
-0 10px 30px rgba(0,0,0,0.5),
-inset 0 0 10px rgba(255,255,255,0.03);
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:12px;
+    margin:15px 0;
 }
-	.car-stat{
-display:grid;
-grid-template-columns: 180px 40px 70px 40px;
-align-items:center;
-margin-bottom:14px;
+
+.car-stat{
+    background:#111;
+    border:1px solid #333;
+    border-radius:8px;
+    padding:10px;
+    text-align:center;
 }
 
 .stat-label{
-color:white;
-font-size:15px;
+    display:block;
+    font-size:13px;
+    margin-bottom:6px;
+    color:#aaa;
 }
 
 .stat-controls{
-display:flex;
-align-items:center;
-gap:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
 }
-	.stat-controls button{
-width:34px;
-height:34px;
-border:none;
-border-radius:8px;
-background:#ff8800;
-color:white;
-font-size:18px;
-cursor:pointer;
-transition:0.2s;
+
+.stat-controls button{
+    background:#222;
+    border:1px solid #444;
+    color:white;
+    width:28px;
+    height:28px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
 .stat-controls button:hover{
@@ -2752,6 +2749,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
