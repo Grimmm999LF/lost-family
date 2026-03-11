@@ -1916,7 +1916,7 @@ function sendMarketOffer(){
         return;
     }
 
-    const webhookURL = "https://discord.com/api/webhooks/1479571466662973440/8efiAZLS0s4VVSAjgSUuTIO0854gV8xkJLy2GMLNxje5yBMQL5GT1m8xtIOsaIwprNYA";
+    
 
     const price = document.getElementById("offerPrice").value;
     const contact = document.getElementById("offerContact").value.trim();
@@ -1990,13 +1990,17 @@ const pozostaleText = pozostale.length ? sortParts(pozostale).join("\n") : "Brak
         ]
     };
 
-    fetch(webhookURL,{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body: JSON.stringify(message)
+fetch("https://lost-family.grimmmm999.workers.dev",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+        key: "lostfamily123",
+        type: "market",
+        message: message
     })
+})
     .then(()=>{
 
         alert("Oferta wysłana!");
@@ -2302,7 +2306,7 @@ if (now - lastSendTime < sendCooldown) {
     return;
 		
 }
-	const webhookURL = "https://discord.com/api/webhooks/1479547039183405076/o6c2xOYNfL2UMLuOK7m7SxAG5CWwhcEX6Uvlwine4yIX0u5chxRuh0Y29RU5QCjBr1mi";
+
 
     const car = document.getElementById("carSearch").value || "Brak";
 	const variantName = document.getElementById("variantSelect")?.selectedOptions[0]?.textContent || "Brak";
@@ -2365,10 +2369,14 @@ if (now - lastSendTime < sendCooldown) {
     ]
 };
 
-fetch(webhookURL, {
+fetch("https://lost-family.grimmmm999.workers.dev", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(message)
+    body: JSON.stringify({
+        key: "lostfamily123",
+        type: "gielda",
+        message: message
+    })
 })
 .then(() => {
     lastSendTime = Date.now();
@@ -2768,6 +2776,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
