@@ -1437,27 +1437,36 @@ function renderParts() {
             div.classList.add("selected");
         }
 
-        checkbox.addEventListener("change", function() {
-            if (this.checked) {
-                selectedParts[part.name] = part.price;
-                div.classList.add("selected");
-            } else {
-                delete selectedParts[part.name];
-                div.classList.remove("selected");
-            }
-            calculate();
-        });
+checkbox.addEventListener("change", function() {
 
-        div.addEventListener("click", function(e) {
-            if (e.target.tagName !== "INPUT") {
-                checkbox.checked = !checkbox.checked;
-                checkbox.dispatchEvent(new Event("change"));
+    const engines = ["Silnik benzynowy", "Silnik Diesel", "Silnik Elektryczny"];
+
+    // jeśli wybrany element to silnik
+    if (engines.includes(part.name) && this.checked) {
+
+        // odznacz inne silniki
+        document.querySelectorAll(".part input").forEach(cb => {
+            const parent = cb.closest(".part");
+            const name = parent.querySelector(".part-name").textContent;
+
+            if (cb !== this && engines.includes(name)) {
+                cb.checked = false;
+                delete selectedParts[name];
+                parent.classList.remove("selected");
             }
         });
+    }
 
-        partsList.appendChild(div);
-    });
-}
+    if (this.checked) {
+        selectedParts[part.name] = part.price;
+        div.classList.add("selected");
+    } else {
+        delete selectedParts[part.name];
+        div.classList.remove("selected");
+    }
+
+    calculate();
+});
 
 renderParts();
 const cars = [
@@ -2828,6 +2837,7 @@ updateClock();
 </body>
 
 </html>
+
 
 
 
