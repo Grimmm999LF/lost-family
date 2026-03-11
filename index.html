@@ -506,6 +506,27 @@ transform:scale(1.05);
 .variant-card:hover{
     border-color:#00d9ff;
 }
+	#clockBox{
+position:absolute;
+top:35px;
+left:50%;
+transform:translateX(-50%);
+font-size:28px;
+font-weight:bold;
+font-family:monospace;
+
+color:#00e1ff;
+
+text-shadow:
+0 0 10px #00e1ff,
+0 0 20px #00e1ff;
+
+background:rgba(0,0,0,0.25);
+padding:6px 18px;
+border-radius:10px;
+
+backdrop-filter:blur(6px);
+}
 /* ===== CUSTOM CHECKBOX FIXED CENTER ===== */
 
 .custom-check {
@@ -880,6 +901,9 @@ transform:scale(1.05);
 <body>
 <div id="rgb-border"></div>
 <div class="container">
+<div id="clockBox">
+    <span id="clock"></span>
+</div>
 <div style="flex:2;">
 
 <h1 class="logo">
@@ -2773,9 +2797,27 @@ document.addEventListener("DOMContentLoaded", function() {
 	<div style="text-align:center;margin-top:20px;">
 <img src="https://visitor-badge.laobi.icu/badge?page_id=grimmm999lf.lost-family">
 </div>
+<script>
+function updateClock(){
+
+const now = new Date();
+
+const h = String(now.getHours()).padStart(2,'0');
+const m = String(now.getMinutes()).padStart(2,'0');
+const s = String(now.getSeconds()).padStart(2,'0');
+
+document.getElementById("clock").textContent =
+h + ":" + m + ":" + s;
+
+}
+
+setInterval(updateClock,1000);
+updateClock();
+</script>
 </body>
 
 </html>
+
 
 
 
