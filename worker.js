@@ -33,9 +33,8 @@ const discordResponse = await fetch(webhook, {
   body: JSON.stringify(data.message)
 });
 
-if (!discordResponse.ok) {
-  const err = await discordResponse.text();
-  return new Response("Discord error: " + err, { status: 500 });
-}
+const text = await discordResponse.text();
 
-return new Response("OK - sent to Discord");
+return new Response(
+  "Discord status: " + discordResponse.status + "\n" + text
+);
