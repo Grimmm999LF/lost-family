@@ -2357,11 +2357,34 @@ if (now - lastSendTime < sendCooldown) {
 	const variantName = document.getElementById("variantSelect")?.selectedOptions[0]?.textContent || "Brak";
     const total = document.getElementById("total").innerText;
 
-    let partsText = "";
-    for (let name in selectedParts) {
-        partsText += "• " + name + "\n";
+let wizualne = [];
+let silnikParts = [];
+let regulacje = [];
+let pozostale = [];
+
+Object.values(selectedParts).forEach(p => {
+
+    const cat = (p.category || "").toLowerCase();
+
+    if(cat === "wizualne"){
+        wizualne.push("• " + p.name);
     }
-    if (partsText === "") partsText = "Brak";
+    else if(cat === "silnik"){
+        silnikParts.push("• " + p.name);
+    }
+    else if(cat === "regulacje"){
+        regulacje.push("• " + p.name);
+    }
+    else{
+        pozostale.push("• " + p.name);
+    }
+
+});
+
+const wizualneText = wizualne.length ? wizualne.join("\n") : "Brak";
+const silnikText = silnikParts.length ? silnikParts.join("\n") : "Brak";
+const regulacjeText = regulacje.length ? regulacje.join("\n") : "Brak";
+const pozostaleText = pozostale.length ? pozostale.join("\n") : "Brak";
 
     const cylText = document.getElementById("cyl").innerText;
     const engineText = document.getElementById("engine").innerText;
@@ -2385,11 +2408,26 @@ if (now - lastSendTime < sendCooldown) {
     value: variantName,
     inline: false
 },
-                {
-                    name: "🔧 Części",
-                    value: partsText,
-                    inline: false
-                },
+               {
+    name: "✨ Wizualne",
+    value: wizualneText,
+    inline: true
+},
+{
+    name: "⚙️ Silnik",
+    value: silnikText,
+    inline: true
+},
+{
+    name: "📏 Regulacje",
+    value: regulacjeText,
+    inline: true
+},
+{
+    name: "🧰 Pozostałe",
+    value: pozostaleText,
+    inline: false
+},
                 {
                     name: "⚙️ Ulepszenia",
                     value:
@@ -2838,6 +2876,7 @@ updateClock();
 </body>
 
 </html>
+
 
 
 
