@@ -1,9 +1,9 @@
 export default {
   async fetch(request) {
 
-    // pozwól tylko na POST
+    // pozwól tylko POST
     if (request.method !== "POST") {
-      return new Response("Method not allowed", { status: 405 });
+      return new Response("Use POST", { status: 405 });
     }
 
     const data = await request.json();
@@ -19,25 +19,23 @@ export default {
     let webhook;
 
     if (data.type === "gielda") {
-      webhook = webhook1;
-    } else if (data.type === "market") {
-      webhook = webhook2;
-    } else {
+      webhook = webhookGielda;
+    }
+    else if (data.type === "market") {
+      webhook = webhookMarket;
+    }
+    else {
       return new Response("Wrong type", { status: 400 });
     }
 
-    const discordResponse = await fetch(webhook, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
+    // wysyłanie do discord
+    await fetch(webhook,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
       },
       body: JSON.stringify(data.message)
     });
-
-    if (!discordResponse.ok) {
-      const err = await discordResponse.text();
-      return new Response(err, { status: 500 });
-    }
 
     return new Response("OK");
   }
