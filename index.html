@@ -1437,37 +1437,46 @@ function renderParts() {
             div.classList.add("selected");
         }
 
-checkbox.addEventListener("change", function() {
+        checkbox.addEventListener("change", function() {
 
-    const engines = ["Silnik benzynowy", "Silnik Diesel", "Silnik Elektryczny"];
+            const engines = ["Silnik benzynowy", "Silnik Diesel", "Silnik Elektryczny"];
 
-    // jeśli wybrany element to silnik
-    if (engines.includes(part.name) && this.checked) {
+            if (engines.includes(part.name) && this.checked) {
 
-        // odznacz inne silniki
-        document.querySelectorAll(".part input").forEach(cb => {
-            const parent = cb.closest(".part");
-            const name = parent.querySelector(".part-name").textContent;
+                document.querySelectorAll(".part input").forEach(cb => {
+                    const parent = cb.closest(".part");
+                    const name = parent.querySelector(".part-name").textContent;
 
-            if (cb !== this && engines.includes(name)) {
-                cb.checked = false;
-                delete selectedParts[name];
-                parent.classList.remove("selected");
+                    if (cb !== this && engines.includes(name)) {
+                        cb.checked = false;
+                        delete selectedParts[name];
+                        parent.classList.remove("selected");
+                    }
+                });
+            }
+
+            if (this.checked) {
+                selectedParts[part.name] = part.price;
+                div.classList.add("selected");
+            } else {
+                delete selectedParts[part.name];
+                div.classList.remove("selected");
+            }
+
+            calculate();
+        });
+
+        div.addEventListener("click", function(e) {
+            if (e.target.tagName !== "INPUT") {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event("change"));
             }
         });
-    }
 
-    if (this.checked) {
-        selectedParts[part.name] = part.price;
-        div.classList.add("selected");
-    } else {
-        delete selectedParts[part.name];
-        div.classList.remove("selected");
-    }
+        partsList.appendChild(div);
 
-    calculate();
-});
-	}
+    });
+}
 renderParts();
 const cars = [
     {name: "Audi RS2", price: 800000, variants:[{name:"Domyślny",price:0},{name:"Zwykly",price:1000000},{name:"Dodatki",price:2000000},{name:"Bagażnik na dachu",price:2000000},{name:"Dodatki + Bagażnik na dachu",price:4000000},{name:"RS Power",price:9000000},{name:"Dodatki + RS Power",price:9000000}]},
