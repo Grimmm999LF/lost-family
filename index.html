@@ -2197,12 +2197,33 @@ function renderGieldaParts() {
 
         div.innerHTML = `<span class="part-name">${part.name}</span>`;
 
+        const engines = ["Silnik benzynowy", "Silnik Diesel", "Silnik Elektryczny"];
+
         // 🔹 SPRAWDZENIE CZY JUŻ WYBRANA
         if (marketSelectedParts.some(p => p.name === part.name)) {
             div.classList.add("selected");
         }
 
-        div.onclick = () => toggleMarketPart(part, div);
+        div.onclick = () => {
+
+            // jeśli kliknięto silnik
+            if (engines.includes(part.name)) {
+
+                // usuń inne silniki
+                marketSelectedParts = marketSelectedParts.filter(p => !engines.includes(p.name));
+
+                // usuń zaznaczenie z UI
+                document.querySelectorAll("#gieldaParts .part").forEach(el => {
+                    const name = el.querySelector(".part-name").textContent;
+                    if (engines.includes(name)) {
+                        el.classList.remove("selected");
+                    }
+                });
+
+            }
+
+            toggleMarketPart(part, div);
+        };
 
         container.appendChild(div);
 
@@ -2846,6 +2867,7 @@ updateClock();
 </body>
 
 </html>
+
 
 
 
