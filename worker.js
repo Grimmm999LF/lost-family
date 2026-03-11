@@ -14,12 +14,12 @@ export default {
 
     let webhook;
 
-    if (data.type === "gielda") {
-      webhook = webhookKosztorys;
-    }
-    else if (data.type === "market") {
-      webhook = webhookMarket;
-    }
+  if (data.type === "gielda") {
+  webhook = webhook1;
+  }
+  else if (data.type === "market") {
+  webhook = webhook2;
+  }
     else {
       return new Response("Wrong type", { status: 400 });
     }
