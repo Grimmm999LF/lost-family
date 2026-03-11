@@ -25,15 +25,17 @@ export default {
     }
 
     // wysyłanie do Discorda
-    const discordResponse = await fetch(webhook, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data.message)
-    });
+const discordResponse = await fetch(webhook, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data.message)
+});
 
-    return new Response("OK");
+if (!discordResponse.ok) {
+  const err = await discordResponse.text();
+  return new Response("Discord error: " + err, { status: 500 });
+}
 
-  }
-};
+return new Response("OK - sent to Discord");
