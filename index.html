@@ -63,32 +63,51 @@ html, body {
     box-shadow: 0 0 10px rgba(255,140,0,0.5);
 }
 .engine-panel{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:12px;
-    margin:15px 0;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px;
+
+background:linear-gradient(145deg,#0f1724,#0b1320);
+padding:22px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+
+margin-bottom:25px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.5),
+inset 0 0 10px rgba(255,255,255,0.03);
 }
 
 .car-stat{
-    background:#111;
-    border:1px solid #333;
-    border-radius:8px;
-    padding:10px;
-    text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+
+background:#0b1320;
+border:1px solid #1f2937;
+border-radius:10px;
+
+padding:15px;
+gap:6px;
+}
+.stat-controls span{
+font-size:22px;
+font-weight:bold;
+color:#fff;
 }
 
 .stat-label{
-    display:block;
-    font-size:13px;
-    margin-bottom:6px;
-    color:#aaa;
+font-size:12px;
+color:#9aa0a6;
+letter-spacing:1px;
 }
 
 .stat-controls{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:8px;
+display:flex;
+gap:8px;
+margin-top:5px;
 }
 
 .stat-controls button{
@@ -2749,6 +2768,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
+
 
 
 
