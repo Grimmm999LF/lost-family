@@ -1409,6 +1409,7 @@ function toggleTFTPanel() {
 
     renderParts();
     calculate();
+	setMaxStats();
 }
 // Funkcja renderująca części
 function renderParts() {
@@ -1969,6 +1970,15 @@ function filterCarsDemontaz() {
     });
 
 }	
+	function setMaxStats() {
+    cyl = 2;
+    engine = 9;
+    fuel = 3;
+
+    document.getElementById("cyl").innerText = "V8";
+    document.getElementById("engine").innerText = (1.2 + engine * 0.2).toFixed(1);
+    document.getElementById("fuel").innerText = (25 + fuel * 25) + "L";
+}
 function sendMarketOffer(){
 	console.log(marketSelectedParts);
     const now = Date.now();
