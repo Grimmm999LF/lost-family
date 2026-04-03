@@ -1386,31 +1386,54 @@ function calculateDemontaz() {
     document.getElementById("demontazCount").innerText = count;
 }
 function toggleTFTPanel() {
-    const tab = document.getElementById("tftTab");
+const tab = document.getElementById("tftTab");
 
-    tftEnabled = !tftEnabled;
 
-    if (tftEnabled) {
-        tab.classList.add("active");
+tftEnabled = !tftEnabled;
 
-        parts.forEach(category => {
-            category.items.forEach(part => {
-                const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L", "Vopis", "Silnik Benzynowy", "Silnik Elektryczny", "Uni Bak"];
-                if (!excluded.includes(part.name)) {
-                    selectedParts[part.name] = part.price;
-                }
-            });
+if (tftEnabled) {
+
+    // 🔥 TUTAJ — zapisz stan PRZED zmianą
+    prevCyl = cyl;
+    prevEngine = engine;
+    prevFuel = fuel;
+
+    tab.classList.add("active");
+
+    parts.forEach(category => {
+        category.items.forEach(part => {
+            const excluded = ["Nitro 5L", "Nitro 10L", "Nitro 15L", "Vopis", "Silnik Benzynowy", "Silnik Elektryczny", "Uni Bak"];
+            if (!excluded.includes(part.name)) {
+                selectedParts[part.name] = part.price;
+            }
         });
+    });
 
-    } else {
-        tab.classList.remove("active");
-        selectedParts = {};
-    }
+    // 🔥 ustaw MAX dopiero po zapisaniu
+    setMaxStats();
 
-    renderParts();
-    calculate();
-	setMaxStats();
+} else {
+    tab.classList.remove("active");
+
+    // 🔥 przywróć stare wartości
+    cyl = prevCyl;
+    engine = prevEngine;
+    fuel = prevFuel;
+
+    const cylValues = ["V4", "V6", "V8"];
+    document.getElementById("cyl").innerText = cylValues[cyl];
+    document.getElementById("engine").innerText = (1.2 + engine * 0.2).toFixed(1);
+    document.getElementById("fuel").innerText = (25 + fuel * 25) + "L";
+
+    selectedParts = {};
 }
+
+renderParts();
+calculate();
+
+
+}
+
 // Funkcja renderująca części
 function renderParts() {
     partsList.innerHTML = "";
