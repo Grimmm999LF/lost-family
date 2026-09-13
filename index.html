@@ -653,25 +653,6 @@ animation: clockNeon 2s ease-in-out infinite;
         0 0 10px #00ffff,
         0 0 20px #00ffff;
 }
-	#rgb-border {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 120px;
-
-    pointer-events: none;
-    z-index: 0;
-
-    background: linear-gradient(
-        to top,
-        rgba(0,255,255,0.25),
-        rgba(0,255,255,0.15),
-        transparent 70%
-    );
-
-    transition: background 0.1s linear;
-}
 .part-name {
     font-weight: 500;
 }
@@ -920,7 +901,6 @@ text-shadow:
 </style>
 </head>
 <body>
-<div id="rgb-border"></div>
 <div class="container">
 <div id="clockBox">
     <span id="clock"></span>
@@ -2728,7 +2708,7 @@ function sendToDiscord() {
 document.addEventListener("DOMContentLoaded", function() {
 
     const btn = document.getElementById("musicToggle");
-	const rgbBorder = document.getElementById("rgb-border");
+	
 
     music.volume = 0.05;
 
@@ -2806,20 +2786,6 @@ function animate(){
 
     btn.style.borderColor = `hsl(${hue}, 100%, 60%)`;
 
-
-// ===== DOLNY AMBIENT (MIĘKKI) =====
-const intensity = Math.min(avg / 255, 1);
-const alpha1 = 0.25 * intensity;
-const alpha2 = 0.15 * intensity;
-
-rgbBorder.style.background = `
-    linear-gradient(
-        to top,
-        hsla(${hue}, 60%, 50%, ${alpha1}),
-        hsla(${hue}, 60%, 50%, ${alpha2}),
-        transparent 70%
-    )
-`;
 
     requestAnimationFrame(animate);
 }
