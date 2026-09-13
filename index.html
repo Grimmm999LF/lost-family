@@ -977,8 +977,6 @@ text-shadow:
 	<button class="main-tab" onclick="switchMainTab('salon')">Auta Salon</button>
 	<button class="main-tab" onclick="switchMainTab('demontaz')">Demontaż</button>
 	<button class="main-tab" onclick="switchMainTab('gielda')">Giełda</button>
-	<button id="musicToggle">🔊</button>
-	<audio id="bgMusic" src="muzyka.mp3" loop></audio>
 </div>
 	<div id="configTab">
     <h2>Części tuningowe</h2>
@@ -2724,14 +2722,11 @@ function sendToDiscord() {
 
 </div> <!-- ZAMYKA container -->
 
-<audio id="bgMusic" autoplay loop>
-    <source src="muzyka.mp3" type="audio/mpeg">
-</audio>
+
 <script>
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    const music = document.getElementById("bgMusic");
     const btn = document.getElementById("musicToggle");
 	const rgbBorder = document.getElementById("rgb-border");
 
@@ -2852,7 +2847,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    const music = document.getElementById("bgMusic");
+    
     const btn = document.getElementById("musicToggle");
 
     music.volume = 0.05;
