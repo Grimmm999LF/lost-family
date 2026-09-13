@@ -2494,17 +2494,24 @@ function sendToDiscord() {
             </p>
         </div>
 
-        <!-- TWÓRCA -->
+```html
+<!-- TWÓRCA -->
 <div class="info-card">
     <h2>👤 Twórca</h2>
 
     <a 
         href="https://discord.com/users/290967936183697408"
         target="_blank"
+        rel="noopener noreferrer"
         class="creator-card"
     >
         <div class="creator-left">
-            <img src="https://cdn.discordapp.com/avatars/290967936183697408/0888e8ad1f5cd2e0169e012e65cb1478.webp?size=28" class="creator-avatar">
+            <img
+                id="creatorAvatar"
+                src="https://cdn.discordapp.com/embed/avatars/0.png"
+                class="creator-avatar"
+                alt="Avatar Grim"
+            >
             <span class="creator-name">Grim</span>
         </div>
 
@@ -2512,8 +2519,66 @@ function sendToDiscord() {
             ● Online
         </div>
     </a>
-
 </div>
+
+<script>
+    // Discord User ID
+    const DISCORD_USER_ID = "290967936183697408";
+
+    async function updateDiscordAvatar() {
+        const avatarElement = document.getElementById("creatorAvatar");
+
+        if (!avatarElement) return;
+
+        try {
+            /*
+             * Lanyard udostępnia aktualne dane użytkownika Discord.
+             * Dzięki temu nie musimy wpisywać ręcznie hasha avatara.
+             */
+            const response = await fetch(
+                `https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`
+            );
+
+            if (!response.ok) {
+                throw new Error("Nie udało się pobrać danych Discord.");
+            }
+
+            const result = await response.json();
+
+            if (!result.success || !result.data || !result.data.discord_user) {
+                throw new Error("Brak danych użytkownika Discord.");
+            }
+
+            const discordUser = result.data.discord_user;
+
+            if (discordUser.avatar) {
+                /*
+                 * Discord zwraca hash aktualnego avatara.
+                 * Jeżeli zmienisz avatar, hash również się zmieni.
+                 */
+                const avatarUrl =
+                    `https://cdn.discordapp.com/avatars/${DISCORD_USER_ID}/${discordUser.avatar}.webp?size=128`;
+
+                avatarElement.src = avatarUrl;
+            } else {
+                // Użytkownik nie ma ustawionego własnego avatara
+                avatarElement.src =
+                    "https://cdn.discordapp.com/embed/avatars/0.png";
+            }
+
+        } catch (error) {
+            console.warn("Nie udało się pobrać avatara Discord:", error);
+
+            // Fallback – domyślny avatar Discorda
+            avatarElement.src =
+                "https://cdn.discordapp.com/embed/avatars/0.png";
+        }
+    }
+
+    // Pobierz aktualny avatar przy ładowaniu strony
+    updateDiscordAvatar();
+</script>
+
 
         <!-- PODZIĘKOWANIA -->
         <div class="info-card">
