@@ -506,25 +506,38 @@ transform:scale(1.05);
 .variant-card:hover{
     border-color:#00d9ff;
 }
-#clockBox{
-position:absolute;
-top:80px;
-left:50%;
-transform:translateX(-50%);
+#premiumBox {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
 
-font-size:28px;
-font-weight:bold;
-font-family:monospace;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-color:#00e1ff;
+    font-size: 18px;
+    font-weight: bold;
 
-background:rgba(0,0,0,0.25);
-padding:6px 18px;
-border-radius:10px;
+    color: #fff;
 
-backdrop-filter:blur(6px);
+    background: rgba(0,0,0,0.25);
+    padding: 8px 18px;
+    border-radius: 10px;
 
-animation: clockNeon 2s ease-in-out infinite;
+    border: 1px solid rgba(0,200,255,0.4);
+    box-shadow: 0 0 12px rgba(0,200,255,0.25);
+
+    backdrop-filter: blur(6px);
+}
+
+.premium-title {
+    color: #00e1ff;
+}
+
+.premium-value {
+    color: #ff7a00;
+    font-weight: bold;
 }
 /* ===== CUSTOM CHECKBOX FIXED CENTER ===== */
 
@@ -876,34 +889,14 @@ animation: clockNeon 2s ease-in-out infinite;
         text-shadow: 0 0 5px rgba(255,122,0,0.5);
     }
 }
-@keyframes clockNeon {
 
-0%{
-text-shadow:
-0 0 5px #00e1ff,
-0 0 10px #00e1ff;
-}
-
-50%{
-text-shadow:
-0 0 15px #00e1ff,
-0 0 30px #00e1ff,
-0 0 60px #00e1ff;
-}
-
-100%{
-text-shadow:
-0 0 5px #00e1ff,
-0 0 10px #00e1ff;
-}
-
-}
 </style>
 </head>
 <body>
 <div class="container">
-<div id="clockBox">
-    <span id="clock"></span>
+<div id="premiumBox">
+    <span class="premium-title">Punkty Premium</span>
+    <span class="premium-value">100 PP - 700k</span>
 </div>
 <div style="flex:2;">
 
@@ -2846,21 +2839,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <img src="https://visitor-badge.laobi.icu/badge?page_id=grimmm999lf.lost-family">
 </div>
 <script>
-function updateClock(){
-
-const now = new Date();
-
-const h = String(now.getHours()).padStart(2,'0');
-const m = String(now.getMinutes()).padStart(2,'0');
-const s = String(now.getSeconds()).padStart(2,'0');
-
-document.getElementById("clock").textContent =
-h + ":" + m + ":" + s;
-
-}
-
-setInterval(updateClock,1000);
-updateClock();
 </script>
 </body>
 
